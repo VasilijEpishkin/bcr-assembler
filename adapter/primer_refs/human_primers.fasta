@@ -1,3 +1,6 @@
+# Human primers for pRESTO MaskPrimers
+# Cheng 2011 universal set: 15 VH FR1 forward + 4 JH reverse
+# Used with: MaskPrimers.py align --mode cut --maxerror 0.2
 >VH1_1
 CAGGTCCAGCTTGTGCAGTCTGG
 >VH1_2
@@ -62,3 +65,13 @@ CAGACTGTGGTGACCCAGGAGCC
 CAGCCTGTGCTGACTCAGCCTTC
 >Vl10_1
 CAGCCAGGGCTGACTCAGCCT
+
+# Human JH reverse primers (4 JH)
+>JH1_rev
+TGAGGAGACGGTGACCAGGGT
+>JH2_rev
+TGAGGAGACGGTGACCATGGT
+>JH3_rev
+TGAGGAGACGGTGACCAGGGT
+>JH4_rev
+TGAGGAGACGGTGACCATGGT
