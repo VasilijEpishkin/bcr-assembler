@@ -28,5 +28,8 @@ remote_oneq_*.sh
 run_oneq_*.py
 tmp_run_oneq_*.py
 
+# Macaque results removed from repo; raw dataset stays on OneQ only
+results/PRJNA1247978/
+
 # Python/script caches
 scripts/__pycache__/
