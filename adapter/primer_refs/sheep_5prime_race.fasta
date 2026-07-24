@@ -1,0 +1,23 @@
+# Sheep (Ovis aries) 5' RACE technical sequences for cutadapt
+# From Park et al. 2023 Mol. Immunol. 156:20-30 (PRJNA900592)
+# Protocol: SMARTer 5' RACE, MiSeq 2x300 (600 cycles)
+# Used with anchored cutadapt: -g ^SMARTer_anchor -a Sh_IGHG_rev... (or --action=trim)
+# Note: These are technical sequences, NOT V-gene primers. Remove with cutadapt, not MaskPrimers.
+
+# SMARTer 5' RACE universal anchor (at 5' end of R1)
+# CTAATACGACTCACTATAGGGCAAGCAGTGGTATCAACGCAGAGT
+>SMARTer_5prime_Anchor
+CTAATACGACTCACTATAGGGCAAGCAGTGGTATCAACGCAGAGT
+
+# C-region reverse primers (at 3' end of R2, gene-specific)
+# Sh_IGHG_rev_1 - IgG constant region
+>Sh_IGHG_rev_1
+TCCCCGCAGCAAGAAGTCAGAGGGTAG
+
+# Sh_IGKC_rev_1 - IgK constant region
+>Sh_IGKC_rev_1
+GTTTGAAGAGGAAGACGGATGGCTGAGC
+
+# Sh_IGLC_rev_1 - IgL constant region
+>Sh_IGLC_rev_1
+AGGGTGACCGAGGGTGCGGACTT
