@@ -23,17 +23,6 @@
 Сырые FASTQ-файлы **не коммитятся** в репозиторий — они хранятся
 только на вычислительном volume.
 
-## Платформа
-
-**OneQ** — внутренняя платформа Biocad для запуска Jupyter-ноутбуков
-и вычислительных задач.
-
-- Доступ через веб-интерфейс Jupyter (浏览器) или SSH (для worker-tasks)
-- Volume: `/data/user/epishkin/` — постоянное хранилище данных и результатов
-- Conda-окружение: `bcr_env` (`/opt/conda/envs/bcr_env`) с инструментами
-  FastQC, fastp, cutadapt, MultiQC, pRESTO, MaskPrimers
-- Установка: `bash scripts/setup_vm_conda.sh` (один раз при создании новой task)
-
 ## Этапы пайплайна
 
 ### 1. Контроль качества сырых ридов (QC)
@@ -125,9 +114,11 @@ run_qc("/data/user/epishkin", "PRJNA900592", "merged")
 rima/
 ├── README.md                    этот файл
 ├── .gitignore                   FASTQ, OneQ-state, .pyc — не коммитить
-├── primer_refs/                 праймер-сеты для MaskPrimers
-│   ├── human_primers.fasta      32 V-gene FR1 + JH rev праймера
-│   └── horse_primers.fasta      29 EquPD v2020 праймеров
+├── seq_refs/                    референсные последовательности (адаптеры, праймеры)
+│   ├── adapter_sequences.fasta  адаптеры (Illumina, horse run-specific)
+│   ├── human_primers.fasta      36 human V-gene FR1 + JH rev (MaskPrimers)
+│   ├── horse_primers.fasta      35 EquPD v2020 primers (MaskPrimers)
+│   └── sheep_5prime_race.fasta  SMARTer anchor + C-region rev (cutadapt)
 ├── scripts/                     standalone-скрипты (зеркало ноутбуков)
 │   ├── qc.py                    FastQC + MultiQC
 │   ├── adapter_trim.py           cutadapt + fastp
@@ -210,22 +201,22 @@ FASTQ-файлы (сырые, trimmed, pr_trimmed, merged) хранятся **т
 
 ### Человек (PRJEB40348)
 - Multiplex PCR с FR1-праймерами (Cheng 2011 universal set: 15 VH fwd + 4 JH rev)
-- Адаптеры: NEBNext/TruSeq-style (`AGATCGGAAGAGC...`)
-- Primer trim: MaskPrimers `align --mode cut` с `primer_refs/human_primers.fasta`
+- Адаптеры: Illumina TruSeq/NEBNext (`seq_refs/adapter_sequences.fasta`)
+- Primer trim: MaskPrimers `align --mode cut` с `seq_refs/human_primers.fasta`
 - Retention после adapter+primer trim: 88.1% (77–95% per sample)
 
 ### Лошадь (PRJNA848968)
 - EquPD v2020 primer set, phage display scFv libraries
-- Адаптеры: эмпиричесие run-specific R1 (разные для каждого run),
+- Адаптеры: эмпирические run-specific R1 (`seq_refs/adapter_sequences.fasta`),
   НЕ копировать human TruSeq; EquPD/scFv tails НЕ резать на adapter-этапе
-- Primer trim: MaskPrimers `align` с `primer_refs/horse_primers.fasta` (29 праймеров)
+- Primer trim: MaskPrimers `align` с `seq_refs/horse_primers.fasta` (35 праймеров)
 
 ### Овца (PRJNA900592)
 - 5′ RACE (SMARTer), универсальный anchor (не multiplex V-primer PCR)
-- Адаптеры: Illumina/NEBNext read-through (`AGATCGGA...`),
+- Адаптеры: Illumina/NEBNext read-through (`seq_refs/adapter_sequences.fasta`),
   без fastp autodetect (детектит SMARTer anchor как "адаптер")
 - Primer trim: anchored cutadapt — SMARTer anchor (5′) +
-  C-region reverse primers (Sh_IGHG/IGKC/IGLC rev, 3′)
+  C-region reverse primers (`seq_refs/sheep_5prime_race.fasta`, 3′)
 - Retention: raw → adapter trimmed 78.2% → primer trimmed ~100% (только срез тех. seqs)
 - Read length: ~300 bp → ~266 bp после primer trim
 
