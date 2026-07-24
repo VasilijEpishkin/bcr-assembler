@@ -1,1 +1,0 @@
-- [BCR benchmark project state](project_bcr_benchmark.md) — dataset criteria, 3+2 candidate datasets, GCP/VM infra state, experiment design (read-splitting + SHM + assembly benchmark)
