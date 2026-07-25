@@ -1,0 +1,13 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR22279249_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279249_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279250_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279250_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279251_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279251_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279252_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279252_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279253_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279253_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279254_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279254_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279255_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279255_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279256_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279256_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279257_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279257_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279258_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279258_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279259_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279259_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR22279260_assemble-pass	/Users/epishkin/workspace/rima/results/PRJNA900592/merged/fastqc/SRR22279260_assemble-pass_fastqc.zip
