@@ -1,0 +1,13 @@
+.	Basic Statistics	Per Base Sequence Quality	Per Sequence Quality Scores	Per Base Sequence Content	Per Sequence GC Content	Per Base N Content	Sequence Length Distribution	Sequence Duplication Levels	Overrepresented Sequences	Adapter Content
+SRR22279249_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279250_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279251_assemble-pass	1	1	1	0.25	0.25	1	0.5	0.25	0.25	1
+SRR22279252_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279253_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279254_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279255_assemble-pass	1	1	1	0.25	1	1	0.5	0.25	0.25	1
+SRR22279256_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279257_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279258_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+SRR22279259_assemble-pass	1	1	1	0.25	0.25	1	0.5	0.25	0.25	1
+SRR22279260_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1

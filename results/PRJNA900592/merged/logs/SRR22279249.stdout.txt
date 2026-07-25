@@ -1,0 +1,40 @@
+       START> AssemblePairs
+     COMMAND> align
+       FILE1> SRR22279249_1.pr.fastq.gz
+       FILE2> SRR22279249_2.pr.fastq.gz
+  COORD_TYPE> illumina
+       ALPHA> 1e-05
+   MAX_ERROR> 0.3
+     MIN_LEN> 8
+     MAX_LEN> 1000
+SCAN_REVERSE> False
+       NPROC> 8
+
+PROGRESS> 09:21:47 |                    |   0% (        0) 0.0 min
+PROGRESS> 09:25:53 |#                   |   5% (   70,919) 4.1 min
+PROGRESS> 09:29:58 |##                  |  10% (  141,838) 8.2 min
+PROGRESS> 09:34:03 |###                 |  15% (  212,757) 12.3 min
+PROGRESS> 09:38:09 |####                |  20% (  283,676) 16.4 min
+PROGRESS> 09:42:14 |#####               |  25% (  354,595) 20.5 min
+PROGRESS> 09:46:19 |######              |  30% (  425,514) 24.5 min
+PROGRESS> 09:50:23 |#######             |  35% (  496,433) 28.6 min
+PROGRESS> 09:54:27 |########            |  40% (  567,352) 32.7 min
+PROGRESS> 09:58:32 |#########           |  45% (  638,271) 36.7 min
+PROGRESS> 10:02:37 |##########          |  50% (  709,190) 40.8 min
+PROGRESS> 10:06:41 |###########         |  55% (  780,109) 44.9 min
+PROGRESS> 10:10:45 |############        |  60% (  851,028) 49.0 min
+PROGRESS> 10:14:50 |#############       |  65% (  921,947) 53.0 min
+PROGRESS> 10:18:55 |##############      |  70% (  992,866) 57.1 min
+PROGRESS> 10:22:59 |###############     |  75% (1,063,785) 61.2 min
+PROGRESS> 10:27:03 |################    |  80% (1,134,704) 65.3 min
+PROGRESS> 10:31:08 |#################   |  85% (1,205,623) 69.3 min
+PROGRESS> 10:35:13 |##################  |  90% (1,276,542) 73.4 min
+PROGRESS> 10:39:18 |################### |  95% (1,347,461) 77.5 min
+PROGRESS> 10:43:21 |####################| 100% (1,418,365) 81.6 min
+
+OUTPUT> SRR22279249_assemble-pass.fastq.gz
+ PAIRS> 1418365
+  PASS> 1303904
+  FAIL> 114461
+   END> AssemblePairs
+

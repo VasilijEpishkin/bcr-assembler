@@ -1,0 +1,34 @@
+Using merge environment: /data/user/epishkin/venvs/presto_env
+[merge_pairs_optimized] dataset=PRJNA900592 label=pr_trimmed
+[merge_pairs_optimized] input=/data/user/epishkin/results/PRJNA900592/pr_trimmed/fastq
+[merge_pairs_optimized] pairs=12 nproc=8
+[merge_pairs_optimized] verbose_log=False failed_reads=False gzip_output=True
+  [1/12] [run] SRR22279249
+    pass=1,303,904 fail_records=0 elapsed=84.0 min
+  [2/12] [run] SRR22279250
+    pass=1,210,188 fail_records=0 elapsed=73.9 min
+  [3/12] [run] SRR22279251
+    pass=1,293,833 fail_records=0 elapsed=77.3 min
+  [4/12] [run] SRR22279252
+    pass=1,128,266 fail_records=0 elapsed=71.9 min
+  [5/12] [run] SRR22279253
+    pass=1,503,478 fail_records=0 elapsed=92.0 min
+  [6/12] [run] SRR22279254
+    pass=1,766,062 fail_records=0 elapsed=106.1 min
+  [7/12] [run] SRR22279255
+    pass=1,313,677 fail_records=0 elapsed=85.8 min
+  [8/12] [run] SRR22279256
+    pass=1,225,289 fail_records=0 elapsed=74.0 min
+  [9/12] [run] SRR22279257
+    pass=1,745,305 fail_records=0 elapsed=108.0 min
+  [10/12] [run] SRR22279258
+    pass=1,769,963 fail_records=0 elapsed=106.2 min
+  [11/12] [run] SRR22279259
+    pass=1,197,329 fail_records=0 elapsed=70.5 min
+  [12/12] [run] SRR22279260
+    pass=1,191,847 fail_records=0 elapsed=72.9 min
+[merge_pairs_optimized] qc: /data/user/epishkin/results/PRJNA900592/merged/qc/assembly_qc.tsv
+[merge_pairs_optimized] assembled_pairs=16,649,141
+[merge_pairs_optimized] failed_records=0
+[merge_pairs_optimized] For merged QC, run qc.ipynb with label='merged'.
+FINAL_QC /data/user/epishkin/results/PRJNA900592/merged/qc/assembly_qc.tsv
