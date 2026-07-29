@@ -31,5 +31,8 @@ tmp_run_oneq_*.py
 # Macaque results removed from repo; raw dataset stays on OneQ only
 results/PRJNA1247978/
 
+# Local Hermes plan / session artifacts
+.hermes/
+
 # Python/script caches
 scripts/__pycache__/
