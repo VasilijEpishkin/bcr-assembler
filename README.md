@@ -40,7 +40,8 @@ FastQC на каждый образец + MultiQC-сводка. Результа
 ### 2. Обрезка адаптеров (adapter trim)
 
 **Ноутбуки:**
-- `notebooks/adapter_trim.ipynb` — человек (NEBNext/TruSeq-адаптеры)
+- `notebooks/adapter_trim_human.ipynb` — человек (NEBNext/TruSeq-адаптеры)
+- `notebooks/adapter_trim_mouse.ipynb` — мышь (explicit adapters, PE250-like MiSeq)
 - `notebooks/adapter_trim_horse.ipynb` — лошадь (эмпирические run-specific R1-адаптеры)
 - `notebooks/adapter_trim_sheep.ipynb` — овца (Illumina/NEBNext read-through + quality/length)
 
@@ -65,13 +66,15 @@ run_qc("/data/user/epishkin", "PRJNA900592", "trimmed")
 ### 4. Обрезка праймеров / технических последовательностей (primer trim)
 
 **Ноутбуки:**
-- `notebooks/primer_trim.ipynb` — человек и лошадь (V-праймеры через pRESTO MaskPrimers)
+- `notebooks/primer_trim_human.ipynb` — человек (V-праймеры через pRESTO MaskPrimers)
+- `notebooks/primer_trim_mouse.ipynb` — мышь (Greiff 2014 multiplex primers через MaskPrimers)
+- `notebooks/primer_trim.ipynb` — legacy notebook для human/horse
 - `notebooks/primer_trim_sheep.ipynb` — овца (5′ RACE: SMARTer anchor + C-region reverse primers через cutadapt)
 
 **Инструмент:** MaskPrimers.py (`align --mode cut --maxerror 0.2`) для
 multiplex-PCR датасетов; anchored cutadapt для 5′ RACE.
 
-Праймер-сетов: `primer_refs/human_primers.fasta`, `primer_refs/horse_primers.fasta`.
+Праймер-сетов: `seq_refs/human_primers.fasta`, `seq_refs/horse_primers.fasta`.
 Для овцы праймеры встроены в ноутбук (SMARTer anchor, Sh_IGHG/IGKC/IGLC rev).
 
 QC после primer trim — отдельным шагом:
@@ -84,7 +87,9 @@ run_qc("/data/user/epishkin", "PRJNA900592", "pr_trimmed")
 
 ### 5. Сшивание парных ридов (merge)
 
-**Ноутбук:** `notebooks/presto.ipynb`
+**Ноутбуки:**
+- `notebooks/presto.ipynb` — canonical merge notebook
+- `notebooks/presto_mouse.ipynb` — mouse-specific merge notebook для `ERP003950`
 
 **Инструмент:** pRESTO AssemblePairs.py align
 
@@ -113,26 +118,24 @@ run_qc("/data/user/epishkin", "PRJNA900592", "merged")
 ```
 rima/
 ├── README.md                    этот файл
-├── .gitignore                   FASTQ, OneQ-state, .pyc — не коммитить
+├── .gitignore                   FASTQ, OneQ-state, checkpoints, .pyc — не коммитить
 ├── seq_refs/                    референсные последовательности (адаптеры, праймеры)
 │   ├── adapter_sequences.fasta  адаптеры (Illumina, horse run-specific)
 │   ├── human_primers.fasta      36 human V-gene FR1 + JH rev (MaskPrimers)
 │   ├── horse_primers.fasta      35 EquPD v2020 primers (MaskPrimers)
 │   └── sheep_5prime_race.fasta  SMARTer anchor + C-region rev (cutadapt)
-├── scripts/                     standalone-скрипты (зеркало ноутбуков)
-│   ├── qc.py                    FastQC + MultiQC
-│   ├── adapter_trim.py           cutadapt + fastp
-│   ├── primer_trim.py            MaskPrimers (human/horse)
-│   ├── primer_trim.sh            shell-версия primer_trim
-│   └── setup_vm_conda.sh         установка conda-окружения на OneQ
-├── notebooks/                   Jupyter-ноутбуки — основной рабочий формат
+├── notebooks/                   Jupyter-ноутбуки — основной и canonical рабочий формат
 │   ├── qc.ipynb                 QC на любой этап (raw/trimmed/pr_trimmed/merged)
-│   ├── adapter_trim.ipynb        человек
+│   ├── adapter_trim_human.ipynb  человек
+│   ├── adapter_trim_mouse.ipynb  мышь
 │   ├── adapter_trim_horse.ipynb  лошадь
 │   ├── adapter_trim_sheep.ipynb  овца
-│   ├── primer_trim.ipynb         человек + лошадь (MaskPrimers)
+│   ├── primer_trim_human.ipynb   человек
+│   ├── primer_trim_mouse.ipynb   мышь
+│   ├── primer_trim.ipynb         legacy human + horse
 │   ├── primer_trim_sheep.ipynb   овца (5′ RACE cutadapt)
-│   └── presto.ipynb             сшивание PE ридов (AssemblePairs.py align)
+│   ├── presto.ipynb              canonical PE merge
+│   └── presto_mouse.ipynb        mouse merge (`ERP003950`)
 └── results/                     QC-отчёты (FastQC HTML/ZIP + MultiQC)
     ├── PRJEB40348/              человек
     ├── PRJNA848968/             лошадь
@@ -156,9 +159,10 @@ results/<DS>/
     └── fastq/      _assemble-pass.fastq.gz
 ```
 
-FASTQ-файлы (сырые, trimmed, pr_trimmed, merged) хранятся **только
+FASTQ-файлы (сырые, trimmed, pr_trimmed, pr_trimmed_sync, merged) хранятся **только
 на OneQ volume** (`/data/user/epishkin/results/<DS>/`) и не
-коммитятся в git. В репозитории — только QC-отчёты (HTML, ZIP, JSON, MultiQC).
+коммитятся в git. В репозитории — notebook'и, QC-отчёты (HTML, ZIP, JSON, MultiQC),
+`seq_refs/` и стабильные metadata/summary-артефакты.
 
 ## Инструменты
 
