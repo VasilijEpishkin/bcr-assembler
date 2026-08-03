@@ -1,0 +1,31 @@
+{
+  "dataset": "ERP003950",
+  "sample": "ERR346596",
+  "reads_requested": 200,
+  "igblast": {
+    "total": 200,
+    "productive": 190,
+    "productive_pct": 95.0,
+    "germline_db": "mouse_gl"
+  },
+  "abstar": {
+    "total": 198,
+    "productive": 189,
+    "productive_pct": 95.5,
+    "germline_db": "c57bl6"
+  },
+  "shared_reads": 198,
+  "v_call_agree": 0,
+  "v_call_agree_pct": 0.0,
+  "d_call_agree": 4,
+  "d_call_agree_pct": 2.0,
+  "j_call_agree": 0,
+  "j_call_agree_pct": 0.0,
+  "cdr3_aa_agree": 196,
+  "cdr3_aa_agree_pct": 99.0,
+  "notes": [
+    "Mouse comparison uses mouse-compatible germline DBs in both annotators.",
+    "IgBLAST and abstar use different germline database nomenclatures, so V/D/J exact string agreement can be low even when annotations are biologically similar.",
+    "CDR3_AA is the most portable direct comparison field across these annotators."
+  ]
+}
