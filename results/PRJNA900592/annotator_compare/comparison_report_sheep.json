@@ -1,0 +1,31 @@
+{
+  "dataset": "PRJNA900592",
+  "sample": "SRR22279249",
+  "reads_requested": 200,
+  "igblast": {
+    "total": 200,
+    "productive": 165,
+    "productive_pct": 82.5
+  },
+  "abstar": {
+    "total": 200,
+    "productive": 145,
+    "productive_pct": 72.5,
+    "germline_db": "c57bl6"
+  },
+  "shared_reads": 200,
+  "v_call_agree": 0,
+  "v_call_agree_pct": 0.0,
+  "d_call_agree": 2,
+  "d_call_agree_pct": 1.0,
+  "j_call_agree": 0,
+  "j_call_agree_pct": 0.0,
+  "cdr3_aa_agree": 151,
+  "cdr3_aa_agree_pct": 75.5,
+  "notes": [
+    "Sheep-specific germline DB is not available in this task.",
+    "IgBLAST output was produced using mouse germline DB.",
+    "abstar output was produced using c57bl6 germline DB.",
+    "Interpret V/D/J call agreement cautiously; CDR3_AA is the most portable comparison field."
+  ]
+}
