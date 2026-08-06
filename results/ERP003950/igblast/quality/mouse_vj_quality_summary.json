@@ -1,0 +1,44 @@
+{
+  "per_sample": [
+    {
+      "sample": "ERR346596",
+      "n_records": 658771,
+      "n_bad_v_or_j": 24061,
+      "pct_bad_v_or_j": 3.6524072856880463,
+      "n_bad_v": 20661,
+      "n_bad_j": 3596,
+      "n_v_aa_identity_available": 658474,
+      "n_j_aa_identity_available": 656168,
+      "n_v_evalue_available": 0,
+      "n_j_evalue_available": 0,
+      "metric_basis": "AA_ALIGNMENT_IDENTITY;E_VALUE_UNAVAILABLE_IN_IGBLAST_OUTFMT19",
+      "aa_identity_threshold": 85.0,
+      "evalue_bad_threshold": 1.0
+    },
+    {
+      "sample": "ERR346597",
+      "n_records": 627705,
+      "n_bad_v_or_j": 23137,
+      "pct_bad_v_or_j": 3.6859671342429965,
+      "n_bad_v": 19846,
+      "n_bad_j": 3481,
+      "n_v_aa_identity_available": 627429,
+      "n_j_aa_identity_available": 625246,
+      "n_v_evalue_available": 0,
+      "n_j_evalue_available": 0,
+      "metric_basis": "AA_ALIGNMENT_IDENTITY;E_VALUE_UNAVAILABLE_IN_IGBLAST_OUTFMT19",
+      "aa_identity_threshold": 85.0,
+      "evalue_bad_threshold": 1.0
+    }
+  ],
+  "overall": {
+    "n_records": 1286476,
+    "n_bad_v_or_j": 47198,
+    "aa_identity_threshold": 85.0,
+    "evalue_bad_threshold": 1.0,
+    "metric_basis_values": [
+      "AA_ALIGNMENT_IDENTITY;E_VALUE_UNAVAILABLE_IN_IGBLAST_OUTFMT19"
+    ],
+    "pct_bad_v_or_j": 3.6687820060382004
+  }
+}

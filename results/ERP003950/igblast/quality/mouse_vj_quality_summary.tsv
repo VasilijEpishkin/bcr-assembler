@@ -1,0 +1,3 @@
+sample	n_records	n_bad_v_or_j	pct_bad_v_or_j	n_bad_v	n_bad_j	n_v_aa_identity_available	n_j_aa_identity_available	n_v_evalue_available	n_j_evalue_available	metric_basis	aa_identity_threshold	evalue_bad_threshold
+ERR346596	658771	24061	3.6524072856880463	20661	3596	658474	656168	0	0	AA_ALIGNMENT_IDENTITY;E_VALUE_UNAVAILABLE_IN_IGBLAST_OUTFMT19	85.0	1.0
+ERR346597	627705	23137	3.6859671342429965	19846	3481	627429	625246	0	0	AA_ALIGNMENT_IDENTITY;E_VALUE_UNAVAILABLE_IN_IGBLAST_OUTFMT19	85.0	1.0
