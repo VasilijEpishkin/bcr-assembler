@@ -1,0 +1,25 @@
+{
+  "per_sample": [
+    {
+      "sample": "ERR346596",
+      "n_records": 658771,
+      "n_stop_codon": 30671,
+      "pct_stop_codon": 4.655790859039029,
+      "source_file": "/data/user/epishkin/results/ERP003950/igblast/ERR346596_igblast.tsv",
+      "stop_detection_method": "stop_codon"
+    },
+    {
+      "sample": "ERR346597",
+      "n_records": 627705,
+      "n_stop_codon": 29393,
+      "pct_stop_codon": 4.682613648130889,
+      "source_file": "/data/user/epishkin/results/ERP003950/igblast/ERR346597_igblast.tsv",
+      "stop_detection_method": "stop_codon"
+    }
+  ],
+  "overall": {
+    "n_records": 1286476,
+    "n_stop_codon": 60064,
+    "pct_stop_codon": 4.668878393378501
+  }
+}

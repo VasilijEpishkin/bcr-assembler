@@ -1,0 +1,3 @@
+sample	n_records	n_stop_codon	pct_stop_codon	source_file	stop_detection_method
+ERR346596	658771	30671	4.655790859039029	/data/user/epishkin/results/ERP003950/igblast/ERR346596_igblast.tsv	stop_codon
+ERR346597	627705	29393	4.682613648130889	/data/user/epishkin/results/ERP003950/igblast/ERR346597_igblast.tsv	stop_codon
