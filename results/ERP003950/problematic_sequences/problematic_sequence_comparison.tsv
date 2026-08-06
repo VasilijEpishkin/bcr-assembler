@@ -1,0 +1,3 @@
+sequence_id	in_igblast	in_abstar	abstar_status	igblast_productive	igblast_stop_codon	igblast_v_call	igblast_j_call	igblast_v_identity	igblast_j_identity	igblast_v_evalue	igblast_j_evalue	igblast_cdr3_aa
+ko_seq_1	True	False	NOT_AVAILABLE_abstar_killed_in_ssh_128MB_cgroup	F	F	7183.20.37,VH7183.a19.31,VH7183.a21.35	JH1	82.759	83.721	1.345e-82	1.723e-08	ATSPRLRYFDWFTLGIRRPAIWGTSIS
+ko_seq_2	True	False	NOT_AVAILABLE_abstar_killed_in_ssh_128MB_cgroup	F	T	7183.20.37,VH7183.a21.35,VH98-3G	JH1	78.049	100.000	2.427e-34	7.349e+00	RWQRPYF
