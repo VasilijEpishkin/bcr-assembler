@@ -1,0 +1,25 @@
+{
+  "dataset": "ERP003950",
+  "organism": "mouse",
+  "sample": "ERR346596",
+  "annotation_engine": "IgBLAST",
+  "output_format": "AIRR TSV / IgBLAST outfmt 19",
+  "status": "completed",
+  "completed_samples": [
+    "ERR346596"
+  ],
+  "pending_samples": [
+    "ERR346597",
+    "ERR346598",
+    "ERR346599",
+    "ERR346600",
+    "ERR346601"
+  ],
+  "local_path": "results/ERP003950/igblast/ERR346596_igblast.tsv",
+  "oneq_path": "/data/user/epishkin/results/ERP003950/igblast/ERR346596_igblast.tsv",
+  "oneq_task": "bbc68913-4463-433d-b647-c3b8a76555ba",
+  "bytes": 2111278230,
+  "lines_including_header": 658772,
+  "md5": "e7c4b2e43affe5910ee5d56bfee53238",
+  "note": "Full TSV is intentionally ignored by git because it is ~2GB; this manifest records the synced artifact."
+}
