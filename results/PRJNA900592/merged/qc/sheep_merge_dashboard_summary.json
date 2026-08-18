@@ -1,0 +1,14 @@
+{
+  "samples": 12,
+  "assembled_total": 16649141,
+  "assembled_min": 1128266,
+  "assembled_max": 1769963,
+  "assembled_median": 1298868.5,
+  "elapsed_min": 70.5,
+  "elapsed_max": 108.0,
+  "elapsed_median": 80.6,
+  "failed_total": 0,
+  "merge_rate_unique": [
+    1.0
+  ]
+}
