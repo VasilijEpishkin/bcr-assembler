@@ -32,34 +32,37 @@ File: `results/ERP003950/problematic_sequences/problematic_sequence_comparison.t
 
 ## 3. Full dataset IgBLAST
 
-- ERR346596 reg 658771 reads (complete)
-- ERR346597 627705 reads (complete)
-- ERR346598 killed by SIGKILL (signal 9, 8844 s, 32/495 MB of fasta) — OOM
-- ERR346599–ERR346601 not started (runner exited on ERROR)
-
-Full dataset quality summarized on two complete samples only.
+All six ERP003950 mouse samples were annotated; full-dataset quality summaries were recomputed locally from the user-provided aggregate results below.
 
 ## 4. Stop-codon percentage
 
 | Sample | n_records | n_stop_codon | pct_stop_codon |
-|---|---|---|---|
+|---|---:|---:|---:|
 | ERR346596 | 658 771 | 30 671 | **4.66%** |
 | ERR346597 | 627 705 | 29 393 | **4.68%** |
-| OVERALL | 1 286 476 | 60 064 | **4.67%** |
+| ERR346598 | 1 325 428 | 66 338 | **5.01%** |
+| ERR346599 | 722 057 | 34 820 | **4.82%** |
+| ERR346600 | 580 241 | 27 397 | **4.72%** |
+| ERR346601 | 698 208 | 32 890 | **4.71%** |
+| OVERALL | 4 612 410 | 221 509 | **4.80%** |
 
 Method: `stop_codon` column (`outfmt 19`) → truthy check.
 
-## 5. Bad V/J percentage (AA alignment identity ⇐85%)
+## 5. Bad V/J percentage (AA alignment identity <85%)
 
 | Sample | n_records | n_bad_v_or_j | pct_bad_v_or_j | n_bad_v | n_bad_j | n_v_aa | n_j_aa |
-|---|---|---|---|---|---|---|---|
+|---|---:|---:|---:|---:|---:|---:|---:|
 | ERR346596 | 658 771 | 24 061 | **3.65%** | 20 661 | 3 596 | 658 474 | 656 168 |
 | ERR346597 | 627 705 | 23 137 | **3.69%** | 19 846 | 3 481 | 627 429 | 625 246 |
-| OVERALL | 1 286 476 | 47 198 | **3.67%** | 40 507 | 7 077 | — | — |
+| ERR346598 | 1 325 428 | 57 725 | **4.36%** | 47 184 | 11 512 | 1 324 960 | 1 318 052 |
+| ERR346599 | 722 057 | 30 579 | **4.23%** | 25 086 | 5 945 | 721 718 | 718 447 |
+| ERR346600 | 580 241 | 21 006 | **3.62%** | 17 783 | 3 373 | 579 959 | 578 202 |
+| ERR346601 | 698 208 | 29 232 | **4.19%** | 23 876 | 5 816 | 697 757 | 694 944 |
+| OVERALL | 4 612 410 | 185 740 | **4.03%** | — | — | — | — |
 
 Method:
 - AA %identity = 100 × sum(matches) / sum(aligned) from `v_sequence_alignment_aa` / stat `v_germline_alignment_aa` and likewise for J.
-- `bad_v` = AA identity < 85% (e-value > 1 not applied — column `v_evalue`/`j_evalue` was **absent** from IgBLAST AIRR format; confirmed zero non-nan portable elaborate events).
+- `bad_v` = AA identity < 85% (e-value > 1 not applied — column `v_evalue`/`j_evalue` was absent from IgBLAST AIRR format).
 - `bad_v_or_j` = bad_v OR bad_j.
 
 ## Caveats

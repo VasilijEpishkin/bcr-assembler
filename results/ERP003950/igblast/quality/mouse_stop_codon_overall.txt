@@ -1,0 +1,6 @@
+=== STOP overall ===
+{
+  "n_records": 4612410,
+  "n_stop_codon": 221509,
+  "pct_stop_codon": 4.8024568501065605
+}

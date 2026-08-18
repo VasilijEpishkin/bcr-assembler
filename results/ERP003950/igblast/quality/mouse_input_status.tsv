@@ -1,0 +1,7 @@
+sample	path	exists	bytes	processed	reason
+ERR346596	/data/user/epishkin/results/ERP003950/igblast/ERR346596_igblast.tsv	True	2111278230	True	ok
+ERR346597	/data/user/epishkin/results/ERP003950/igblast/ERR346597_igblast.tsv	True	2011831184	True	ok
+ERR346598	/data/user/epishkin/results/ERP003950/igblast/ERR346598_igblast.tsv	True	4235921495	True	ok
+ERR346599	/data/user/epishkin/results/ERP003950/igblast/ERR346599_igblast.tsv	True	2310227601	True	ok
+ERR346600	/data/user/epishkin/results/ERP003950/igblast/ERR346600_igblast.tsv	True	1862236257	True	ok
+ERR346601	/data/user/epishkin/results/ERP003950/igblast/ERR346601_igblast.tsv	True	2236790719	True	ok

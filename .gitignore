@@ -16,6 +16,10 @@ raw/
 **/*.fq
 **/*.fq.gz
 
+# Large annotation tables live on OneQ/local disk; track lightweight manifests/summaries instead.
+results/**/igblast/*_igblast.tsv
+results/**/igblast/*.bak
+
 # Local OneQ/OpenScience state, credentials, staging, logs
 .oneq-home/
 .oneq-results-test/

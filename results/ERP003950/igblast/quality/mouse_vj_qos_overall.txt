@@ -1,0 +1,13 @@
+=== V/J overall ===
+{
+  "n_records": 4612410,
+  "n_bad_v_or_j_aa_identity": 185740,
+  "pct_bad_v_or_j_aa_identity": 4.026962043703834,
+  "n_bad_v_or_j_evalue": 35082,
+  "pct_bad_v_or_j_evalue": 0.7606002068333041,
+  "n_bad_v_or_j_identity_or_evalue": 209783,
+  "pct_bad_v_or_j_identity_or_evalue": 4.548229667353943,
+  "aa_identity_threshold": 85.0,
+  "evalue_support_threshold": 1.0,
+  "evalue_field_basis": "IgBLAST_AIRR_v_support_j_support"
+}
