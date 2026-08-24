@@ -1,232 +1,441 @@
-# RIMA — BCR Repertoire Analysis Pipeline
+# bcr-assembler
 
-Проект **rima** — пайплайн для препроцессинга и сшивания paired-end
-ридов B-клеточных рецепторов (BCR) из высокопроизводительного
-секвенирования (HTS) на платформе Illumina MiSeq (2×300 bp).
+`bcr-assembler` — исследовательский репозиторий для разработки и проверки пайплайна
+воссоздания и последующей сборки BCR-последовательностей из paired-end reads.
 
-Пайплайн выполняет полный цикл Stage A: контроль качества сырых
-данных, обрезку адаптеров и технических последовательностей,
-сшивание парных ридов и подготовку данных для downstream-анализа
-(IgBLAST/IMGT, клонотипирование, SHM-профилирование).
+Сейчас репозиторий описывает и отрабатывает только тот сценарий, который уже удалось
+провести последовательно от начала до конца на одном датасете:
 
-## Датасеты
+- датасет: `ERP003950`
+- организм: мышь
+- тип данных: BCR heavy-chain amplicon reads
+- текущая подтверждённая траектория: raw FASTQ → QC → adapter trim → QC → primer trim
+  → QC → merge paired-end reads в reference-like dataset → annotation/compare/quality
+  analysis → simulation
 
-| Биопроект | Организм | Пары ридов | Протокол | Статья |
-|-----------|----------|------------|----------|--------|
-| PRJEB40348 | Человек (Homo sapiens) | 35 | Multiplex PCR, VH/VL FR1-праймеры, MiSeq 2×300 | Lomakin et al., Front. Immunol. 2022 |
-| PRJNA848968 | Лошадь (Equus caballus) | 4 | EquPD v2020, phage display scFv, MiSeq 2×300 | Rosenfeld et al., Front. Immunol. 2022 |
-| PRJNA900592 | Овца (Ovis aries) | 12 | 5′ RACE (SMARTer), MiSeq 2×300 | Park et al., Mol. Immunol. 2023 |
+Финальный шаг проекта — запуск repertoire assemblers уровня `TRUST4` на
+симулированных/фрагментированных reads и оценка качества сборки относительно
+референсного датасета — ещё в работе.
 
-Данные скачиваются из ENA (European Nucleotide Archive) через
-`wget` в `raw/<биопроект>/` на вычислительной платформе OneQ.
+Важно различать две разные задачи:
 
-Сырые FASTQ-файлы **не коммитятся** в репозиторий — они хранятся
-только на вычислительном volume.
+1. `merge paired-end reads` — техническое восстановление одной последовательности из
+   пары R1/R2 для формирования эталонного набора reads/templates.
+2. `BCR assembly` — более поздняя задача реконструкции V(D)J/C-последовательностей из
+   reads с помощью инструментов уровня `TRUST4`.
 
-## Этапы пайплайна
+В этом репозитории первый шаг уже реализован для мыши, второй — исследуется.
 
-### 1. Контроль качества сырых ридов (QC)
+## Основная идея проекта
 
-**Ноутбук:** `notebooks/qc.ipynb`
-**Скрипт:** `scripts/qc.py`
+Проект строится вокруг такой цепочки:
 
-```python
-run_qc("/data/user/epishkin", "PRJNA900592", "raw")
-```
+1. взять сырые paired-end BCR reads;
+2. определить тип эксперимента и характеристики секвенирования;
+3. убрать технический шум, не потеряв полезный иммунорепертуарный сигнал;
+4. восстановить merged dataset, который можно использовать как reference-like baseline;
+5. аннотировать этот baseline несколькими аннотаторами;
+6. на его основе сгенерировать синтетические датасеты с контролируемым ground truth;
+7. запускать assemblers и сравнивать их результат с известной reference truth.
 
-FastQC на каждый образец + MultiQC-сводка. Результат:
-`results/<DS>/qc_raw/` (FastQC-отчёты + MultiQC).
+Идея не в том, чтобы привязаться к одному инструменту, а в том, чтобы получить
+проверяемый workflow для сравнения разных решений на BCR reads.
 
-### 2. Обрезка адаптеров (adapter trim)
+## Текущий подтверждённый объект: mouse dataset `ERP003950`
 
-**Ноутбуки:**
-- `notebooks/adapter_trim_human.ipynb` — человек (NEBNext/TruSeq-адаптеры)
-- `notebooks/adapter_trim_mouse.ipynb` — мышь (explicit adapters, PE250-like MiSeq)
-- `notebooks/adapter_trim_horse.ipynb` — лошадь (эмпирические run-specific R1-адаптеры)
-- `notebooks/adapter_trim_sheep.ipynb` — овца (Illumina/NEBNext read-through + quality/length)
+Именно мышиный датасет `ERP003950` сейчас является главным рабочим кейсом репозитория,
+потому что по нему уже собрана непрерывная экспериментальная цепочка:
 
-**Инструменты:** cutadapt (явные adapter sequences → R1/R2) → fastp
-(`-q 30 -l 250 --detect_adapter_for_pe`, `--cut_right` отключён).
+- сырые reads;
+- QC на нескольких стадиях;
+- adapter trimming;
+- primer trimming;
+- merge paired-end reads;
+- annotation через IgBLAST;
+- сравнение с abstar;
+- quality summaries по annotation output;
+- подготовка reference-like merged dataset;
+- simulation через InSilicoSeq;
+- подготовка входа для будущего тестирования `TRUST4` и подобных assembler'ов.
 
-```python
-run_adapter_trim("/data/user/epishkin", "PRJNA900592")
-```
+Другие датасеты и species-специфичные ноутбуки в репозитории остаются как exploratory
+материал, но этот README описывает только мышиный пайплайн, потому что именно он сейчас
+лучше всего подтверждён на практике.
 
-Результат: `results/<DS>/trimmed/fastq/` (.trim.fastq.gz) +
-`results/<DS>/trimmed/fastp_reports/` (JSON + HTML).
+## Пайплайн для мыши: от начала до конца
 
-### 3. QC после обрезки адаптеров
+### 1. Сырые данные и первичное понимание эксперимента
 
-```python
-run_qc("/data/user/epishkin", "PRJNA900592", "trimmed")
-```
+Исходная точка — paired-end FASTQ мышиного датасета `ERP003950`.
 
-Результат: `results/<DS>/trimmed/fastqc/` + `results/<DS>/trimmed/multiqc/`.
+Для этого датасета в репозитории уже зафиксированы рабочие предпосылки:
 
-### 4. Обрезка праймеров / технических последовательностей (primer trim)
+- mouse IgG heavy-chain dataset;
+- paired-end geometry соответствует MiSeq/PE250-like данным;
+- это не финальная задача de novo repertoire assembly, а сначала задача корректного
+  восстановления reference-like merged dataset из исходных reads.
 
-**Ноутбуки:**
-- `notebooks/primer_trim_human.ipynb` — человек (V-праймеры через pRESTO MaskPrimers)
-- `notebooks/primer_trim_mouse.ipynb` — мышь (Greiff 2014 multiplex primers через MaskPrimers)
-- `notebooks/primer_trim.ipynb` — legacy notebook для human/horse
-- `notebooks/primer_trim_sheep.ipynb` — овца (5′ RACE: SMARTer anchor + C-region reverse primers через cutadapt)
+Смысл этого этапа — до любых преобразований понять:
 
-**Инструмент:** MaskPrimers.py (`align --mode cut --maxerror 0.2`) для
-multiplex-PCR датасетов; anchored cutadapt для 5′ RACE.
+- тип протокола;
+- где likely adapters;
+- где biological signal, который нельзя случайно срезать;
+- какие технические праймеры нужно удалять отдельно.
 
-Праймер-сетов: `seq_refs/human_primers.fasta`, `seq_refs/horse_primers.fasta`.
-Для овцы праймеры встроены в ноутбук (SMARTer anchor, Sh_IGHG/IGKC/IGLC rev).
+### 2. QC сырых reads
 
-QC после primer trim — отдельным шагом:
-```python
-run_qc("/data/user/epishkin", "PRJNA900592", "pr_trimmed")
-```
+Инструменты:
 
-Результат: `results/<DS>/pr_trimmed/fastq/` (.pr.fastq.gz) +
-`results/<DS>/pr_trimmed/fastqc/` + `results/<DS>/pr_trimmed/multiqc/`.
+- `FastQC`
+- `MultiQC`
+- helper script: `scripts/qc.py`
+- notebook: `notebooks/qc.ipynb`
 
-### 5. Сшивание парных ридов (merge)
+Что делается:
 
-**Ноутбуки:**
-- `notebooks/presto.ipynb` — canonical merge notebook
-- `notebooks/presto_mouse.ipynb` — mouse-specific merge notebook для `ERP003950`
+- per-sample FastQC;
+- сводка через MultiQC;
+- проверка качества по циклам, длинам, adapter contamination и общему профилю run.
 
-**Инструмент:** pRESTO AssemblePairs.py align
+Цель:
 
-```python
-run_merge_pairs("/data/user/epishkin", "PRJNA900592", label="pr_trimmed")
-```
+- зафиксировать baseline качества до любых обрезок;
+- понять, какие именно технические последовательности реально мешают дальше.
 
-Оптимизированные параметры:
-- `--nproc 8` (8 CPU достаточно, 16 — оптимум)
-- `--gzip-output` (сжатый выход)
-- `--coord illumina --rc tail`
-- без `--log` (verbose лог >2 GB/sample — bottleneck)
-- без `--failed` (failed reads не пишем)
-- GPU не нужен (pRESTO — CPU-only Python)
+### 3. Определение стратегии adapter trimming
 
-Результат: `results/<DS>/merged/fastq/` (_assemble-pass.fastq.gz).
+Для `ERP003950` стратегия не сводится к blind autodetect.
 
-### 6. QC после сшивания
+Подтверждённый текущий подход:
 
-```python
-run_qc("/data/user/epishkin", "PRJNA900592", "merged")
-```
+- notebook: `notebooks/adapter_trim_mouse.ipynb`
+- делается только `adapter/quality trimming`;
+- FR1/CH1 technical primers на этом этапе не режутся;
+- после smoke-test и ручной проверки для датасета захардкожены явные
+  `Illumina/TruSeq-style` адаптеры;
+- фактическая обрезка выполняется `cutadapt`.
 
-## Структура репозитория
+Ключевая идея этого этапа: сначала убрать sequencing/library adapters и length/quality
+artefacts, не смешивая это с primer-trimming логикой.
 
-```
-rima/
-├── README.md                    этот файл
-├── .gitignore                   FASTQ, OneQ-state, checkpoints, .pyc — не коммитить
-├── seq_refs/                    референсные последовательности (адаптеры, праймеры)
-│   ├── adapter_sequences.fasta  адаптеры (Illumina, horse run-specific)
-│   ├── human_primers.fasta      36 human V-gene FR1 + JH rev (MaskPrimers)
-│   ├── horse_primers.fasta      35 EquPD v2020 primers (MaskPrimers)
-│   └── sheep_5prime_race.fasta  SMARTer anchor + C-region rev (cutadapt)
-├── notebooks/                   Jupyter-ноутбуки — основной и canonical рабочий формат
-│   ├── qc.ipynb                 QC на любой этап (raw/trimmed/pr_trimmed/merged)
-│   ├── adapter_trim_human.ipynb  человек
-│   ├── adapter_trim_mouse.ipynb  мышь
-│   ├── adapter_trim_horse.ipynb  лошадь
-│   ├── adapter_trim_sheep.ipynb  овца
-│   ├── primer_trim_human.ipynb   человек
-│   ├── primer_trim_mouse.ipynb   мышь
-│   ├── primer_trim.ipynb         legacy human + horse
-│   ├── primer_trim_sheep.ipynb   овца (5′ RACE cutadapt)
-│   ├── presto.ipynb              canonical PE merge
-│   └── presto_mouse.ipynb        mouse merge (`ERP003950`)
-└── results/                     QC-отчёты (FastQC HTML/ZIP + MultiQC)
-    ├── PRJEB40348/              человек
-    ├── PRJNA848968/             лошадь
-    └── PRJNA900592/             овца
-```
+### 4. Adapter trimming и техническая фильтрация
 
-Для каждого датасета в `results/<DS>/`:
-```
-results/<DS>/
-├── raw/            QC сырых ридов
-│   ├── fastqc/     per-sample FastQC HTML + ZIP
-│   └── multiqc/    MultiQC-сводка
-├── trimmed/        QC после adapter trim
-│   ├── fastp_reports/  fastp JSON + HTML
-│   ├── fastqc/     per-sample FastQC
-│   └── multiqc/    MultiQC-сводка
-├── pr_trimmed/     QC после primer trim
-│   ├── fastqc/     per-sample FastQC
-│   └── multiqc/    MultiQC-сводка
-└── merged/         (на OneQ) результат AssemblePairs
-    └── fastq/      _assemble-pass.fastq.gz
-```
+Основной рабочий mouse notebook:
 
-FASTQ-файлы (сырые, trimmed, pr_trimmed, pr_trimmed_sync, merged) хранятся **только
-на OneQ volume** (`/data/user/epishkin/results/<DS>/`) и не
-коммитятся в git. В репозитории — notebook'и, QC-отчёты (HTML, ZIP, JSON, MultiQC),
-`seq_refs/` и стабильные metadata/summary-артефакты.
+- `notebooks/adapter_trim_mouse.ipynb`
 
-## Инструменты
+Инструменты:
 
-| Инструмент | Версия | Назначение |
-|------------|--------|------------|
-| FastQC | 0.12.1 | Per-sample QC |
-| MultiQC | 1.35 | Агрегация FastQC-отчётов |
-| fastp | 0.23+ | Quality filtering, adapter detection (safety net) |
-| cutadapt | 5.2 | Adapter trimming, 5′ RACE primer removal |
-| pRESTO | 0.7.9 | AssemblePairs (merge PE), MaskPrimers (primer trim) |
+- `cutadapt`
 
-Все инструменты устанавливаются в conda-окружение `bcr_env` через
-`scripts/setup_vm_conda.sh`.
+Что делается:
 
-## Запуск на OneQ
+- обрезаются R1/R2 Illumina-style adapters;
+- применяется quality trimming;
+- применяется length filtering;
+- выход сохраняется как `*.trim.fastq.gz`.
 
-1. **Создать task** в OneQ с образом `jupyter/base-notebook` и
-   mounted volume `/data/user/epishkin/`.
+Для общего/раннего workflow в репозитории есть и helper script
+`scripts/adapter_trim.py`, где показан общий шаблон `cutadapt + fastp`, но для текущего
+mouse-пайплайна подтверждённая логика зафиксирована именно в
+`notebooks/adapter_trim_mouse.ipynb` и построена вокруг `cutadapt`.
 
-2. **Установить окружение** (один раз):
-   ```bash
-   bash scripts/setup_vm_conda.sh
-   ```
+### 5. QC после adapter trimming
 
-3. **Скачать данные** из ENA в `raw/<DS>/`:
-   ```bash
-   python3 -c "import urllib.request; \
-   url='https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJNA900592&result=read_run&fields=run_accession,fastq_ftp&format=tsv'; \
-   print(urllib.request.urlopen(url).read().decode())"
-   # далее wget каждого fastq_ftp URL
-   ```
+После adapter/quality trimming снова запускается QC:
 
-4. **Запустить пайплайн** в Jupyter-ноутбуках (по одному шагу за раз):
-   - `qc.ipynb` → `adapter_trim*.ipynb` → `qc.ipynb` →
-     `primer_trim*.ipynb` → `qc.ipynb` → `presto.ipynb` → `qc.ipynb`
+- notebook: `notebooks/qc.ipynb`
+- helper script: `scripts/qc.py`
 
-5. **Скачать QC-отчёты** локально и закоммитить в git.
+Зачем:
 
-## Особенности по датасетам
+- проверить, что adapter contamination действительно ушла;
+- оценить распределение длин и качество после фильтрации;
+- убедиться, что данные готовы к следующему этапу.
 
-### Человек (PRJEB40348)
-- Multiplex PCR с FR1-праймерами (Cheng 2011 universal set: 15 VH fwd + 4 JH rev)
-- Адаптеры: Illumina TruSeq/NEBNext (`seq_refs/adapter_sequences.fasta`)
-- Primer trim: MaskPrimers `align --mode cut` с `seq_refs/human_primers.fasta`
-- Retention после adapter+primer trim: 88.1% (77–95% per sample)
+### 6. Primer trimming
 
-### Лошадь (PRJNA848968)
-- EquPD v2020 primer set, phage display scFv libraries
-- Адаптеры: эмпирические run-specific R1 (`seq_refs/adapter_sequences.fasta`),
-  НЕ копировать human TruSeq; EquPD/scFv tails НЕ резать на adapter-этапе
-- Primer trim: MaskPrimers `align` с `seq_refs/horse_primers.fasta` (35 праймеров)
+Для мыши текущая подтверждённая рабочая политика такая:
 
-### Овца (PRJNA900592)
-- 5′ RACE (SMARTer), универсальный anchor (не multiplex V-primer PCR)
-- Адаптеры: Illumina/NEBNext read-through (`seq_refs/adapter_sequences.fasta`),
-  без fastp autodetect (детектит SMARTer anchor как "адаптер")
-- Primer trim: anchored cutadapt — SMARTer anchor (5′) +
-  C-region reverse primers (`seq_refs/sheep_5prime_race.fasta`, 3′)
-- Retention: raw → adapter trimmed 78.2% → primer trimmed ~100% (только срез тех. seqs)
-- Read length: ~300 bp → ~266 bp после primer trim
+- notebook: `notebooks/primer_trim_mouse.ipynb`
+- рабочий helper: `scripts/primer_trim_mouse_constant_only.py`
+- обрезается только праймер constant-региона IgG;
+- V-region forward primers сохраняются и не включаются в trim reference для этого шага.
 
-## Источники
+Это важный результат проекта: primer trimming для mouse оказался не просто
+"запустить MaskPrimers на всё подряд", а отдельной исследовательской задачей с выбором,
+что именно нужно резать без потери полезной информации.
 
-- **Лошадь:** Rosenfeld R et al. (2022) Centaur antibodies. *Front. Immunol.* 13:942317. doi:10.3389/fimmu.2022.942317. PRJNA848968.
-- **Овца:** Park M et al. (2023) Exploring the sheep immunoglobulin repertoire. *Mol. Immunol.* 156:20–30. doi:10.1016/j.molimm.2023.02.008. PRJNA900592.
-- **Человек:** Lomakin YA et al. (2022) Deconvolution of B cell receptor repertoire. *Front. Immunol.* 13:803229. doi:10.3389/fimmu.2022.803229. PRJEB40348 / E-MTAB-9573.
-- **pRESTO:** Rosenfeld et al. horse paper: pRESTO v0.7.0, Phred Q10 filtering. *Front. Immunol.* 2022.
+Текущая реализация:
+
+- `cutadapt` используется для constant-region primer trimming;
+- для разных samples заранее зафиксировано, в каком mate находится соответствующий
+  constant-region primer;
+- второй mate при необходимости копируется без изменений;
+- выход сохраняется как `*.pr.fastq.gz`.
+
+В репозитории остаётся и более общий `scripts/primer_trim.py` на `MaskPrimers.py`, но
+mouse-пайплайн сейчас опирается на `primer_trim_mouse_constant_only.py`.
+
+### 7. QC после primer trimming
+
+После primer trim снова выполняется QC:
+
+- `FastQC`
+- `MultiQC`
+- `notebooks/qc.ipynb`
+
+Это нужно, чтобы убедиться, что технические последовательности убраны аккуратно и без
+нежелательной деградации данных.
+
+### 8. Merge paired-end reads для формирования reference-like dataset
+
+Это центральный подтверждённый шаг текущего проекта.
+
+Цель:
+
+- не запустить ещё repertoire assembler,
+- а сначала восстановить merged sequences из R1/R2, чтобы получить максимально
+  надёжный reference-like dataset для дальнейшей annotation и simulation.
+
+Основной notebook:
+
+- `notebooks/presto_mouse.ipynb`
+
+Основной инструмент:
+
+- `pRESTO AssemblePairs.py`
+
+Что в нём зафиксировано:
+
+- используется оптимизированный mouse-specific merge workflow;
+- `--nproc` задаётся явно, а не берётся дефолт pRESTO;
+- verbose per-read `--log` по умолчанию выключен, чтобы не раздувать I/O;
+- запись failed reads по умолчанию тоже выключена;
+- long-running merge запускается с heartbeat и отдельными stdout/stderr log files.
+
+Для экспериментов в репозитории также лежит альтернативный merge comparator:
+
+- `scripts/merge_mouse_pairs_custom.py`
+
+Этот скрипт реализует собственную overlap-based сборку и полезен как дополнительный
+контрольный/исследовательский инструмент, но основной подтверждённый merge pipeline для
+мыши сейчас — через `pRESTO`.
+
+### 9. QC merged reads
+
+После merge выполняется ещё один QC-этап:
+
+- `FastQC`
+- `MultiQC`
+- `notebooks/qc.ipynb`
+
+Цель:
+
+- проверить профиль уже reconstructed reads;
+- убедиться, что merged dataset пригоден как baseline/reference для следующего анализа.
+
+### 10. Аннотация reference-like merged dataset
+
+После получения merged reads запускается annotation.
+
+Основной notebook:
+
+- `notebooks/annotate_mouse.ipynb`
+
+Основной инструмент:
+
+- `IgBLAST`
+
+Что делает notebook:
+
+1. конвертирует merged FASTQ в FASTA;
+2. запускает `igblastn` по каждому sample;
+3. делает safe resume;
+4. пропускает только действительно complete outputs;
+5. архивирует stale/incomplete TSV и пересчитывает их;
+6. использует `nproc=4` по умолчанию, потому что `nproc=8` уже приводил к OOM на
+   `ERR346598`.
+
+Это уже не просто preprocessing: здесь формируется аннотированный baseline, который
+можно использовать как reference truth для последующих сравнений.
+
+### 11. Quality analysis по аннотации
+
+После IgBLAST в репозитории есть отдельный notebook:
+
+- `notebooks/mouse_full_quality_summary_6samples.ipynb`
+
+Он считает по всем 6 samples mouse dataset `ERP003950`:
+
+- stop codon rate;
+- долю reads с плохой V/J amino-acid identity;
+- долю reads с плохими `v_support/j_support` значениями;
+- combined quality metrics;
+- дополнительные annotation-level показатели.
+
+Это важный слой проекта: качество оценивается не только по FASTQ/QC-графикам, но и по
+содержимому аннотации.
+
+### 12. Сравнение аннотаторов
+
+Чтобы не полагаться на один annotation stack, в репозитории есть сравнение:
+
+- `notebooks/annotator_compare_mouse.ipynb`
+- `notebooks/igblast_abstar_problematic_2seq.ipynb`
+
+Инструменты:
+
+- `IgBLAST`
+- `abstar`
+
+Что сравнивается:
+
+- productivity;
+- V/D/J calls;
+- CDR3 AA;
+- per-read agreement/disagreement;
+- problematic sequences отдельным notebook'ом.
+
+То есть reference-like dataset не только строится, но и интерпретируется через несколько
+аннотаторов.
+
+### 13. Подготовка reference dataset для simulation
+
+После merge + annotation полученный mouse dataset используется как основа для
+симуляции.
+
+Смысл:
+
+- сформировать controlled ground truth;
+- получить synthetic reads, на которых потом можно честно сравнивать assemblers.
+
+### 14. Simulation sequencing reads
+
+В репозитории уже есть несколько mouse simulation notebooks:
+
+- `notebooks/simulate_mouse_merged_insilicoseq.ipynb`
+- `notebooks/simulate_mouse_merged_insilicoseq_150bp.ipynb`
+- `notebooks/simulate_mouse_merged_insilicoseq_150bp_pcr_fragmented.ipynb`
+
+Основные инструменты:
+
+- `InSilicoSeq`
+- `bowtie2` для подготовки/обучения error model и привязки реальных reads к merged truth
+
+Что уже делается:
+
+- строится общий reference FASTA из merged mouse reads;
+- используются реальные mouse merged sequences как templates;
+- моделируется sequencing error profile;
+- генерируются synthetic paired-end datasets;
+- отдельно исследуется 150bp сценарий;
+- отдельно исследуется PCR-like amplification + fragmentation сценарий.
+
+Это уже прямая подготовка к следующему шагу — тестированию repertoire assemblers.
+
+### 15. Следующий этап: assemblers уровня TRUST4
+
+Это то, к чему проект идёт сейчас.
+
+Цель следующего шага:
+
+- взять simulated fragmented reads;
+- прогнать `TRUST4` и сопоставимые инструменты;
+- сравнить восстановленные последовательности с известной reference truth,
+  полученной на предыдущих этапах.
+
+Именно этот шаг в проекте ещё не завершён, поэтому текущий README честно фиксирует:
+
+- reference-like merged mouse dataset уже построен;
+- annotation и simulation уже идут;
+- полноценная оценка assemblers относительно reference dataset — следующий основной
+  milestone.
+
+## Что уже сделано и подтверждено
+
+Для mouse dataset `ERP003950` в репозитории уже есть подтверждённые рабочие этапы:
+
+1. raw QC;
+2. adapter trimming;
+3. QC после adapter trimming;
+4. primer trimming с текущей mouse-specific политикой;
+5. QC после primer trimming;
+6. merge paired-end reads через `pRESTO`;
+7. QC merged reads;
+8. full-dataset annotation через `IgBLAST`;
+9. quality summaries по annotation output;
+10. сравнение `IgBLAST` vs `abstar`;
+11. problematic-sequence analysis;
+12. simulation на основе reference-like merged dataset.
+
+## Что ещё исследуется
+
+1. насколько текущая mouse-specific primer trimming политика оптимальна;
+2. какие merge/annotation/quality thresholds лучше держать как канонические;
+3. как лучше моделировать realistic fragmented BCR reads;
+4. как сравнивать `TRUST4` и другие assemblers на controlled ground truth;
+5. какие метрики лучше всего отражают качество конечной BCR assembly.
+
+## Основные файлы и ноутбуки
+
+### Core notebooks для мыши
+
+- `notebooks/qc.ipynb` — QC на разных стадиях
+- `notebooks/adapter_trim_mouse.ipynb` — adapter/quality trimming для `ERP003950`
+- `notebooks/primer_trim_mouse.ipynb` — текущая mouse-specific primer trim логика
+- `notebooks/presto_mouse.ipynb` — основной merge paired-end workflow
+- `notebooks/annotate_mouse.ipynb` — full IgBLAST annotation
+- `notebooks/mouse_full_quality_summary_6samples.ipynb` — quality summary по annotation
+- `notebooks/annotator_compare_mouse.ipynb` — IgBLAST vs abstar
+- `notebooks/igblast_abstar_problematic_2seq.ipynb` — разбор проблемных sequences
+- `notebooks/simulate_mouse_merged_insilicoseq.ipynb` — базовая simulation
+- `notebooks/simulate_mouse_merged_insilicoseq_150bp.ipynb` — 150bp fragmented simulation
+- `notebooks/simulate_mouse_merged_insilicoseq_150bp_pcr_fragmented.ipynb` — PCR-like
+  fragmented simulation
+
+### Helper scripts
+
+- `scripts/qc.py` — FastQC + MultiQC runner
+- `scripts/adapter_trim.py` — общий adapter trim helper
+- `scripts/primer_trim.py` — общий MaskPrimers-based helper
+- `scripts/primer_trim_mouse_constant_only.py` — текущий mouse-specific primer trim helper
+- `scripts/merge_mouse_pairs_custom.py` — альтернативный custom merge comparator
+
+## Используемые инструменты
+
+Подтверждённые по текущему mouse workflow инструменты:
+
+- `FastQC`
+- `MultiQC`
+- `cutadapt`
+- `pRESTO`
+- `IgBLAST`
+- `abstar`
+- `InSilicoSeq`
+- `bowtie2`
+
+Целевые/следующие инструменты для основной assembly-задачи:
+
+- `TRUST4`
+- другие repertoire assemblers для сравнения
+
+## Что хранится в репозитории
+
+В git хранятся:
+
+- notebooks;
+- helper scripts;
+- reference sequences;
+- QC/summary/report artefacts;
+- стабильные вспомогательные таблицы и отчёты.
+
+Смысл репозитория — сохранить воспроизводимую логику исследования и проверяемые
+артефакты по mouse pipeline.
+
+## Кратко в одной фразе
+
+`bcr-assembler` — это репозиторий, в котором на mouse dataset `ERP003950`
+последовательно строится и проверяется пайплайн от сырых BCR paired-end reads до
+reference-like merged/annotated baseline, на основе которого затем можно честно
+тестировать `TRUST4` и другие BCR assemblers.
