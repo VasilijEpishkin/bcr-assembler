@@ -1,0 +1,7 @@
+sample	status	templates	nonzero_templates	original_reads	target_read_pairs	final_read_pairs	pcr_lognormal_sigma	min_read_pairs_per_template	read_counts_tsv
+ERR346596	built	624945	624945	658771	6426862	6426862	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346596_read_counts_pcr_fragmented.tsv
+ERR346597	built	595793	595793	627705	6123608	6123608	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346597_read_counts_pcr_fragmented.tsv
+ERR346598	built	1302064	1302064	1325428	13383820	13383820	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346598_read_counts_pcr_fragmented.tsv
+ERR346599	built	713450	713450	722057	7337696	7337696	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346599_read_counts_pcr_fragmented.tsv
+ERR346600	built	552109	552109	580241	5678049	5678049	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346600_read_counts_pcr_fragmented.tsv
+ERR346601	built	689729	689729	698208	7092671	7092671	1.0	1	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp_pcr_fragmented/read_counts/ERR346601_read_counts_pcr_fragmented.tsv
