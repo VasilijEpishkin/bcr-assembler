@@ -1,7 +1,0 @@
-sample	status	elapsed_sec	reads_generated	r1_fastq	r2_fastq
-ERR346596	done	2820.0	3213432	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346596_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346596_R2.fastq.gz
-ERR346597	done	2970.2	3061808	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346597_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346597_R2.fastq.gz
-ERR346598	done	6750.3	6691912	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346598_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346598_R2.fastq.gz
-ERR346599	done	3660.1	3668848	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346599_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346599_R2.fastq.gz
-ERR346600	done	2850.1	2839024	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346600_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346600_R2.fastq.gz
-ERR346601	done	3360.1	3546336	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346601_R1.fastq.gz	/data/user/epishkin/results/ERP003950/simulated/insilicoseq_150bp/fastq/ERR346601_R2.fastq.gz
