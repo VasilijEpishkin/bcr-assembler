@@ -21,7 +21,7 @@ reference-like baseline из реальных данных, а затем ген
 | Adapter trim | `adapter_trim_mouse.ipynb` | cutadapt |
 | Primer trim (только constant-region; V-region primer сохраняется) | `primer_trim_mouse.ipynb` | cutadapt |
 | Merge paired-end reads | `presto_mouse.ipynb` | pRESTO `AssemblePairs.py` |
-| Annotation | `annotate_mouse.ipynb` | IgBLAST (`nproc=4`, `8` вызывал OOM) |
+| Annotation | `annotate_mouse.ipynb` | IgBLAST |
 | Quality summary | `mouse_full_quality_summary_6samples.ipynb` | — |
 | Сравнение аннотаторов | `annotator_compare_mouse.ipynb`, `igblast_abstar_problematic_2seq.ipynb` | IgBLAST vs abstar |
 | Симуляция секвенирования | `simulate_mouse_merged_insilicoseq_150bp.ipynb` | InSilicoSeq, bowtie2 |
