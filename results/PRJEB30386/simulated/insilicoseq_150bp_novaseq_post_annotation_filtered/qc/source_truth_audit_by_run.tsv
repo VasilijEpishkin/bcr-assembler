@@ -1,0 +1,5 @@
+source_run	library	expected_locus	expected_passed_from_filter_summary	airr_pass_rows	simulation_eligible_rows	missing_barcode	invalid_barcode_length	non_acgt_barcode	missing_v_or_j_call	sequence_with_N
+ERR3004229	IgM	IGH	1090122	1090122	1079373	10748	0	0	0	1
+ERR3004230	IgG	IGH	782331	782331	774016	8315	0	0	0	0
+ERR3004231	IgK	IGK	651862	651862	646730	5132	0	0	0	0
+ERR3004232	IgL	IGL	712731	712731	704601	8130	0	0	0	0

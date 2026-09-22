@@ -1,0 +1,3 @@
+Sample	fastqc-percent_duplicates	fastqc-percent_gc	fastqc-avg_sequence_length	fastqc-median_sequence_length	fastqc-percent_fails	fastqc-total_sequences
+PRJEB30386_all_chains_R1	89.01973033258992	53.0	150.0	150	10.0	4.552714
+PRJEB30386_all_chains_R2	85.2090059773908	53.0	150.0	150	10.0	4.552714

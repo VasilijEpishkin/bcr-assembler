@@ -1,0 +1,7 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	ERR346596_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346596_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR346597_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346597_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR346598_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346598_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR346599_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346599_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR346600_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346600_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR346601_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346601_assemble-pass_fastqc.zip

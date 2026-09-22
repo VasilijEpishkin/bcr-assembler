@@ -1,0 +1,2 @@
+sample	pcr1_templates	pcr1_molecules	fragments	fragment_input_molecules	fragmentation_molecule_conserved	pcr2_fragments	target_read_pairs	fragments_with_reads	fragment_sampling_dropout	mean_pcr2_efficiency	median_pcr2_copies
+PRJEB30386_all_chains	549820	10942016500292	2749100	10942016500292	True	2749100	4552714	1110858	0.5959193918009531	0.8500020930829633	514064795.5

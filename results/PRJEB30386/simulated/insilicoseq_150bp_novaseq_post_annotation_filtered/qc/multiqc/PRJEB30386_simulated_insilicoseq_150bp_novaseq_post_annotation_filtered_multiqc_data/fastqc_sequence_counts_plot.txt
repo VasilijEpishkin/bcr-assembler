@@ -1,0 +1,3 @@
+Sample	Unique Reads	Duplicate Reads
+PRJEB30386_all_chains_R1	499901.0	4052813.0
+PRJEB30386_all_chains_R2	673392.0	3879322.0

@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-09-11T09:22:40.221942+00:00",
+  "dataset": "ERP003950_fastp_q30_u40",
+  "branch": null,
+  "stage": "merged",
+  "view": "primary",
+  "input_count": 6,
+  "inputs": [
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346596_assemble-pass.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346597_assemble-pass.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346598_assemble-pass.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346599_assemble-pass.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346600_assemble-pass.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastq/ERR346601_assemble-pass.fastq.gz"
+  ],
+  "report": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/multiqc/ERP003950_fastp_q30_u40_merged_multiqc.html",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:51:19) [Clang 19.1.7 ]",
+  "fastqc": "/usr/local/bin/fastqc",
+  "multiqc": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc"
+}

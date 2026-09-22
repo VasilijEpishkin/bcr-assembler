@@ -1,0 +1,33 @@
+{
+  "expected_pairs": 4552714,
+  "R1_pairs": 4552714,
+  "R2_pairs": 4552714,
+  "read_length": 150,
+  "PCR1_molecules": 10942016500292,
+  "fragment_input_molecules": 10942016500292,
+  "fragmentation_mass_conserved": true,
+  "allocated_pairs": 4552714,
+  "selected_fragment_species": 1110858,
+  "branch": "insilicoseq_150bp_novaseq_post_annotation_filtered",
+  "sample": "PRJEB30386_all_chains",
+  "validation_pairs": 250000,
+  "locus_pairs": {
+    "IGH": 2509309,
+    "IGK": 958261,
+    "IGL": 1085144
+  },
+  "fragment_alignment": {
+    "mapped_pct": 100.0,
+    "properly_paired_pct": 100.0,
+    "error_rate": 0.001617652,
+    "primary_reads_checked": 500000,
+    "qname_origin_parse_rate": 1.0,
+    "exact_fragment_origin_rate": 0.392208,
+    "sequence_equivalent_fragment_origin_rate": 0.393568
+  },
+  "template_alignment": {
+    "mapped_pct": 100.0,
+    "properly_paired_pct": 100.0,
+    "error_rate": 0.001521171
+  }
+}

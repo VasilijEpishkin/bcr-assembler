@@ -1,0 +1,3 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	PRJEB30386_all_chains_R1	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/simulated/insilicoseq_150bp_novaseq_post_annotation_filtered/qc/fastqc/PRJEB30386_all_chains_R1_fastqc.zip
+FastQC	all_sections	PRJEB30386_all_chains_R2	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/simulated/insilicoseq_150bp_novaseq_post_annotation_filtered/qc/fastqc/PRJEB30386_all_chains_R2_fastqc.zip
