@@ -1,0 +1,41 @@
+{
+  "dataset": "PRJEB30386",
+  "source_stage": "post_annotation_filtered",
+  "truth_airr_dir": "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/airr_pass",
+  "filtered_fastq_dir": "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/fastq",
+  "filter_summary": "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/filter_summary.json",
+  "filter_summary_sha256": "0214498e7a0572645b113d0340b247e13e66cb2c045ecff4b67fbe8eb0fe91f4",
+  "filter_rules": {
+    "min_vj_span_nt": 300,
+    "require_v_germline_start_eq_1": true,
+    "require_complete_vdj_for_j_3prime_end": true,
+    "require_expected_locus": {
+      "ERR3004229": "IGH",
+      "ERR3004230": "IGH",
+      "ERR3004231": "IGK",
+      "ERR3004232": "IGL"
+    },
+    "require_productive": true,
+    "reject_stop_codon": true,
+    "min_v_identity_percent": 80.0,
+    "min_j_identity_percent": 85.0,
+    "max_v_support_evalue": 1e-05,
+    "max_j_support_evalue": 1e-05
+  },
+  "simulation_specific_truth_rules": {
+    "require_valid_20nt_umi": true,
+    "drop_sequences_with_N": true,
+    "crop_to_annotated_V_to_J": true,
+    "collapse_key": [
+      "locus",
+      "VJ_sequence"
+    ],
+    "starting_copies_mode": "unique_umis"
+  },
+  "branch": "insilicoseq_150bp_novaseq_post_annotation_filtered",
+  "seed": 42,
+  "sequencing_error_model": {
+    "type": "InSilicoSeq bundled NovaSeq profile",
+    "conditioned_on_post_annotation_filter": false
+  }
+}

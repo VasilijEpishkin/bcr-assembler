@@ -1,0 +1,13 @@
+path	sample	mate	technical_branch	role
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346596_1.pr.fastq.gz	ERR346596	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346596_2.pr.fastq.gz	ERR346596	R2		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346597_1.pr.fastq.gz	ERR346597	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346597_2.pr.fastq.gz	ERR346597	R2		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346598_1.pr.fastq.gz	ERR346598	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346598_2.pr.fastq.gz	ERR346598	R2		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346599_1.pr.fastq.gz	ERR346599	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346599_2.pr.fastq.gz	ERR346599	R2		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346600_1.pr.fastq.gz	ERR346600	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346600_2.pr.fastq.gz	ERR346600	R2		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346601_1.pr.fastq.gz	ERR346601	R1		pr_trimmed_mate
+/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/pr_trimmed/fastq/ERR346601_2.pr.fastq.gz	ERR346601	R2		pr_trimmed_mate

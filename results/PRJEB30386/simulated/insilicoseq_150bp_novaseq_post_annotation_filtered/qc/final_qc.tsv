@@ -1,0 +1,2 @@
+branch	sample	expected_pairs	R1_reads	R2_reads	R1_lengths	R2_lengths	valid
+insilicoseq_150bp_novaseq_post_annotation_filtered	PRJEB30386_all_chains	4552714	4552714	4552714	150	150	True

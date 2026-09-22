@@ -1,0 +1,13 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	ERR346596_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346596_1.trim_fastqc.zip
+FastQC	all_sections	ERR346596_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346596_2.trim_fastqc.zip
+FastQC	all_sections	ERR346597_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346597_1.trim_fastqc.zip
+FastQC	all_sections	ERR346597_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346597_2.trim_fastqc.zip
+FastQC	all_sections	ERR346598_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346598_1.trim_fastqc.zip
+FastQC	all_sections	ERR346598_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346598_2.trim_fastqc.zip
+FastQC	all_sections	ERR346599_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346599_1.trim_fastqc.zip
+FastQC	all_sections	ERR346599_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346599_2.trim_fastqc.zip
+FastQC	all_sections	ERR346600_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346600_1.trim_fastqc.zip
+FastQC	all_sections	ERR346600_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346600_2.trim_fastqc.zip
+FastQC	all_sections	ERR346601_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346601_1.trim_fastqc.zip
+FastQC	all_sections	ERR346601_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346601_2.trim_fastqc.zip

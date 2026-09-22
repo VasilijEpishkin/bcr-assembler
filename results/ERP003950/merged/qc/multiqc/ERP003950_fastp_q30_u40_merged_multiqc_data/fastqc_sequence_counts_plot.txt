@@ -1,0 +1,7 @@
+Sample	Unique Reads	Duplicate Reads
+ERR346596_assemble-pass	20220.0	1089911.0
+ERR346597_assemble-pass	21070.0	1136832.0
+ERR346598_assemble-pass	46335.0	2343032.0
+ERR346599_assemble-pass	597166.0	637810.0
+ERR346600_assemble-pass	17394.0	972617.0
+ERR346601_assemble-pass	28104.0	1232842.0

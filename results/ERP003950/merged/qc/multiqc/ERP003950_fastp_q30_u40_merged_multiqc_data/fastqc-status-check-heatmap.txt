@@ -1,0 +1,7 @@
+.	Basic Statistics	Per Base Sequence Quality	Per Sequence Quality Scores	Per Base Sequence Content	Per Sequence GC Content	Per Base N Content	Sequence Length Distribution	Sequence Duplication Levels	Overrepresented Sequences	Adapter Content
+ERR346596_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+ERR346597_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+ERR346598_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+ERR346599_assemble-pass	1	1	1	0.25	0.25	1	0.5	0.25	0.5	1
+ERR346600_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
+ERR346601_assemble-pass	1	1	1	0.25	0.5	1	0.5	0.25	0.25	1
