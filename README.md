@@ -16,12 +16,15 @@ reference-like baseline из реальных данных, а затем ген
 
 ### Human PRJEB30386
 
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq.ipynb`
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus.ipynb`
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus.ipynb` — random-cut baseline
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 
 ### Mouse ERP003950 fastp
 
-- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`
+- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
+- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 
 Старые `simulate_*_merged_*.ipynb` simulation notebooks удалены как legacy /
 дубликаты и не являются частью production workflow.
@@ -60,9 +63,7 @@ InSilicoSeq
 PE150 FASTQ
 ```
 
-Фрагментация в production notebooks будет приведена к новой модели random-cut;
-отдельные ultrasonic-like варианты будут храниться в отдельных simulation
-notebooks и output branches.
+Фрагментация в production notebooks использует random-cut baseline: одна случайная межнуклеотидная точка разрыва на выбранную library-input молекулу, оба дочерних фрагмента создаются до size-selection. Отдельные ultrasonic-like notebooks используют рекурсивные size-dependent разрывы с midpoint-centered breakpoint distribution и отдельным size-selection.
 
 ## Окружение
 
