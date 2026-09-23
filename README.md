@@ -9,38 +9,60 @@
 reference-like baseline из реальных данных, а затем генерирует на его основе
 синтетические фрагментированные reads с контролируемой правдой.
 
-Рабочий кейс — mouse `ERP003950` (Greiff 2014, IgG heavy-chain репертуар,
-6 сэмплов, MiSeq 2×250). Остальные виды в репозитории — эксплораторный
-материал, не описаны здесь.
+Актуальные simulation-ветки строятся после аннотации и post-filtering, а не
+напрямую из старых merged-read simulation notebooks.
 
-## Пайплайн
+## Актуальные simulation notebooks
+
+### Human PRJEB30386
+
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq.ipynb`
+- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus.ipynb`
+
+### Mouse ERP003950 fastp
+
+- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`
+
+Старые `simulate_*_merged_*.ipynb` simulation notebooks удалены как legacy /
+дубликаты и не являются частью production workflow.
+
+## Пайплайн mouse fastp
 
 | Шаг | Ноутбук | Инструмент |
 |---|---|---|
 | QC (на всех стадиях) | `qc.ipynb` | FastQC, MultiQC |
-| Adapter trim | `adapter_trim_mouse.ipynb` | cutadapt |
-| Primer trim (только constant-region; V-region primer сохраняется) | `primer_trim_mouse.ipynb` | cutadapt |
-| Merge paired-end reads | `presto_mouse.ipynb` | pRESTO `AssemblePairs.py` |
-| Annotation | `annotate_mouse.ipynb` | IgBLAST |
-| Quality summary | `mouse_full_quality_summary_6samples.ipynb` | — |
-| Сравнение аннотаторов | `annotator_compare_mouse.ipynb`, `igblast_abstar_problematic_2seq.ipynb` | IgBLAST vs abstar |
-| Симуляция секвенирования | `simulate_mouse_merged_insilicoseq_150bp.ipynb` | InSilicoSeq, bowtie2 |
-| Валидация симуляции | `align_simulated_reads_bowtie2.ipynb` | bowtie2, samtools |
-| Сшивка фрагментов в исходную последовательность | — | `TRUST4` и аналоги |
+| Adapter trim | `adapter_trim_mouse_fastp_q30_u40.ipynb` | cutadapt, fastp |
+| Primer trim | `primer_trim_mouse_fastp_q30_u40.ipynb` | cutadapt |
+| Merge paired-end reads | `presto_mouse_fastp_q30_u40.ipynb` | pRESTO `AssemblePairs.py` |
+| Annotation | `annotate_mouse_fastp_q30_u40.ipynb` | IgBLAST |
+| Post-annotation filter | `filter_mouse_post_annotation.ipynb` | AIRR/sequence filters |
+| Симуляция секвенирования | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | InSilicoSeq |
+| Валидация симуляции | `validate_mouse_novaseq_post_annotation_filtered.ipynb` | bowtie2, samtools |
+| Сшивка фрагментов | — | `TRUST4` и аналоги |
 
-## Симуляция: как устроена
+## Симуляция: общая архитектура
 
-`simulate_mouse_merged_insilicoseq_150bp.ipynb` — dedup merged reads в
-уникальные templates → error model (KDE, обучена на реальных ридах, обрезанных
-до 150bp) → **PCR#1** (branching, на целых templates, до фрагментации) →
-**фрагментация** (templates явно нарезаются на отслеживаемые кандидат-фрагменты,
-не эфемерно внутри InSilicoSeq) → **PCR#2** (независимый branching на каждом
-фрагменте, library-prep после фрагментации) → мультиномиальная аллокация read
-budget по фрагментам → `iss generate --sequence_type amplicon` (сиквенирует
-фрагмент как есть, без повторной нарезки).
+Актуальная архитектура:
 
-Известное упрощение: PCR#2 стартует с полного `pcr_copies` родителя на каждый
-кандидат-фрагмент, а не тайлит одну амплифицированную молекулу физически.
+```text
+post_annotation_filtered truth
+    ↓
+PCR1
+    ↓
+fragmentation
+    ↓
+PCR2
+    ↓
+read allocation
+    ↓
+InSilicoSeq
+    ↓
+PE150 FASTQ
+```
+
+Фрагментация в production notebooks будет приведена к новой модели random-cut;
+отдельные ultrasonic-like варианты будут храниться в отдельных simulation
+notebooks и output branches.
 
 ## Окружение
 
@@ -49,13 +71,11 @@ source scripts/setup_env.sh
 ```
 
 Собирает `bcr_env` (fastqc, fastp, cutadapt, multiqc, presto, bowtie2,
-samtools, insilicoseq, rsync), регистрирует Jupyter-ядро "BCR Pipeline". Только
-в OneQ Jupyter Terminal — через SSH более тесный memory cgroup убивает тяжёлые
-conda-установки.
+samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR Pipeline".
 
 ## Структура
 
-- `notebooks/` — пайплайн (mouse core + эксплораторные ноутбуки по другим видам)
-- `results/` — QC/аннотации/summary; большие бинарники (FASTQ, IgBLAST TSV,
-  симуляция) в git не хранятся, живут только на OneQ
-- `scripts/setup_env.sh` — окружение
+- `notebooks/` — общие notebooks;
+- `results/PRJEB30386/` — human pipeline и simulation;
+- `results/ERP003950_fastp_q30_u40/` — актуальная mouse fastp production branch;
+- `scripts/setup_env.sh` — окружение.
