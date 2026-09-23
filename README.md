@@ -43,6 +43,16 @@ reference-like baseline из реальных данных, а затем ген
 | Валидация симуляции | `validate_mouse_novaseq_post_annotation_filtered.ipynb` | bowtie2, samtools |
 | Сшивка фрагментов | — | `TRUST4` и аналоги |
 
+## Реконструкция TRUST4
+
+Единый runner для всех актуальных human/mouse simulation branches:
+
+- `notebooks/run_trust4_simulated_bcr_universal.ipynb`
+
+Он запускает TRUST4 на PE150 FASTQ, сохраняет нативные TRUST4 outputs и создаёт
+нормализованные `reconstructed_contigs.fasta/tsv`, `cdr3_normalized.tsv` и
+`trust4_run_summary.tsv` для последующего truth benchmark.
+
 ## Симуляция: общая архитектура
 
 Актуальная архитектура:
