@@ -21,23 +21,23 @@ reference-like baseline из реальных данных, а затем ген
 - `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 - `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 
-### Mouse ERP003950 fastp
+### Mouse ERP003950
 
-- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
-- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
+- `results/ERP003950/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
+- `results/ERP003950/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 
 Старые `simulate_*_merged_*.ipynb` simulation notebooks удалены как legacy /
 дубликаты и не являются частью production workflow.
 
-## Пайплайн mouse fastp
+## Пайплайн mouse ERP003950 (fastp preprocessing)
 
 | Шаг | Ноутбук | Инструмент |
 |---|---|---|
 | QC (на всех стадиях) | `qc.ipynb` | FastQC, MultiQC |
-| Adapter trim | `adapter_trim_mouse_fastp_q30_u40.ipynb` | cutadapt, fastp |
-| Primer trim | `primer_trim_mouse_fastp_q30_u40.ipynb` | cutadapt |
-| Merge paired-end reads | `presto_mouse_fastp_q30_u40.ipynb` | pRESTO `AssemblePairs.py` |
-| Annotation | `annotate_mouse_fastp_q30_u40.ipynb` | IgBLAST |
+| Adapter trim | `adapter_trim_mouse.ipynb` | cutadapt, fastp |
+| Primer trim | `primer_trim_mouse.ipynb` | cutadapt |
+| Merge paired-end reads | `presto_mouse.ipynb` | pRESTO `AssemblePairs.py` |
+| Annotation | `annotate_mouse.ipynb` | IgBLAST |
 | Post-annotation filter | `filter_mouse_post_annotation.ipynb` | AIRR/sequence filters |
 | Симуляция секвенирования | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | InSilicoSeq |
 | Валидация симуляции | `validate_mouse_novaseq_post_annotation_filtered.ipynb` | bowtie2, samtools |
@@ -73,7 +73,9 @@ InSilicoSeq
 PE150 FASTQ
 ```
 
-Фрагментация в production notebooks использует random-cut baseline: одна случайная межнуклеотидная точка разрыва на выбранную library-input молекулу, оба дочерних фрагмента создаются до size-selection. Отдельные ultrasonic-like notebooks используют рекурсивные size-dependent разрывы с midpoint-centered breakpoint distribution и отдельным size-selection.
+Эталон — физический ампликон PCR1 (склеенный рид с восстановленными праймерами); интервал V…J записан в `vj_start`/`vj_end` и служит эталоном для оценки сборки. У человека каждая UMI-молекула считается один раз (`umi_mode`). Порция на фрагментацию (`LIBRARY_INPUT_SCALE`), множитель глубины (`READ_BUDGET_MULTIPLIER`) и центр отбора по длине (`SIZE_SELECTION_TARGET`, по умолчанию 250 нт) входят в имя ветки.
+
+Фрагментация в production notebooks использует random-cut baseline: одна случайная межнуклеотидная точка разрыва на выбранную library-input молекулу, оба дочерних фрагмента создаются до size-selection. QC `12a` классифицирует каждый шаблон по восстановимости V…J (перекрытие ридов / только mate-пара / физически не связан / частичное покрытие / нет ридов). Отдельные ultrasonic-like notebooks используют рекурсивные size-dependent разрывы с midpoint-centered breakpoint distribution и отдельным size-selection.
 
 ## Окружение
 
@@ -88,5 +90,5 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 
 - `notebooks/` — общие notebooks;
 - `results/PRJEB30386/` — human pipeline и simulation;
-- `results/ERP003950_fastp_q30_u40/` — актуальная mouse fastp production branch;
+- `results/ERP003950/` — mouse pipeline (fastp preprocessing) и simulation;
 - `scripts/setup_env.sh` — окружение.
