@@ -41,15 +41,19 @@ reference-like baseline из реальных данных, а затем ген
 | Валидация симуляции | `validate_mouse_novaseq_post_annotation_filtered.ipynb` | bowtie2, samtools |
 | Сшивка фрагментов | — | `TRUST4` и аналоги |
 
-## Реконструкция TRUST4
+## Сборка и оценка сборщиков
 
-Единый runner для всех актуальных human/mouse simulation branches:
+Сборщики запускаются на PE150 FASTQ симуляций отдельными ноутбуками (ветка симуляции
+задаётся `BCR_BRANCH`, число потоков — `BCR_THREADS`):
 
-- `notebooks/run_trust4_simulated_bcr_universal.ipynb`
+- `assemble_trust4_{human,mouse}.ipynb`, `assemble_rnaspades_*.ipynb`, `assemble_trinity_*.ipynb`;
+- `assemble_mixcr_*.ipynb` и `assemble_vdjer_human.ipynb` пока вне рабочей очереди
+  (лицензия MiXCR; V'DJer требует настройки под ампликоны).
 
-Он запускает TRUST4 на PE150 FASTQ, сохраняет нативные TRUST4 outputs и создаёт
-нормализованные `reconstructed_contigs.fasta/tsv`, `cdr3_normalized.tsv` и
-`trust4_run_summary.tsv` для последующего truth benchmark.
+Нативные результаты и нормализованный `contigs.fasta` пишутся в
+`<ветка>/assemblers/<сборщик>/<образец>/`. Сравнение с эталоном —
+`benchmark_assemblers_{human,mouse}.ipynb` (recall по шаблонам и precision по контигам,
+`<ветка>/benchmark/`), отчёт по стадиям симуляции — `notebooks/simulation_report.ipynb`.
 
 ## Симуляция: общая архитектура
 
