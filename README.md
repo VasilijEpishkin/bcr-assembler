@@ -17,9 +17,7 @@ reference-like baseline из реальных данных, а затем ген
 ### Human PRJEB30386
 
 - `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus.ipynb` — random-cut baseline
 - `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_custom_umi_consensus_ultrasonic_fragmentation.ipynb` — ultrasonic-like
 
 ### Mouse ERP003950 fastp
 
