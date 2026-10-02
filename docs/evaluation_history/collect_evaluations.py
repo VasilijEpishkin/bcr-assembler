@@ -1,10 +1,10 @@
-"""Collect all assembler evaluations (full runs) and pilot results into one history folder before cleanup.
+"""Сводит оценки всех полных прогонов сборщиков и пилотов в одну папку истории.
 
-Output (OneQ): /data/user/epishkin/results/evaluation_history/
-  full_runs_summary.tsv    recall / CDR3 rows of every full benchmark (run, dataset, branch, scoring + original columns)
-  full_runs_precision.tsv  per-sample contig precision of every full benchmark
-  full_runs_structure.tsv  contig structure by read support and support thresholds (new scoring only)
-  pilots.tsv               pilots in long format: pilot, condition, metric, value
+Выход: /data/user/epishkin/results/evaluation_history/
+  full_runs_summary.tsv    строки recall / CDR3 каждого полного бенчмарка (прогон, датасет, ветка, схема оценки + исходные колонки)
+  full_runs_precision.tsv  precision контигов по образцам каждого полного бенчмарка
+  full_runs_structure.tsv  структура контигов по поддержке ридами и пороги поддержки (только новая схема)
+  pilots.tsv               пилоты в длинном формате: pilot, condition, metric, value
 """
 import glob
 import json
@@ -22,7 +22,7 @@ MB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in
 HT = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_tails_c1400_in5ng_rb3x_ss250"
 MT = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_tails_c1400_in5ng_rb3x_ss250"
 
-# (run, date, dataset, branch, scoring, directory with assemblers_*.tsv)
+# (прогон, дата, датасет, ветка, схема оценки, каталог с assemblers_*.tsv)
 FULL = [
     ("run1_v2", "2026-09-26..28", "PRJEB30386", "random_cut_amp_umimode_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "PRJEB30386/benchmark_v2"),
     ("run1_v2", "2026-09-26..28", "ERP003950", "random_cut_amp_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "ERP003950/benchmark_v2"),
@@ -57,7 +57,7 @@ for run, date, ds, branch, scoring, d in FULL:
 for k, dfs in parts.items():
     pd.concat(dfs, ignore_index=True).to_csv(OUT / f"full_runs_{k}.tsv", sep="\t", index=False)
 
-# ---------------------------------------------------------------- pilots (long format)
+# ---------------------------------------------------------------- пилоты (длинный формат)
 rows = []
 
 
@@ -67,7 +67,7 @@ def add(pilot, condition, metrics, source):
             rows.append({"pilot": pilot, "condition": condition, "metric": m, "value": v, "source": str(source)})
 
 
-p = V / "trust4_param_pilot/decision.json"                       # TRUST4 run parameters (mouse ERR346600, base)
+p = V / "trust4_param_pilot/decision.json"                       # параметры запуска TRUST4 (мышь ERR346600, база)
 if p.exists():
     d = json.load(open(p))
     for cond, m in d["metrics"].items():
@@ -92,22 +92,22 @@ for s in sorted(glob.glob(str(V / "vdjer_diag*/auto_decision*.json"))):         
         add("vdjer_autopilot", f"{j['species']}:{Path(s).stem}:{m['variant']}",
             {"contigs": m["contigs"], **{f"param_{k}": v for k, v in m["params"].items()}}, s)
     add("vdjer_autopilot", f"{j['species']}:{Path(s).stem}:decision", {"approved": j["approved"]}, s)
-for s in sorted(glob.glob(str(V / "vdjer_diag*/**/exit.json"), recursive=True)):        # every V'DJer run
+for s in sorted(glob.glob(str(V / "vdjer_diag*/**/exit.json"), recursive=True)):        # все запуски V'DJer
     j = json.load(open(s))
     fa = Path(s).parent / "vdj_contigs.fa"
     n = sum(1 for l in open(fa) if l.startswith(">")) if fa.exists() else 0
     add("vdjer_runs", os.path.relpath(Path(s).parent, V), {"returncode": j.get("returncode"), "contigs": n,
         "args": str(j.get("args") or j.get("command"))}, s)
 
-p = V / "collapse_calibration/report_human_umi_20260929.json"     # collapse rule vs human UMI truth
+p = V / "collapse_calibration/report_human_umi_20260929.json"     # правило схлопывания против эталона по UMI человека
 if p.exists():
     for run, ratios in json.load(open(p))["runs"].items():
         for ratio, m in ratios.items():
             add("collapse_rule_on_human_umi", f"{run}:ratio{ratio}", m, p)
-for s in sorted(glob.glob(str(V / "igrec_diag/fair/*.json"))):     # IgReC vs rule, same scorer
+for s in sorted(glob.glob(str(V / "igrec_diag/fair/*.json"))):     # IgReC против правила, один оценщик
     add("igrec_vs_rule_trim30", Path(s).stem, json.load(open(s)), s)
 
-for s in sorted(glob.glob(str(V / "trust4_inexact/ERR*.json"))):   # TRUST4 inexact diagnostics (whole V..J)
+for s in sorted(glob.glob(str(V / "trust4_inexact/ERR*.json"))):   # разбор неточных сборок TRUST4 (вся V..J)
     j = json.load(open(s))
     add("trust4_inexact_whole_vj", Path(s).stem, {**{f"templates_{k}": v for k, v in j["templates"].items()},
         **{f"sites_{k}": v for k, v in j["own_contig_difference_sites"].items()},

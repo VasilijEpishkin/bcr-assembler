@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # setup_env.sh — единый скрипт окружения OneQ VM (jupyter/base-notebook).
-# Объединяет старые setup_vm_conda.sh (сборка bcr_env с нуля) и env_setup.sh
-# (быстрая активация PATH в терминале).
 #
 # ЧТО ДЕЛАЕТ:
 #   1. Если bcr_env отсутствует или неполон — создаёт/дополняет его:

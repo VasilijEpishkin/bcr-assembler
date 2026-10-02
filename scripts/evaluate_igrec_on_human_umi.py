@@ -1,11 +1,11 @@
-"""Score an IgReC repertoire against human UMI-consensus truth (same truth as calibrate_collapse_on_human_umi.py).
+"""Оценка репертуара IgReC по эталону из консенсусов UMI человека (тот же эталон, что в calibrate_collapse_on_human_umi.py).
 
-IgReC is run blind (no UMI) on post_annotation_filtered/fastq/<run>_filtered.fastq.gz. Truth = consensus V..J of
-UMI families with >= 2 reads. A cluster "carries" a true sequence when the true V..J without TRIM nt at each end is an
-exact substring of the cluster consensus: IgReC crops the ends differently from the AIRR V..J interval (checked on
-ERR3004230: 54% of true sequences found whole, 93% with 30 nt trimmed), so whole-sequence matching penalises it unfairly.
+IgReC запускается вслепую (без UMI) на post_annotation_filtered/fastq/<прогон>_filtered.fastq.gz. Эталон — консенсус V..J
+семей UMI с >= 2 ридами. Кластер «несёт» истинную последовательность, если её V..J без TRIM нт с каждого конца целиком
+входит в консенсус кластера: IgReC обрезает концы иначе, чем интервал V..J в AIRR (на ERR3004230 целиком находится
+54% истинных последовательностей, с обрезкой 30 нт — 93%), поэтому сравнение целых последовательностей было бы нечестным.
 
-Output metrics mirror the collapse-rule report so the two can be compared row by row.
+Метрики совпадают с отчётом правила схлопывания, чтобы их можно было сравнить построчно.
 """
 import argparse
 import json
@@ -52,15 +52,15 @@ def evaluate(reads, repertoire_fa, rcm, trim=TRIM):
                 umi_cons[umi] = c
     cons_umis = Counter(umi_cons.values())
 
-    clusters = {}                                      # cluster id -> (consensus, size)
+    clusters = {}                                      # id кластера -> (консенсус, размер)
     for h, s in read_fasta(repertoire_fa).items():
         cid, size = cluster_id(h)
         clusters[cid] = (s, size)
-    by_kmer = defaultdict(set)                         # 25-mer from the middle of each true sequence
+    by_kmer = defaultdict(set)                         # 25-мер из середины каждой истинной последовательности
     for t in cons_umis:
         mid = len(t) // 2
-        by_kmer[t[mid:mid + K]].add(t)                 # middle 25-mer lies inside the trimmed core
-    carries = {}                                       # cluster id -> set of true sequences it contains
+        by_kmer[t[mid:mid + K]].add(t)                 # средний 25-мер лежит внутри обрезанной сердцевины
+    carries = {}                                       # id кластера -> множество истинных последовательностей в нём
     for cid, (s, _) in clusters.items():
         found = set()
         for i in range(len(s) - K + 1):
@@ -69,7 +69,7 @@ def evaluate(reads, repertoire_fa, rcm, trim=TRIM):
                     found.add(t)
         carries[cid] = found
     recovered = set().union(*carries.values()) if carries else set()
-    recovered5 = set().union(*(carries[cid] for cid, (_, sz) in clusters.items() if sz >= 5))  # IgReC "large" repertoire
+    recovered5 = set().union(*(carries[cid] for cid, (_, sz) in clusters.items() if sz >= 5))  # «большой» репертуар IgReC
 
     read_cluster = {}
     for line in open(rcm):
@@ -113,9 +113,9 @@ def evaluate(reads, repertoire_fa, rcm, trim=TRIM):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--airr", type=Path, required=True)
-    ap.add_argument("--igrec-out", type=Path, required=True, help="IgReC output directory")
+    ap.add_argument("--igrec-out", type=Path, required=True, help="каталог выхода IgReC")
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--trim", type=int, default=TRIM, help="nt ignored at each end of true V..J when matching (0 = whole)")
+    ap.add_argument("--trim", type=int, default=TRIM, help="сколько нт с каждого конца истинной V..J не сравнивается (0 — вся)")
     a = ap.parse_args()
     assert not a.out.exists(), "choose a new report path"
     reads = read_run(a.airr, with_ids=True)

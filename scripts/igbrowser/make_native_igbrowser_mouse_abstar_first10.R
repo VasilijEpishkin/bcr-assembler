@@ -34,8 +34,8 @@ compute_cdr3_coords <- function(df) {
 }
 
 normalize_abstar_for_igbrowser <- function(df) {
-  # abstar has AIRR-like calls plus FWR/CDR fields, but may lack cdr3_start/end.
-  # Derive cdr3_start/end from the nucleotide cdr3 substring in sequence.
+  # abstar выдаёт поля, похожие на AIRR, и поля FWR/CDR, но может не иметь cdr3_start/end.
+  # cdr3_start/end вычисляются по положению нуклеотидной cdr3 в sequence.
   df <- compute_cdr3_coords(df)
   if (!"sequence_id" %in% names(df) && "seq_id" %in% names(df)) df$sequence_id <- df$seq_id
   for (col in c("v_sequence_start", "v_sequence_end", "j_sequence_start", "j_sequence_end", "cdr3_start", "cdr3_end")) {

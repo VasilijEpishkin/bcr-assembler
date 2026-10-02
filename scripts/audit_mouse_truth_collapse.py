@@ -1,7 +1,7 @@
-"""Read-only sensitivity audit of the existing mouse truth collapse rule.
+"""Проверка чувствительности правила схлопывания эталона мыши (только чтение).
 
-Uses the notebook's exact implementation. This quantifies what is removed;
-it cannot determine whether those variants are sequencing errors or SHM.
+Использует ту же реализацию, что ноутбук симуляции. Показывает, что удаляется,
+но не может определить, ошибки ли это секвенирования или SHM.
 """
 import argparse
 import ast

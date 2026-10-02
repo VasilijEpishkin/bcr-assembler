@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build AIRR QC statistics, empirical quality distributions, and combined igbrowser HTML."""
+"""Строит статистику QC по AIRR, эмпирические распределения качества и общий HTML igbrowser."""
 from __future__ import annotations
 
 import argparse
@@ -56,10 +56,10 @@ DATASET_CONFIGS = {
 }
 BOOL_TRUE = ["t", "true", "1", "yes"]
 
-# Conservative, dataset-specific post-annotation QC cutoffs.
-# Current report: minimum P01 across libraries is 83.391% for V identity
-# and 88.372% for J identity. Therefore 80/85% sit below the observed
-# 1% tails and avoid a strong bias against somatically hypermutated IgG.
+# Консервативные пороги QC после аннотации, свои для каждого датасета.
+# Минимальный 1-й перцентиль по библиотекам — 83,391% для идентичности V
+# и 88,372% для J, поэтому пороги 80/85% лежат ниже наблюдаемых
+# 1%-хвостов и не отсекают сильно мутированные (SHM) IgG.
 MIN_V_IDENTITY = 80.0
 MIN_J_IDENTITY = 85.0
 MAX_V_SUPPORT = 1e-5
@@ -167,7 +167,7 @@ def first_gene(name: str) -> pl.Expr:
 
 
 def quality_histograms(lf: pl.LazyFrame, run: str) -> list[dict]:
-    """Build normalized empirical histograms from all annotated rows of one library."""
+    """Нормированные эмпирические гистограммы по всем аннотированным строкам одной библиотеки."""
     df = lf.select(
         number("v_identity").alias("v_identity"),
         number("j_identity").alias("j_identity"),
@@ -183,7 +183,7 @@ def quality_histograms(lf: pl.LazyFrame, run: str) -> list[dict]:
             return
         spec = QUALITY_SPECS[metric]
         x_min, x_max, width = spec["x_min"], spec["x_max"], spec["bin_width"]
-        # First/last bins absorb values outside the plotting range.
+        # Крайние интервалы собирают значения за пределами диапазона графика.
         value = min(max(float(value), x_min), math.nextafter(x_max, x_min))
         low = x_min + math.floor((value - x_min) / width) * width
         low = round(low, 10)
@@ -496,7 +496,7 @@ def distribution_svg(hist_rows: list[dict], metric: str) -> str:
     left, right, top, bottom = 62, 18, 24, 58
     plot_w, plot_h = width - left - right, height - top - bottom
     x_min, x_max, bw = spec["x_min"], spec["x_max"], spec["bin_width"]
-    y_min_log, y_max_log = -4.0, 2.0  # 0.0001% .. 100%, logarithmic frequency axis
+    y_min_log, y_max_log = -4.0, 2.0  # 0,0001% .. 100%, логарифмическая ось частоты
 
     def xpix(x: float) -> float:
         return left + (x - x_min) / (x_max - x_min) * plot_w
@@ -506,7 +506,7 @@ def distribution_svg(hist_rows: list[dict], metric: str) -> str:
         lv = min(max(lv, y_min_log), y_max_log)
         return top + (y_max_log - lv) / (y_max_log - y_min_log) * plot_h
 
-    # Grid and y ticks.
+    # Сетка и деления оси y.
     parts = [f"<svg viewBox='0 0 {width} {height}' role='img' aria-label='{html.escape(spec['label'])} distribution'>"]
     for val in (1e-4, 1e-2, 1.0, 100.0):
         y = ypix(val)
@@ -527,7 +527,7 @@ def distribution_svg(hist_rows: list[dict], metric: str) -> str:
     parts.append(f"<line x1='{tx:.1f}' y1='{top}' x2='{tx:.1f}' y2='{top+plot_h}' stroke='#111' stroke-dasharray='5 4' stroke-width='1.5'/>")
     parts.append(f"<text x='{min(tx+5,width-150):.1f}' y='{top+12}' font-size='10'>{html.escape(spec['threshold_label'])}</text>")
 
-    # One normalized empirical series per library.
+    # Одна нормированная эмпирическая кривая на библиотеку.
     legend_x = left + 8
     for idx, (run, meta) in enumerate(RUNS.items()):
         library = meta["library"]
