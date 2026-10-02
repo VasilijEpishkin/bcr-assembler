@@ -40,3 +40,6 @@ results/PRJNA1247978/
 
 # Python/script caches
 scripts/__pycache__/
+
+# Local working copy of the mouse fastp branch; published as results/ERP003950 (see docs/notebook_layout.md)
+results/ERP003950_fastp_q30_u40/

@@ -1,20 +1,20 @@
 {
-    "report_multiqc_command": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc -f -o results/ERP003950_fastp_q30_u40/trimmed/multiqc -n ERP003950_fastp_q30_u40_trimmed_multiqc.html results/ERP003950_fastp_q30_u40/trimmed/fastqc",
+    "report_multiqc_command": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc -f -o results/ERP003950/trimmed/multiqc -n ERP003950_trimmed_multiqc.html results/ERP003950/trimmed/fastqc",
     "report_data_sources": {
         "FastQC": {
             "all_sections": {
-                "ERR346596_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346596_1.trim_fastqc.zip",
-                "ERR346596_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346596_2.trim_fastqc.zip",
-                "ERR346597_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346597_1.trim_fastqc.zip",
-                "ERR346597_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346597_2.trim_fastqc.zip",
-                "ERR346598_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346598_1.trim_fastqc.zip",
-                "ERR346598_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346598_2.trim_fastqc.zip",
-                "ERR346599_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346599_1.trim_fastqc.zip",
-                "ERR346599_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346599_2.trim_fastqc.zip",
-                "ERR346600_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346600_1.trim_fastqc.zip",
-                "ERR346600_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346600_2.trim_fastqc.zip",
-                "ERR346601_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346601_1.trim_fastqc.zip",
-                "ERR346601_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc/ERR346601_2.trim_fastqc.zip"
+                "ERR346596_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346596_1.trim_fastqc.zip",
+                "ERR346596_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346596_2.trim_fastqc.zip",
+                "ERR346597_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346597_1.trim_fastqc.zip",
+                "ERR346597_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346597_2.trim_fastqc.zip",
+                "ERR346598_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346598_1.trim_fastqc.zip",
+                "ERR346598_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346598_2.trim_fastqc.zip",
+                "ERR346599_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346599_1.trim_fastqc.zip",
+                "ERR346599_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346599_2.trim_fastqc.zip",
+                "ERR346600_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346600_1.trim_fastqc.zip",
+                "ERR346600_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346600_2.trim_fastqc.zip",
+                "ERR346601_1": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346601_1.trim_fastqc.zip",
+                "ERR346601_2": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc/ERR346601_2.trim_fastqc.zip"
             }
         }
     },
@@ -24525,7 +24525,7 @@
         }
     },
     "config_analysis_dir": [
-        "results/ERP003950_fastp_q30_u40/trimmed/fastqc"
+        "results/ERP003950/trimmed/fastqc"
     ],
     "config_git_hash": null,
     "config_intro_text": null,
@@ -24536,11 +24536,11 @@
     "config_subtitle": null,
     "config_title": null,
     "config_version": "1.35",
-    "config_output_dir": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/multiqc",
+    "config_output_dir": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/multiqc",
     "config_sample_names_rename": [],
     "config_sample_names_rename_buttons": [],
     "config_analysis_dir_abs": [
-        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/trimmed/fastqc"
+        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/trimmed/fastqc"
     ],
     "report_saved_raw_data": {
         "multiqc_fastqc": {
