@@ -1,4 +1,4 @@
-"""Completion and summary checks for pRESTO AssemblePairs outputs."""
+"""Проверка полноты и сводки выходов pRESTO AssemblePairs."""
 
 from __future__ import annotations
 

@@ -1,1 +1,1 @@
-"""Reusable helpers for notebook-first workflows."""
+"""Общие функции для ноутбуков проекта."""

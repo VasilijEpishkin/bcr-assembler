@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Build a V'DJer reference bundle for a species/chain that has no prebuilt bundle (e.g. mouse IGH).
+"""Собирает референсный набор V'DJer для вида/цепи без готового набора (например, IGH мыши).
 
-Mirrors the layout of vdjer_human_references/<chain>/:
-  ig_vdj.fa      V/D/J alleles (only the sequences are read by V'DJer, headers are informational)
-  v_anchors.txt  16-mers, one per V allele: --v-rule cys (default; ENDS 7 nt before the conserved Cys codon) or fixed16 (seq[-32:-16])
-  j_anchors.txt  16-mers, one per J allele: --j-rule fixed16 (default, official seq[16:32]) or trp (STARTS 2 nt before the TGG)
-  v_index/j_index  every 16-mer within Hamming distance <= --max-dist of an anchor, "code<TAB>dist"
-                   (code: 2 bits per base, A=0 T=1 C=2 G=3, first base most significant; see seq_to_kmer.c)
-  v_region.fa    genomic V region in GENE orientation (reverse complement of the forward slice for reverse-strand loci)
+Повторяет структуру vdjer_human_references/<цепь>/:
+  ig_vdj.fa      аллели V/D/J (V'DJer читает только последовательности, заголовки справочные)
+  v_anchors.txt  16-меры, по одному на аллель V: --v-rule cys (по умолчанию; КОНЧАЕТСЯ за 7 нт до консервативного кодона Cys) или fixed16 (seq[-32:-16])
+  j_anchors.txt  16-меры, по одному на аллель J: --j-rule fixed16 (по умолчанию, официальное seq[16:32]) или trp (НАЧИНАЕТСЯ за 2 нт до TGG)
+  v_index/j_index  все 16-меры на расстоянии Хэмминга <= --max-dist от якоря, "код<TAB>расстояние"
+                   (код: 2 бита на основание, A=0 T=1 C=2 G=3, первое основание старшее; см. seq_to_kmer.c)
+  v_region.fa    геномная область V в ориентации ГЕНА (обратный комплемент прямого отрезка для локусов на обратной цепи)
 
-Anchor placement was checked against the human bundle: the official anchors sit at a FIXED offset (V: seq[-32:-16] for all
-142 human V genes; J: seq[16:32]); the Cys-relative V rule reproduces it for alleles ending in TGT GCn AGA.
-The default --max-dist is 4 (V'DJer default --am 4); the human bundle also stores distance 5, which is unused at --am 4.
+Положение якорей сверено с набором человека: официальные якоря стоят на ФИКСИРОВАННОМ смещении (V: seq[-32:-16] для всех
+142 генов V человека; J: seq[16:32]); правило от Cys воспроизводит его для аллелей, оканчивающихся на TGT GCn AGA.
+--max-dist по умолчанию 4 (в V'DJer --am 4); набор человека хранит и расстояние 5, которое при --am 4 не используется.
 """
 import argparse, collections, gzip, hashlib, itertools, json, re, sys
 from pathlib import Path
@@ -40,7 +40,7 @@ def read_fasta(path):
 
 
 def v_anchor(seq):
-    """16-mer ending 7 nt before the last in-frame Cys codon (TGT/TGC) found in the last 39 nt; None if absent."""
+    """16-мер, кончающийся за 7 нт до последнего кодона Cys (TGT/TGC) в рамке среди последних 39 нт; None, если его нет."""
     for i in range(len(seq) - 3, max(len(seq) - 40, 0), -1):
         if seq[i:i + 3] in ("TGT", "TGC") and (len(seq) - i) % 3 == 0:
             end = i - 7
@@ -49,7 +49,7 @@ def v_anchor(seq):
 
 
 def j_anchor(seq):
-    """16-mer starting 2 nt before the conserved Trp codon (TGG of W-G-x-G: TGGG[GCT]); None if absent."""
+    """16-мер, начинающийся за 2 нт до консервативного кодона Trp (TGG мотива W-G-x-G: TGGG[GCT]); None, если его нет."""
     m = re.search("TGGG[GCT]", seq)
     if not m or m.start() < 2 or m.start() + 14 > len(seq):
         return None
@@ -57,12 +57,12 @@ def j_anchor(seq):
 
 
 def v_anchor_fixed16(seq):
-    """Official V'DJer rule: 16-mer that ends 16 nt before the 3' end of the V allele (all 142 human V genes)."""
+    """Официальное правило V'DJer: 16-мер, кончающийся за 16 нт до 3'-конца аллеля V (все 142 гена V человека)."""
     return seq[-32:-16] if len(seq) >= 32 else None
 
 
 def j_anchor_fixed16(seq):
-    """Official V'DJer rule: 16-mer that starts 16 nt after the 5' end of the J allele."""
+    """Официальное правило V'DJer: 16-мер, начинающийся через 16 нт от 5'-конца аллеля J."""
     return seq[16:32] if len(seq) >= 32 else None
 
 
@@ -74,7 +74,7 @@ def to_code(kmer):
 
 
 def neighbour_masks(max_dist, k=16):
-    """XOR masks that change exactly d bases (d <= max_dist); XOR with a nonzero 2-bit value always changes the base."""
+    """XOR-маски, меняющие ровно d оснований (d <= max_dist); XOR с ненулевым 2-битным значением всегда меняет основание."""
     masks, dists = [np.zeros(1, dtype=np.uint64)], [np.zeros(1, dtype=np.uint8)]
     for d in range(1, max_dist + 1):
         cur = []
@@ -91,10 +91,10 @@ def write_index(anchors, path, max_dist):
     masks, mdist = neighbour_masks(max_dist)
     codes = np.concatenate([np.uint64(to_code(a)) ^ masks for a in anchors])
     dists = np.tile(mdist, len(anchors))
-    order = np.lexsort((dists, codes))                       # by code, then distance
+    order = np.lexsort((dists, codes))                       # по коду, затем по расстоянию
     codes, dists = codes[order], dists[order]
     first = np.ones(len(codes), dtype=bool)
-    first[1:] = codes[1:] != codes[:-1]                      # keep the minimum distance per code
+    first[1:] = codes[1:] != codes[:-1]                      # для каждого кода оставить минимальное расстояние
     codes, dists = codes[first], dists[first]
     with open(path, "w") as out:
         out.write("".join(f"{c}\t{d}\n" for c, d in zip(codes.tolist(), dists.tolist())))
@@ -111,26 +111,26 @@ def sha256(path):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--imgt", required=True, help="IMGT allele FASTA with names like IGHV1-1*01 (e.g. TRUST4 mouse_IMGT+C.fa)")
-    ap.add_argument("--chain", required=True, help="IGH, IGK or IGL")
-    ap.add_argument("--genome", required=True, help="FASTA(.gz) of the chromosome carrying the locus")
-    ap.add_argument("--contig", required=True, help="contig name used in the BAM, e.g. chr12")
-    ap.add_argument("--v-region", required=True, help="START-END (1-based, inclusive) of the genomic V region")
-    ap.add_argument("--reverse-strand", action="store_true", help="locus is on the reverse strand: v_region.fa is written reverse-complemented")
+    ap.add_argument("--imgt", required=True, help="FASTA аллелей IMGT с именами вида IGHV1-1*01 (например, mouse_IMGT+C.fa из TRUST4)")
+    ap.add_argument("--chain", required=True, help="IGH, IGK или IGL")
+    ap.add_argument("--genome", required=True, help="FASTA(.gz) хромосомы с локусом")
+    ap.add_argument("--contig", required=True, help="имя контига в BAM, например chr12")
+    ap.add_argument("--v-region", required=True, help="НАЧАЛО-КОНЕЦ геномной области V (с 1, включительно)")
+    ap.add_argument("--reverse-strand", action="store_true", help="локус на обратной цепи: v_region.fa пишется обратным комплементом")
     ap.add_argument("--v-rule", choices=["cys", "fixed16"], default="cys",
-                    help="cys: 16-mer ending 7 nt before the conserved Cys (equals fixed16 for alleles ending in TGT GCn AGA); "
+                    help="cys: 16-мер, кончающийся за 7 нт до консервативного Cys (совпадает с fixed16 для аллелей на TGT GCn AGA); "
                          "fixed16: official V'DJer rule seq[-32:-16]")
     ap.add_argument("--j-rule", choices=["fixed16", "trp"], default="fixed16",
-                    help="fixed16: official V'DJer rule seq[16:32]; trp: 16-mer starting 2 nt before the conserved TGG")
+                    help="fixed16: официальное правило V'DJer seq[16:32]; trp: 16-мер, начинающийся за 2 нт до консервативного TGG")
     ap.add_argument("--max-dist", type=int, default=4)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    seqs = {n: s.replace(".", "") for n, s in read_fasta(a.imgt).items()}   # IMGT-gapped alignments contain "." gap characters
+    seqs = {n: s.replace(".", "") for n, s in read_fasta(a.imgt).items()}   # выравнивания IMGT с пропусками содержат символы "."
     pref = a.chain.upper()
-    clean = re.compile("^[ACGT]+$")      # V'DJer exits on any base other than A/C/G/T
+    clean = re.compile("^[ACGT]+$")      # V'DJer завершается на любом основании, кроме A/C/G/T
     skipped = sorted(n for n, s in seqs.items() if n.startswith(pref) and not clean.match(s))
     V = {n: s for n, s in seqs.items() if n.startswith(pref + "V") and clean.match(s)}
     D = {n: s for n, s in seqs.items() if n.startswith(pref + "D") and clean.match(s)}

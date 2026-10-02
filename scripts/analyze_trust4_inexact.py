@@ -1,13 +1,13 @@
-"""Why are TRUST4 reconstructions "near" but not exact? Diagnostic on one sample of an existing benchmark.
+"""Почему сборки TRUST4 близки к эталону, но не точны: разбор одного образца готового бенчмарка.
 
-For every verified truth template whose best contig is not an exact full-length match:
-  * where the differences are (V part / CDR3 junction / J part, 5' or 3' end not covered) and of which type
-    (substitution, insertion, deletion), from minimap2 --cs of truth V..J against contigs;
-  * whose contig it is: the best contig may be an exact reconstruction of ANOTHER (related) truth template,
-    i.e. the template itself was not assembled but its clonal relative was ("shadowed");
-  * chimera candidates: contigs that match no template exactly while their 5' and 3' parts each match
-    different templates exactly.
-Read-only; writes one JSON summary.
+Для каждого проверенного шаблона, чей лучший контиг не совпадает с ним точно по всей длине:
+  * где отличия (V-часть / CDR3 / J-часть, непокрытый 5'- или 3'-конец) и какого они типа
+    (замена, вставка, делеция) — по minimap2 --cs эталонной V..J против контигов;
+  * чей это контиг: лучший контиг может быть точной сборкой ДРУГОГО (родственного) шаблона,
+    то есть сам шаблон не собран, а собран его клональный родственник («затенение»);
+  * кандидаты в химеры: контиги без точного совпадения с шаблоном, у которых 5'- и 3'-части
+    точно совпадают с разными шаблонами.
+Только читает данные; пишет одну JSON-сводку.
 """
 import argparse
 import collections
@@ -32,7 +32,7 @@ def fasta(path):
 
 
 def paf_cs(ref, query, threads):
-    """Best hit per query with cs string; minimap2 short-read preset as in the benchmark."""
+    """Лучшее выравнивание каждого запроса со строкой cs; пресет minimap2 для коротких ридов, как в бенчмарке."""
     cmd = ["minimap2", "-c", "--cs", "-x", "sr", "-N", "20", "-p", "0.5", "--secondary=yes", "-t", str(threads), str(ref), str(query)]
     best = {}
     for line in subprocess.run(cmd, capture_output=True, text=True, check=True).stdout.splitlines():
@@ -48,8 +48,8 @@ def paf_cs(ref, query, threads):
 
 
 def diffs(h):
-    """Query (truth) coordinates and type of each difference. cs walks the reference forward:
-    '*xy' substitution, '+seq' bases in truth missing from the contig, '-seq' extra bases in the contig."""
+    """Координаты в запросе (эталоне) и тип каждого отличия. cs идёт по референсу:
+    '*xy' замена, '+seq' основания эталона, которых нет в контиге, '-seq' лишние основания контига."""
     minus = h["strand"] == "-"
     pos, out = (h["qlen"] - h["qe"]) if minus else h["qs"], []
     for op, val in re.findall(r"([:*+\-])([0-9]+|[a-z]+)", h["cs"]):
@@ -66,9 +66,9 @@ def diffs(h):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--bench-dir", type=Path, required=True, help="<branch>/benchmark/trust4/<sample> (has work/truth_vj.fasta, work/contigs.fasta)")
+    ap.add_argument("--bench-dir", type=Path, required=True, help="<ветка>/benchmark/trust4/<образец> (содержит work/truth_vj.fasta, work/contigs.fasta)")
     ap.add_argument("--threads", type=int, default=8)
-    ap.add_argument("--end", type=int, default=5, help="differences within this many nt of a V..J end count as end effects")
+    ap.add_argument("--end", type=int, default=5, help="отличия не дальше стольких нт от конца V..J считаются краевыми")
     ap.add_argument("--out", type=Path, required=True)
     a = ap.parse_args()
     work = a.bench_dir / "work"
@@ -116,7 +116,7 @@ def main():
                 region = "V"
             where[f"{region}:{kind}"] += 1
 
-    # chimera candidates: contig with no exact template, whose 5' 60% and 3' 60% match different templates exactly
+    # кандидаты в химеры: контиг без точного шаблона, чьи 5'- и 3'-части по 60% точно совпадают с разными шаблонами
     parts = a.out.with_suffix(".chimera_parts.fasta")
     with open(parts, "w") as out:
         for c, s in contigs.items():

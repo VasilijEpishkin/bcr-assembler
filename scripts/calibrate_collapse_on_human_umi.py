@@ -1,15 +1,15 @@
-"""Calibrate the mouse error-collapse rule on human reads whose true molecule is known from UMI.
+"""Калибровка правила схлопывания ошибок мыши на ридах человека, чья истинная молекула известна по UMI.
 
-Human reads carry a 20-nt UMI, so a UMI family with >= MIN_UMI_READS reads has a consensus V..J that is the
-"true" molecule. The mouse rule (`collapse_errors`, copied verbatim from the mouse simulation notebook) is applied
-to the same reads WITHOUT looking at the UMI, and its decisions are scored against the UMI consensus:
+Риды человека несут UMI длиной 20 нт, поэтому у семьи UMI с >= MIN_UMI_READS ридов консенсус V..J — это
+«истинная» молекула. Правило мыши (`collapse_errors`, дословно из ноутбука симуляции мыши) применяется
+к тем же ридам, НЕ глядя на UMI, а его решения сверяются с консенсусом UMI:
 
-  * absorbed_true_variants  - distinct UMI consensuses that the rule absorbed into another sequence (false merges)
-  * error_reads_*           - reads that differ from their own UMI consensus (sequencing/PCR errors): were they
-                              absorbed into their own consensus (correct), into another sequence (wrong) or kept
-  * residual_false_variants - sequences left after collapse that are not the consensus of any UMI family
+  * absorbed_true_variants  - разные консенсусы UMI, поглощённые правилом в другую последовательность (ложные слияния)
+  * error_reads_*           - риды, отличающиеся от консенсуса своей семьи (ошибки секвенирования/ПЦР): поглощены
+                              в свой консенсус (верно), в другую последовательность (неверно) или оставлены
+  * residual_false_variants - последовательности после схлопывания, не являющиеся консенсусом ни одной семьи UMI
 
-Run-level (each source run is one library, like each mouse sample). Read-only: writes one JSON report.
+Считается по прогонам (каждый прогон — одна библиотека, как образец мыши). Только читает данные; пишет один JSON-отчёт.
 """
 import argparse
 import ast
@@ -28,7 +28,7 @@ def barcode(sequence_id):
 
 
 def consensus(seqs):
-    """Column-wise consensus of equal-length reads; None on a tie (same as the simulation notebook)."""
+    """Поколоночный консенсус ридов одной длины; None при равенстве (как в ноутбуке симуляции)."""
     if len(set(seqs)) == 1:
         return seqs[0]
     out = []
@@ -52,7 +52,7 @@ def load_collapse(notebook, ratio):
 
 
 def read_run(airr, with_ids=False):
-    """-> list of (umi, locus, vj_sequence) for reads with a valid 20-nt UMI and no N; with_ids prepends sequence_id."""
+    """-> список (umi, locus, vj_sequence) для ридов с корректным UMI длиной 20 нт и без N; with_ids добавляет sequence_id в начало."""
     reads = []
     with open(airr, newline="") as h:
         for r in csv.DictReader(h, delimiter="\t"):
@@ -71,7 +71,7 @@ def evaluate(reads, collapse):
     fam = defaultdict(list)
     for umi, locus, seq in reads:
         fam[umi].append(seq)
-    umi_cons = {}                                  # UMI -> consensus of modal-length reads (families with >= MIN_UMI_READS)
+    umi_cons = {}                                  # UMI -> консенсус ридов модальной длины (семьи с >= MIN_UMI_READS ридов)
     for umi, seqs in fam.items():
         length = Counter(map(len, seqs)).most_common(1)[0][0]
         group = [s for s in seqs if len(s) == length]
@@ -79,9 +79,9 @@ def evaluate(reads, collapse):
             c = consensus(group)
             if c is not None:
                 umi_cons[umi] = c
-    counts = Counter(seq for _, _, seq in reads)   # blind counts: the rule sees reads, not UMIs
+    counts = Counter(seq for _, _, seq in reads)   # слепой подсчёт: правило видит риды, а не UMI
     parent_of = collapse(counts)
-    cons_umis = Counter(umi_cons.values())         # consensus sequence -> number of independent UMI families
+    cons_umis = Counter(umi_cons.values())         # консенсусная последовательность -> число независимых семей UMI
     res = {"reads": len(reads), "distinct_sequences": len(counts), "umi_families": len(fam),
            "verified_families": len(umi_cons), "distinct_true_sequences": len(cons_umis),
            "absorbed_variants": len(parent_of)}
@@ -90,7 +90,7 @@ def evaluate(reads, collapse):
     res["absorbed_true_variants_ge2_umis"] = sum(cons_umis[c] >= 2 for c in absorbed_true)
     res["absorbed_true_variants_umis_total"] = sum(cons_umis[c] for c in absorbed_true)
     res["true_variants_ge2_umis"] = sum(n >= 2 for n in cons_umis.values())
-    # reads in verified families: is the read an error, and what did the rule do with it?
+    # риды проверенных семей: ошибочен ли рид и что с ним сделало правило
     tally = Counter()
     for umi, locus, seq in reads:
         c = umi_cons.get(umi)
@@ -119,7 +119,7 @@ def evaluate(reads, collapse):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--airr-dir", type=Path, required=True, help="results/PRJEB30386/post_annotation_filtered/airr_pass")
-    ap.add_argument("--notebook", type=Path, required=True, help="mouse simulation notebook with collapse_errors")
+    ap.add_argument("--notebook", type=Path, required=True, help="ноутбук симуляции мыши с функцией collapse_errors")
     ap.add_argument("--runs", nargs="+", default=["ERR3004229", "ERR3004230", "ERR3004231", "ERR3004232"])
     ap.add_argument("--ratios", nargs="+", type=int, default=[3, 5, 10])
     ap.add_argument("--out", type=Path, required=True)

@@ -1,8 +1,8 @@
-"""Compare simulated reads directly to their named source fragments.
+"""Сравнивает симулированные риды напрямую с фрагментами-источниками, указанными в их именах.
 
-Run in a OneQ Jupyter kernel. No remapping or source data mutation. The same
-full-query edit-distance criterion is applied to the true and mapped fragments,
-so local alignment / clipping cannot give a mapped hit an unfair advantage.
+Без перекартирования и без изменения исходных данных. К истинному и картированному фрагменту применяется
+один критерий — редакционное расстояние по всему запросу, поэтому локальное выравнивание и обрезка
+не дают картированному попаданию нечестного преимущества.
 """
 import argparse
 from collections import Counter
@@ -97,9 +97,9 @@ def run(branch, sample, r1, r2, bam, output):
         for mate, seq, qual in ((1, s1, q1), (2, s2, q2)):
             counters["reads"] += 1
             oriented_ref = ref if mate == 1 else revcomp(ref)
-            # SHW anchors the expected start, allowing a small end displacement
-            # caused by indels before PE151->PE150 cropping. HW is unconstrained
-            # within the true fragment, and is used for fair hit comparisons.
+            # SHW закрепляет ожидаемое начало и допускает небольшой сдвиг конца
+            # из-за инделей до обрезки PE151->PE150. HW не ограничен
+            # внутри истинного фрагмента и используется для честного сравнения попаданий.
             end_ed = edlib.align(seq, oriented_ref[:len(seq) + 12], mode="SHW", task="distance")["editDistance"]
             own_ed = hw(seq, oriented_ref)
             hist[own_ed] += 1
@@ -120,8 +120,8 @@ def run(branch, sample, r1, r2, bam, output):
                 hitid, mapq, nm = hit
                 mapped_mapq[mapq] += 1
                 alt = fragments[hitid]
-                # Try both strands; no penalty is imposed by the mapper's
-                # arbitrary choice of orientation for ambiguous hits.
+                # Проверяются обе цепи: произвольный выбор ориентации картировщиком
+                # для неоднозначных попаданий не штрафуется.
                 alt_ed = min(hw(seq, alt), hw(seq, revcomp(alt)))
                 assigned_pair += alt_ed
                 mapped_refs.append(hitid)
@@ -139,7 +139,7 @@ def run(branch, sample, r1, r2, bam, output):
             key = "source_better" if own_pair < assigned_pair else "equal_full_pair_edits" if own_pair == assigned_pair else "assigned_better"
             pair_comparison[key] += 1
             counters["mapped_mates_on_different_fragments"] += mapped_refs[0] != mapped_refs[1]
-        # Deterministic negative control on 1% of pairs, using another template.
+        # Детерминированный отрицательный контроль на 1% пар по другому шаблону.
         if idx % 100 == 0:
             candidate = origins[reads[(idx + 7919) % len(reads)][0]]
             if candidate.split("_rc_", 1)[0] != fid.split("_rc_", 1)[0]:

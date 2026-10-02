@@ -1,7 +1,7 @@
-"""Evaluate the existing human IGL pilot without touching production results.
+"""Оценка пилота V'DJer на IGL человека без изменения основных результатов.
 
-Run from a OneQ Jupyter kernel. Recall is conditioned on the actual pilot reads;
-the existing project benchmark is reused, with an extra full-contig check.
+Recall считается относительно ридов, реально попавших в пилот; используется
+бенчмарк проекта с дополнительной проверкой полных контигов.
 """
 import collections
 import hashlib

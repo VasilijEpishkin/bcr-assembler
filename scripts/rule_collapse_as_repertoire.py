@@ -1,7 +1,7 @@
-"""Write the mouse collapse rule's output in IgReC repertoire format, so both are scored by evaluate_igrec_on_human_umi.py.
+"""Записывает результат правила схлопывания мыши в формате репертуара IgReC, чтобы оба оценивались evaluate_igrec_on_human_umi.py.
 
-Each retained sequence becomes a cluster (size = its reads + reads of variants absorbed into it); every read maps to
-the cluster of its own sequence or of the parent that absorbed it. Human reads, UMI ignored (blind, like IgReC).
+Каждая оставшаяся последовательность становится кластером (размер = её риды + риды поглощённых вариантов); каждый рид
+относится к кластеру своей последовательности или поглотившего её родителя. Риды человека, UMI не используются (вслепую, как IgReC).
 """
 import argparse
 from collections import Counter
@@ -13,9 +13,9 @@ from calibrate_collapse_on_human_umi import load_collapse, read_run
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--airr", type=Path, required=True)
-    ap.add_argument("--notebook", type=Path, required=True, help="mouse simulation notebook with collapse_errors")
+    ap.add_argument("--notebook", type=Path, required=True, help="ноутбук симуляции мыши с функцией collapse_errors")
     ap.add_argument("--ratio", type=int, required=True)
-    ap.add_argument("--out", type=Path, required=True, help="directory for final_repertoire.fa / .rcm")
+    ap.add_argument("--out", type=Path, required=True, help="каталог для final_repertoire.fa / .rcm")
     a = ap.parse_args()
     reads = read_run(a.airr, with_ids=True)
     counts = Counter(seq for _, _, _, seq in reads)

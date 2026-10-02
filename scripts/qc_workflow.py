@@ -1,4 +1,4 @@
-"""Input resolution and execution helpers for the canonical QC notebook."""
+"""Выбор входных файлов и запуск для ноутбука QC."""
 
 from __future__ import annotations
 
@@ -79,7 +79,7 @@ def resolve_qc_inputs(
     branch: str | None = None,
     view: str = "primary",
 ) -> list[QCInput]:
-    """Resolve file-level QC inputs without mixing aggregates and components."""
+    """Определяет входные файлы QC, не смешивая сводные файлы и их составные части."""
     volume = Path(volume)
     if stage not in STAGES:
         raise ValueError(f"stage must be one of {sorted(STAGES)}")
@@ -125,9 +125,9 @@ def resolve_qc_inputs(
             raise ValueError("branch_diagnostics view is only valid for branch-aware pr_trimmed/merged stages")
         source = stage_dir / "fastq"
         if stage == "merged":
-            # AssemblePairs may leave mate-specific *assemble-fail* files next
-            # to the consensus. Primary merged QC must contain pass consensus
-            # only, otherwise MultiQC mixes failed mates with assembled reads.
+            # AssemblePairs может оставить рядом с консенсусом файлы *assemble-fail*
+            # отдельных мейтов. Основной QC стадии merged должен включать только
+            # собранный консенсус, иначе MultiQC смешает несобранные мейты со сборкой.
             paths = sorted(source.glob("*_assemble-pass.fastq.gz")) + sorted(
                 source.glob("*_assemble-pass.fastq")
             )
@@ -206,7 +206,7 @@ def run_qc(
     env_dir: str | Path | None = None,
     heartbeat: int = 30,
 ) -> QCOutputPaths:
-    """Run FastQC/MultiQC after exact input resolution and write provenance manifests."""
+    """Запускает FastQC/MultiQC по точно определённым входам и пишет манифесты происхождения."""
     inputs = resolve_qc_inputs(volume, dataset, stage, branch=branch, view=view)
     if expected_count is not None and len(inputs) != expected_count:
         raise RuntimeError(f"Expected {expected_count} inputs, found {len(inputs)}")
