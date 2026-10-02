@@ -1,14 +1,14 @@
 {
-    "report_multiqc_command": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc -f -o /Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/multiqc -n ERP003950_fastp_q30_u40_merged_multiqc.html /Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc",
+    "report_multiqc_command": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc -f -o /Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/multiqc -n ERP003950_merged_multiqc.html /Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc",
     "report_data_sources": {
         "FastQC": {
             "all_sections": {
-                "ERR346596_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346596_assemble-pass_fastqc.zip",
-                "ERR346597_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346597_assemble-pass_fastqc.zip",
-                "ERR346598_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346598_assemble-pass_fastqc.zip",
-                "ERR346599_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346599_assemble-pass_fastqc.zip",
-                "ERR346600_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346600_assemble-pass_fastqc.zip",
-                "ERR346601_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc/ERR346601_assemble-pass_fastqc.zip"
+                "ERR346596_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346596_assemble-pass_fastqc.zip",
+                "ERR346597_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346597_assemble-pass_fastqc.zip",
+                "ERR346598_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346598_assemble-pass_fastqc.zip",
+                "ERR346599_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346599_assemble-pass_fastqc.zip",
+                "ERR346600_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346600_assemble-pass_fastqc.zip",
+                "ERR346601_assemble-pass": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc/ERR346601_assemble-pass_fastqc.zip"
             }
         }
     },
@@ -15479,7 +15479,7 @@
         }
     },
     "config_analysis_dir": [
-        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc"
+        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc"
     ],
     "config_git_hash": null,
     "config_intro_text": null,
@@ -15490,11 +15490,11 @@
     "config_subtitle": null,
     "config_title": null,
     "config_version": "1.35",
-    "config_output_dir": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/multiqc",
+    "config_output_dir": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/multiqc",
     "config_sample_names_rename": [],
     "config_sample_names_rename_buttons": [],
     "config_analysis_dir_abs": [
-        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950_fastp_q30_u40/merged/fastqc"
+        "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/merged/fastqc"
     ],
     "report_saved_raw_data": {
         "multiqc_fastqc": {

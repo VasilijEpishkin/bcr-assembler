@@ -12,48 +12,45 @@ reference-like baseline из реальных данных, а затем ген
 Актуальные simulation-ветки строятся после аннотации и post-filtering, а не
 напрямую из старых merged-read simulation notebooks.
 
-## Актуальные simulation notebooks
+## Основная линия (run2_base)
 
-### Human PRJEB30386
+Симуляция: ПЦР1 → порция **5 нг** → один случайный разрез → отбор по размеру 250±40 → ПЦР2 → NovaSeq PE150.
+Ноутбуки основной линии (ветки по умолчанию — `…_random_cut_amp_{umicons,ec1x3}_in5ng_rb3x_ss250`):
 
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
-- `results/PRJEB30386/notebooks/simulate_human_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
+| Шаг | Человек `results/PRJEB30386/notebooks/` | Мышь `results/ERP003950/notebooks/` |
+|---|---|---|
+| Симуляция | `simulate_human_insilicoseq_150bp_novaseq.ipynb` | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` |
+| Валидация симуляции | `validate_human_novaseq_post_annotation_filtered.ipynb` | `validate_mouse_novaseq_post_annotation_filtered.ipynb` |
+| Сборка | `assemble_{trust4,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,rnaspades,trinity}_mouse.ipynb` |
+| Оценка | `benchmark_assemblers_human.ipynb` | `benchmark_assemblers_mouse.ipynb` |
 
-### Mouse ERP003950 fastp
+Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`.
 
-- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` — random-cut baseline
-- `results/ERP003950_fastp_q30_u40/notebooks/simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq_ultrasonic_fragmentation.ipynb` — ultrasonic-like
+Варианты, которые лежат в репозитории, но ещё не проверены как основная линия:
+`simulate_*_pcr1_tails.ipynb` (хвосты праймеров ПЦР1), `simulate_*_ultrasonic_fragmentation.ipynb`
+(ультразвуковая фрагментация), `assemble_mixcr_*.ipynb` (нужна лицензия), `assemble_vdjer_*.ipynb`
+(на ампликонах 0 контигов, закрыт).
 
-Старые `simulate_*_merged_*.ipynb` simulation notebooks удалены как legacy /
-дубликаты и не являются частью production workflow.
+## Подготовка данных мыши ERP003950
 
-## Пайплайн mouse fastp
+`results/ERP003950/` — ветка с фильтрацией fastp (`-q 30 -u 40 -l 250`) под каноническим именем датасета.
 
 | Шаг | Ноутбук | Инструмент |
 |---|---|---|
-| QC (на всех стадиях) | `qc.ipynb` | FastQC, MultiQC |
-| Adapter trim | `adapter_trim_mouse_fastp_q30_u40.ipynb` | cutadapt, fastp |
-| Primer trim | `primer_trim_mouse_fastp_q30_u40.ipynb` | cutadapt |
-| Merge paired-end reads | `presto_mouse_fastp_q30_u40.ipynb` | pRESTO `AssemblePairs.py` |
-| Annotation | `annotate_mouse_fastp_q30_u40.ipynb` | IgBLAST |
+| QC (на всех стадиях) | `notebooks/qc.ipynb` | FastQC, MultiQC |
+| Adapter trim | `adapter_trim_mouse.ipynb` | cutadapt, fastp |
+| Primer trim | `primer_trim_mouse.ipynb` | cutadapt |
+| Merge paired-end reads | `presto_mouse.ipynb` | pRESTO `AssemblePairs.py` |
+| Annotation | `annotate_mouse.ipynb`, `annotation_report_mouse.ipynb` | IgBLAST |
 | Post-annotation filter | `filter_mouse_post_annotation.ipynb` | AIRR/sequence filters |
-| Симуляция секвенирования | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | InSilicoSeq |
-| Валидация симуляции | `validate_mouse_novaseq_post_annotation_filtered.ipynb` | bowtie2, samtools |
-| Сшивка фрагментов | — | `TRUST4` и аналоги |
 
 ## Сборка и оценка сборщиков
 
 Сборщики запускаются на PE150 FASTQ симуляций отдельными ноутбуками (ветка симуляции
-задаётся `BCR_BRANCH`, число потоков — `BCR_THREADS`):
-
-- `assemble_trust4_{human,mouse}.ipynb`, `assemble_rnaspades_*.ipynb`, `assemble_trinity_*.ipynb`;
-- `assemble_mixcr_*.ipynb` и `assemble_vdjer_human.ipynb` пока вне рабочей очереди
-  (лицензия MiXCR; V'DJer требует настройки под ампликоны).
-
-Нативные результаты и нормализованный `contigs.fasta` пишутся в
-`<ветка>/assemblers/<сборщик>/<образец>/`. Сравнение с эталоном —
-`benchmark_assemblers_{human,mouse}.ipynb` (recall по шаблонам и precision по контигам,
-`<ветка>/benchmark/`), отчёт по стадиям симуляции — `notebooks/simulation_report.ipynb`.
+задаётся `BCR_BRANCH`, число потоков — `BCR_THREADS`). Нативные результаты и нормализованный
+`contigs.fasta` пишутся в `<ветка>/assemblers/<сборщик>/<образец>/`. Сравнение с эталоном —
+`benchmark_assemblers_{human,mouse}.ipynb` (`<ветка>/benchmark_unique_trim{20,0}/`), отчёт по стадиям
+симуляции — `notebooks/simulation_report.ipynb`, история всех оценок — `docs/evaluation_history/`.
 
 ## Симуляция: общая архитектура
 
@@ -89,6 +86,9 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 ## Структура
 
 - `notebooks/` — общие notebooks;
-- `results/PRJEB30386/` — human pipeline и simulation;
-- `results/ERP003950_fastp_q30_u40/` — актуальная mouse fastp production branch;
-- `scripts/setup_env.sh` — окружение.
+- `results/PRJEB30386/` — human pipeline, simulation, сборка и оценка;
+- `results/ERP003950/` — mouse pipeline (fastp), simulation, сборка и оценка;
+- `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
+  предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши), вне основной линии;
+- `docs/` — отчёты, история оценок, раскладка ноутбуков;
+- `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `igbrowser/` — R-отчёты igbrowser).

@@ -34,8 +34,8 @@ DATASET_CONFIGS = {
             "IgL": "#8e63ce",
         },
     },
-    "ERP003950_fastp_q30_u40": {
-        "dataset": "ERP003950_fastp_q30_u40",
+    "ERP003950": {
+        "dataset": "ERP003950",
         "runs": {
             "ERR346596": {"library": "Mouse IGH 596", "expected_locus": "IGH"},
             "ERR346597": {"library": "Mouse IGH 597", "expected_locus": "IGH"},
