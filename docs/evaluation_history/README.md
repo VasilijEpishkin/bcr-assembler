@@ -10,6 +10,7 @@
 | `full_runs_precision.tsv` | precision контигов по образцам; в новой схеме — ещё доли классов структуры |
 | `full_runs_structure.tsv` | структура контигов по поддержке ридами (`table=structure_by_support`) и пороги отсечения по поддержке (`table=support_thresholds`) |
 | `pilots.tsv` | пилоты в длинном формате: `pilot`, `condition`, `metric`, `value`, `source` |
+| `run2_base_report.md` | отчёт по основной линии (5 нг): результаты TRUST4, rnaSPAdes, Trinity, расчёт каждой метрики, стадии сборщиков |
 
 ## Полные прогоны
 
