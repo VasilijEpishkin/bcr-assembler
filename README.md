@@ -19,7 +19,7 @@ reference-like baseline из реальных данных, а затем ген
 
 | Шаг | Человек `results/PRJEB30386/notebooks/` | Мышь `results/ERP003950/notebooks/` |
 |---|---|---|
-| Симуляция | `simulate_human_insilicoseq_150bp_novaseq.ipynb` | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` |
+| Симуляция | `simulate_human_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` |
 | Валидация симуляции | `validate_human_novaseq_post_annotation_filtered.ipynb` | `validate_mouse_novaseq_post_annotation_filtered.ipynb` |
 | Сборка | `assemble_{trust4,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,rnaspades,trinity}_mouse.ipynb` |
 | Оценка | `benchmark_assemblers_human.ipynb` | `benchmark_assemblers_mouse.ipynb` |

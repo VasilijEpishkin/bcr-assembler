@@ -43,3 +43,8 @@ scripts/__pycache__/
 
 # Local working copy of the mouse fastp branch; published as results/ERP003950 (see docs/notebook_layout.md)
 results/ERP003950_fastp_q30_u40/
+
+# Light-chain mouse PRJNA1226555: only the selected branch (fastp q30 u40 min250) is published, under canonical names;
+# other preprocessing branches stay local
+results/PRJNA1226555/notebooks/*_min200.ipynb
+results/PRJNA1226555/notebooks/*_fastp_min250.ipynb
