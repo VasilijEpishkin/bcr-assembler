@@ -1,0 +1,5 @@
+sample	input_pairs	assembled_pairs	failed_pairs	merge_rate	pass_fastq	completion_marker
+ERR3004229	1168461	1168102	359	0.999693	ERR3004229_assemble-pass.fastq.gz	END> AssemblePairs
+ERR3004230	937910	937315	595	0.999366	ERR3004230_assemble-pass.fastq.gz	END> AssemblePairs
+ERR3004231	820430	819996	434	0.999471	ERR3004231_assemble-pass.fastq.gz	END> AssemblePairs
+ERR3004232	895259	894861	398	0.999555	ERR3004232_assemble-pass.fastq.gz	END> AssemblePairs

@@ -1,0 +1,4 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR32426580_all_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_fastp_min250/qc_merged_presto/SRR32426580_all_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR32426580_igl_primer_pass_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_fastp_min250/qc_merged_presto/SRR32426580_igl_primer_pass_assemble-pass_fastqc.zip
+FastQC	all_sections	SRR32426580_primer_unmatched_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_fastp_min250/qc_merged_presto/SRR32426580_primer_unmatched_assemble-pass_fastqc.zip

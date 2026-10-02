@@ -1,0 +1,5 @@
+Sample	Unique Reads	Duplicate Reads
+SRR32426580_igl_primer_pass-1_pair-pass	883.0	162502.0
+SRR32426580_igl_primer_pass-2_pair-pass	3284.0	160101.0
+SRR32426580_primer_unmatched-1_pair-pass	193194.0	351403.0
+SRR32426580_primer_unmatched-2_pair-pass	29127.0	515470.0

@@ -1,0 +1,5 @@
+Sample	fastqc-percent_duplicates	fastqc-percent_gc	fastqc-avg_sequence_length	fastqc-median_sequence_length	fastqc-percent_fails	fastqc-total_sequences
+ERR3004229_assemble-pass	98.08955039885215	56.0	392.1587746618018	392	30.0	1.168102
+ERR3004230_assemble-pass	97.48387681835882	55.0	385.570340280482	384	30.0	0.937315
+ERR3004231_assemble-pass	97.00096098029746	52.0	415.4596559007605	422	40.0	0.819996
+ERR3004232_assemble-pass	97.78915384623981	58.0	395.4798756454913	397	30.0	0.8948609999999999

@@ -1,0 +1,136 @@
+{
+  "comparison": {
+    "min250": {
+      "raw_airr": {
+        "rows": 340707,
+        "productive": 265248,
+        "complete_vdj": 211514,
+        "productive_complete_no_stop": 200988
+      },
+      "airr_loci": {
+        "IGL": 22035,
+        "IGK": 318670,
+        "": 2
+      },
+      "strict": {
+        "run": "SRR32426580_min250",
+        "source": "PRJNA1226555_min250",
+        "input_tsv": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555/comparison_annotation/SRR32426580_balbcbyj_igkl.airr.tsv",
+        "expected_loci": [
+          "IGK",
+          "IGL"
+        ],
+        "boundary_rule": "v_sequence_start through j_sequence_end, AIRR 1-based inclusive",
+        "total_records": 340707,
+        "accepted_records": 200988,
+        "accepted_source_records": 285194,
+        "unique_templates": 30232,
+        "rejected": {
+          "incomplete_vdj": 64260,
+          "unproductive": 75459
+        }
+      },
+      "strict_unique_loci": {
+        "IGK": 23313,
+        "IGL": 6919
+      }
+    },
+    "min200": {
+      "raw_airr": {
+        "rows": 537068,
+        "productive": 400145,
+        "complete_vdj": 304078,
+        "productive_complete_no_stop": 288041
+      },
+      "airr_loci": {
+        "IGL": 34710,
+        "IGK": 502349,
+        "": 9
+      },
+      "strict": {
+        "run": "SRR32426580_min200",
+        "source": "PRJNA1226555_min200",
+        "input_tsv": "/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_min200/comparison_annotation/SRR32426580_balbcbyj_igkl.airr.tsv",
+        "expected_loci": [
+          "IGK",
+          "IGL"
+        ],
+        "boundary_rule": "v_sequence_start through j_sequence_end, AIRR 1-based inclusive",
+        "total_records": 537068,
+        "accepted_records": 288041,
+        "accepted_source_records": 398109,
+        "unique_templates": 49736,
+        "rejected": {
+          "incomplete_vdj": 112104,
+          "unproductive": 136923
+        }
+      },
+      "strict_unique_loci": {
+        "IGK": 38457,
+        "IGL": 11279
+      }
+    }
+  },
+  "residual_motifs": {
+    "min250": {
+      "denominators": {
+        "IGL": 22035,
+        "IGK": 318670,
+        "UNASSIGNED": 2
+      },
+      "counts": {
+        "IGK|CK_candidate|full": 192674,
+        "IGK|CK_candidate|outside_VJ": 191286,
+        "IGK|IGL1|full": 46,
+        "IGK|IGL1|outside_VJ": 1,
+        "IGK|IGL2|full": 34,
+        "IGK|IGL2|outside_VJ": 3,
+        "IGK|IGL3|full": 23,
+        "IGK|IGL4|full": 19,
+        "IGK|IGL4|outside_VJ": 2,
+        "IGL|CK_candidate|full": 203,
+        "IGL|CK_candidate|outside_VJ": 5,
+        "IGL|IGL1|full": 278,
+        "IGL|IGL1|outside_VJ": 277,
+        "IGL|IGL2|full": 227,
+        "IGL|IGL2|outside_VJ": 224,
+        "IGL|IGL3|full": 149,
+        "IGL|IGL3|outside_VJ": 149,
+        "IGL|IGL4|full": 159,
+        "IGL|IGL4|outside_VJ": 157
+      }
+    },
+    "min200": {
+      "denominators": {
+        "IGL": 34710,
+        "IGK": 502349,
+        "UNASSIGNED": 9
+      },
+      "counts": {
+        "IGK|CK_candidate|full": 279855,
+        "IGK|CK_candidate|outside_VJ": 277223,
+        "IGK|IGL1|full": 935,
+        "IGK|IGL1|outside_VJ": 737,
+        "IGK|IGL2|full": 990,
+        "IGK|IGL2|outside_VJ": 872,
+        "IGK|IGL3|full": 655,
+        "IGK|IGL3|outside_VJ": 584,
+        "IGK|IGL4|full": 713,
+        "IGK|IGL4|outside_VJ": 641,
+        "IGL|CK_candidate|full": 275,
+        "IGL|CK_candidate|outside_VJ": 6,
+        "IGL|IGL1|full": 505,
+        "IGL|IGL1|outside_VJ": 499,
+        "IGL|IGL2|full": 427,
+        "IGL|IGL2|outside_VJ": 415,
+        "IGL|IGL3|full": 286,
+        "IGL|IGL3|outside_VJ": 284,
+        "IGL|IGL4|full": 295,
+        "IGL|IGL4|outside_VJ": 290,
+        "UNASSIGNED|IGL1|full": 2,
+        "UNASSIGNED|IGL2|full": 2,
+        "UNASSIGNED|IGL4|full": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+path	sample	mate	technical_branch	role
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004229_1.fastq.gz	ERR3004229	R1		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004229_2.fastq.gz	ERR3004229	R2		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004230_1.fastq.gz	ERR3004230	R1		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004230_2.fastq.gz	ERR3004230	R2		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004231_1.fastq.gz	ERR3004231	R1		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004231_2.fastq.gz	ERR3004231	R2		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004232_1.fastq.gz	ERR3004232	R1		raw_mate
+/Users/epishkin/workspace/bcr-assembler/raw/PRJEB30386/ERR3004232_2.fastq.gz	ERR3004232	R2		raw_mate

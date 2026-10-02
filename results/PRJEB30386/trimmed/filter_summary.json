@@ -1,0 +1,38 @@
+{
+  "adapters": {
+    "R1": "AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC",
+    "R2": "AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAG"
+  },
+  "cutadapt": {
+    "times": 2,
+    "minimum_overlap": 10
+  },
+  "fastp": {
+    "qualified_quality_phred": 30,
+    "unqualified_percent_limit": 40,
+    "minimum_length": 250,
+    "quality_end_trimming": false
+  },
+  "samples": {
+    "ERR3004229": {
+      "before_pairs": 1355378,
+      "after_pairs": 1200096,
+      "retention": 0.885433
+    },
+    "ERR3004230": {
+      "before_pairs": 1153931,
+      "after_pairs": 960657,
+      "retention": 0.832508
+    },
+    "ERR3004231": {
+      "before_pairs": 958261,
+      "after_pairs": 841895,
+      "retention": 0.878565
+    },
+    "ERR3004232": {
+      "before_pairs": 1085144,
+      "after_pairs": 905156,
+      "retention": 0.834134
+    }
+  }
+}

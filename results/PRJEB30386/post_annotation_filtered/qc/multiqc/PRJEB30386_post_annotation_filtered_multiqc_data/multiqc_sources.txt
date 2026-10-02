@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	ERR3004229_filtered	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/qc/fastqc/ERR3004229_filtered_fastqc.zip
+FastQC	all_sections	ERR3004230_filtered	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/qc/fastqc/ERR3004230_filtered_fastqc.zip
+FastQC	all_sections	ERR3004231_filtered	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/qc/fastqc/ERR3004231_filtered_fastqc.zip
+FastQC	all_sections	ERR3004232_filtered	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/post_annotation_filtered/qc/fastqc/ERR3004232_filtered_fastqc.zip

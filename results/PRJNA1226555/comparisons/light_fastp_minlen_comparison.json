@@ -1,0 +1,223 @@
+{
+  "comparison": {
+    "min250": {
+      "upstream": {
+        "trim_summary": {
+          "semantics": "cutadapt adapters-only; fastp whole-read filtering; no quality trimming",
+          "raw_pairs": 984351,
+          "trimmed_pairs": 707982,
+          "retention": 0.7192373452152738,
+          "qualified_quality_phred": 30,
+          "unqualified_percent_limit": 40,
+          "minimum_length": 250,
+          "low_quality_reads": 291624,
+          "too_short_reads": 261114
+        },
+        "assembly_summary": {
+          "input_pairs": 707982,
+          "assembled_pairs": 699983,
+          "failed_pairs": 7999,
+          "merge_rate": 0.9887016901559644,
+          "igl_primer_pass_assembled": 162725,
+          "primer_unmatched_assembled": 537258
+        }
+      },
+      "collapsed_queries": 571769,
+      "annotation_query_identity_verified": 571769,
+      "raw_airr": {
+        "rows": 571769,
+        "productive": 427333,
+        "complete_vdj": 324110,
+        "productive_complete_no_stop": 306309
+      },
+      "airr_loci": {
+        "IGL": 38768,
+        "IGK": 532997,
+        "": 4
+      },
+      "merged_length_median": 472,
+      "vj_length_median": 322,
+      "strict": {
+        "run": "SRR32426580_min250",
+        "source": "PRJNA1226555_min250",
+        "input_tsv": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min250/annotation/SRR32426580_balbcbyj_igkl.airr.tsv",
+        "expected_loci": [
+          "IGK",
+          "IGL"
+        ],
+        "boundary_rule": "v_sequence_start through j_sequence_end, AIRR 1-based inclusive",
+        "total_records": 571769,
+        "accepted_records": 306309,
+        "accepted_source_records": 421601,
+        "unique_templates": 55273,
+        "rejected": {
+          "incomplete_vdj": 121024,
+          "unproductive": 144436
+        }
+      },
+      "strict_unique_loci": {
+        "IGK": 42215,
+        "IGL": 13058
+      },
+      "qc": {
+        "trimmed_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min250/trimmed/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "pr_trimmed_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min250/pr_trimmed/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "merged_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min250/merged/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "merged_branch_diagnostics": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min250/merged/multiqc_branch_diagnostics/qc_run_manifest.json",
+          "available": false
+        }
+      }
+    },
+    "min200": {
+      "upstream": {
+        "trim_summary": {
+          "semantics": "cutadapt adapters-only; fastp whole-read filtering; no quality trimming",
+          "raw_pairs": 984351,
+          "trimmed_pairs": 735932,
+          "retention": 0.747631688290051,
+          "qualified_quality_phred": 30,
+          "unqualified_percent_limit": 40,
+          "minimum_length": 200,
+          "low_quality_reads": 291624,
+          "too_short_reads": 205214
+        },
+        "assembly_summary": {
+          "input_pairs": 735932,
+          "assembled_pairs": 727880,
+          "failed_pairs": 8052,
+          "merge_rate": 0.989058771734345,
+          "igl_primer_pass_assembled": 167239,
+          "primer_unmatched_assembled": 560641
+        }
+      },
+      "collapsed_queries": 599609,
+      "annotation_query_identity_verified": 599609,
+      "raw_airr": {
+        "rows": 599609,
+        "productive": 436650,
+        "complete_vdj": 324114,
+        "productive_complete_no_stop": 306312
+      },
+      "airr_loci": {
+        "IGL": 39672,
+        "IGK": 559928,
+        "": 9
+      },
+      "merged_length_median": 470,
+      "vj_length_median": 322.0,
+      "strict": {
+        "run": "SRR32426580_min200",
+        "source": "PRJNA1226555_min200",
+        "input_tsv": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min200/annotation/SRR32426580_balbcbyj_igkl.airr.tsv",
+        "expected_loci": [
+          "IGK",
+          "IGL"
+        ],
+        "boundary_rule": "v_sequence_start through j_sequence_end, AIRR 1-based inclusive",
+        "total_records": 599609,
+        "accepted_records": 306312,
+        "accepted_source_records": 421604,
+        "unique_templates": 55274,
+        "rejected": {
+          "incomplete_vdj": 130338,
+          "unproductive": 162959
+        }
+      },
+      "strict_unique_loci": {
+        "IGK": 42216,
+        "IGL": 13058
+      },
+      "qc": {
+        "trimmed_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min200/trimmed/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "pr_trimmed_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min200/pr_trimmed/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "merged_primary": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min200/merged/multiqc/qc_run_manifest.json",
+          "available": false
+        },
+        "merged_branch_diagnostics": {
+          "manifest": "/Users/epishkin/workspace/bcr-assembler/results/PRJNA1226555/branches/fastp_q30_u40_min200/merged/multiqc_branch_diagnostics/qc_run_manifest.json",
+          "available": false
+        }
+      }
+    }
+  },
+  "residual_motifs": {
+    "min250": {
+      "denominators": {
+        "IGL": 38768,
+        "IGK": 532997,
+        "UNASSIGNED": 4
+      },
+      "counts": {
+        "IGK|CK_candidate|full": 289576,
+        "IGK|CK_candidate|outside_VJ": 287114,
+        "IGK|IGL1|full": 77,
+        "IGK|IGL1|outside_VJ": 2,
+        "IGK|IGL2|full": 56,
+        "IGK|IGL2|outside_VJ": 6,
+        "IGK|IGL3|full": 37,
+        "IGK|IGL3|outside_VJ": 2,
+        "IGK|IGL4|full": 35,
+        "IGK|IGL4|outside_VJ": 4,
+        "IGL|CK_candidate|full": 231,
+        "IGL|CK_candidate|outside_VJ": 6,
+        "IGL|IGL1|full": 451,
+        "IGL|IGL1|outside_VJ": 450,
+        "IGL|IGL2|full": 390,
+        "IGL|IGL2|outside_VJ": 386,
+        "IGL|IGL3|full": 240,
+        "IGL|IGL3|outside_VJ": 240,
+        "IGL|IGL4|full": 283,
+        "IGL|IGL4|outside_VJ": 280
+      }
+    },
+    "min200": {
+      "denominators": {
+        "IGL": 39672,
+        "IGK": 559928,
+        "UNASSIGNED": 9
+      },
+      "counts": {
+        "IGK|CK_candidate|full": 295391,
+        "IGK|CK_candidate|outside_VJ": 292580,
+        "IGK|IGL1|full": 1003,
+        "IGK|IGL1|outside_VJ": 758,
+        "IGK|IGL2|full": 1046,
+        "IGK|IGL2|outside_VJ": 897,
+        "IGK|IGL3|full": 705,
+        "IGK|IGL3|outside_VJ": 609,
+        "IGK|IGL4|full": 761,
+        "IGK|IGL4|outside_VJ": 662,
+        "IGL|CK_candidate|full": 282,
+        "IGL|CK_candidate|outside_VJ": 6,
+        "IGL|IGL1|full": 693,
+        "IGL|IGL1|outside_VJ": 687,
+        "IGL|IGL2|full": 602,
+        "IGL|IGL2|outside_VJ": 589,
+        "IGL|IGL3|full": 389,
+        "IGL|IGL3|outside_VJ": 386,
+        "IGL|IGL4|full": 432,
+        "IGL|IGL4|outside_VJ": 426,
+        "UNASSIGNED|IGL1|full": 2,
+        "UNASSIGNED|IGL2|full": 2,
+        "UNASSIGNED|IGL4|full": 1
+      }
+    }
+  }
+}

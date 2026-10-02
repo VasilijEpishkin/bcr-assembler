@@ -1,0 +1,3 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SRR32426580_1	/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_fastp_min250/qc_trimmed/SRR32426580_1.trim_fastqc.zip
+FastQC	all_sections	SRR32426580_2	/Users/epishkin/workspace/bcr-assembler/results/ERP003950/synthetic_mixed_truth/source/PRJNA1226555_fastp_min250/qc_trimmed/SRR32426580_2.trim_fastqc.zip

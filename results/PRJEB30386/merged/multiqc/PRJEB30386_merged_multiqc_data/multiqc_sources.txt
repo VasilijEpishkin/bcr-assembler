@@ -1,0 +1,5 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	ERR3004229_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/merged/fastqc/ERR3004229_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR3004230_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/merged/fastqc/ERR3004230_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR3004231_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/merged/fastqc/ERR3004231_assemble-pass_fastqc.zip
+FastQC	all_sections	ERR3004232_assemble-pass	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/merged/fastqc/ERR3004232_assemble-pass_fastqc.zip

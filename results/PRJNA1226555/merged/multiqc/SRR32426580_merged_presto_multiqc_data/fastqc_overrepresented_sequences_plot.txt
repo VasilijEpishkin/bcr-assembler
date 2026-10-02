@@ -1,0 +1,4 @@
+Sample	Top overrepresented sequence	Sum of remaining overrepresented sequences
+SRR32426580_all_assemble-pass	5.11698141240573	50.37222332542362
+SRR32426580_igl_primer_pass_assemble-pass	20.969734214165005	67.43278537409742
+SRR32426580_primer_unmatched_assemble-pass	6.666815570917511	43.57850418234815

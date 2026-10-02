@@ -1,0 +1,116 @@
+{
+  "dataset": "PRJEB30386",
+  "input": "merged/fastq/*_assemble-pass.fastq.gz (same records used for IgBLAST)",
+  "filters": {
+    "min_vj_span_nt": 300,
+    "require_v_germline_start_eq_1": true,
+    "require_complete_vdj_for_j_3prime_end": true,
+    "require_expected_locus": {
+      "ERR3004229": "IGH",
+      "ERR3004230": "IGH",
+      "ERR3004231": "IGK",
+      "ERR3004232": "IGL"
+    },
+    "require_productive": true,
+    "reject_stop_codon": true,
+    "min_v_identity_percent": 80.0,
+    "min_j_identity_percent": 85.0,
+    "max_v_support_evalue": 1e-05,
+    "max_j_support_evalue": 1e-05
+  },
+  "cutoff_basis": {
+    "v_identity": "80% is below the minimum observed library P01 (83.391%, IgG)",
+    "j_identity": "85% is below the minimum observed library P01 (88.372%, IgG)",
+    "support": "1e-5 retains >=99.27% of V and >=98.94% of J assignments in the current annotation report"
+  },
+  "samples": {
+    "ERR3004229": {
+      "input": 1168102,
+      "passed": 1090122,
+      "rejected": 77980,
+      "pass_pct": 93.32421312522365,
+      "reasons": {
+        "v_gene_5prime_incomplete": 18916,
+        "j_3prime_or_vdj_incomplete": 37173,
+        "nonproductive": 43775,
+        "stop_codon_or_missing": 36937,
+        "missing_vj_coordinates": 1387,
+        "missing_j_identity": 1387,
+        "missing_j_support": 1387,
+        "vj_span_lt_300": 1087,
+        "low_v_identity": 286,
+        "poor_j_support": 206,
+        "unexpected_locus": 41,
+        "poor_v_support": 47,
+        "low_j_identity": 20
+      }
+    },
+    "ERR3004230": {
+      "input": 937315,
+      "passed": 782331,
+      "rejected": 154984,
+      "pass_pct": 83.46511044846183,
+      "reasons": {
+        "j_3prime_or_vdj_incomplete": 131618,
+        "missing_vj_coordinates": 5357,
+        "v_gene_5prime_incomplete": 60444,
+        "unexpected_locus": 5154,
+        "nonproductive": 33893,
+        "stop_codon_or_missing": 27661,
+        "missing_v_identity": 1412,
+        "missing_j_identity": 5357,
+        "missing_v_support": 1412,
+        "missing_j_support": 5357,
+        "vj_span_lt_300": 3939,
+        "low_v_identity": 3611,
+        "poor_v_support": 5444,
+        "poor_j_support": 4496,
+        "low_j_identity": 2215
+      }
+    },
+    "ERR3004231": {
+      "input": 819996,
+      "passed": 651862,
+      "rejected": 168134,
+      "pass_pct": 79.49575363782262,
+      "reasons": {
+        "nonproductive": 80978,
+        "poor_j_support": 3202,
+        "j_3prime_or_vdj_incomplete": 94214,
+        "stop_codon_or_missing": 31424,
+        "vj_span_lt_300": 7021,
+        "v_gene_5prime_incomplete": 29199,
+        "missing_vj_coordinates": 2009,
+        "missing_j_identity": 2009,
+        "missing_j_support": 2009,
+        "unexpected_locus": 54,
+        "low_v_identity": 1238,
+        "poor_v_support": 105,
+        "low_j_identity": 712
+      }
+    },
+    "ERR3004232": {
+      "input": 894861,
+      "passed": 712731,
+      "rejected": 182130,
+      "pass_pct": 79.64711837927902,
+      "reasons": {
+        "j_3prime_or_vdj_incomplete": 127589,
+        "nonproductive": 67200,
+        "stop_codon_or_missing": 43999,
+        "missing_vj_coordinates": 7316,
+        "missing_j_identity": 7316,
+        "missing_j_support": 7316,
+        "v_gene_5prime_incomplete": 24065,
+        "unexpected_locus": 629,
+        "poor_v_support": 4822,
+        "low_v_identity": 1919,
+        "vj_span_lt_300": 4277,
+        "poor_j_support": 2183,
+        "low_j_identity": 379,
+        "missing_v_identity": 102,
+        "missing_v_support": 102
+      }
+    }
+  }
+}

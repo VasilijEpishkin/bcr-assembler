@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-09-14T16:32:47.746101+00:00",
+  "dataset": "PRJEB30386",
+  "branch": null,
+  "stage": "pr_trimmed",
+  "view": "primary",
+  "input_count": 8,
+  "inputs": [
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004229_1.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004229_2.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004230_1.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004230_2.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004231_1.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004231_2.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004232_1.pr.fastq.gz",
+    "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/fastq/ERR3004232_2.pr.fastq.gz"
+  ],
+  "report": "/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/pr_trimmed/multiqc/PRJEB30386_pr_trimmed_multiqc.html",
+  "python": "3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:51:19) [Clang 19.1.7 ]",
+  "fastqc": "/usr/local/bin/fastqc",
+  "multiqc": "/Users/epishkin/.hermes/hermes-agent/venv/bin/multiqc"
+}
