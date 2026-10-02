@@ -1,0 +1,5 @@
+Sample	Unique Reads	Duplicate Reads
+ERR3004229_assemble-pass	22316.0	1145786.0
+ERR3004230_assemble-pass	23584.0	913731.0
+ERR3004231_assemble-pass	24592.0	795404.0
+ERR3004232_assemble-pass	19784.0	875077.0

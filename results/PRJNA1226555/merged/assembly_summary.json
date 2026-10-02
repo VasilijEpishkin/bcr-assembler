@@ -1,0 +1,8 @@
+{
+  "input_pairs": 707982,
+  "assembled_pairs": 699983,
+  "failed_pairs": 7999,
+  "merge_rate": 0.9887016901559644,
+  "igl_primer_pass_assembled": 162725,
+  "primer_unmatched_assembled": 537258
+}

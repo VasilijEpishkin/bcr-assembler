@@ -1,0 +1,9 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	ERR3004229_1	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004229_1.trim_fastqc.zip
+FastQC	all_sections	ERR3004229_2	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004229_2.trim_fastqc.zip
+FastQC	all_sections	ERR3004230_1	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004230_1.trim_fastqc.zip
+FastQC	all_sections	ERR3004230_2	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004230_2.trim_fastqc.zip
+FastQC	all_sections	ERR3004231_1	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004231_1.trim_fastqc.zip
+FastQC	all_sections	ERR3004231_2	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004231_2.trim_fastqc.zip
+FastQC	all_sections	ERR3004232_1	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004232_1.trim_fastqc.zip
+FastQC	all_sections	ERR3004232_2	/Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/trimmed/fastqc/ERR3004232_2.trim_fastqc.zip

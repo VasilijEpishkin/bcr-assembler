@@ -1,0 +1,4 @@
+Sample	fastqc-percent_duplicates	fastqc-percent_gc	fastqc-avg_sequence_length	fastqc-median_sequence_length	fastqc-percent_fails	fastqc-total_sequences
+SRR32426580_all_assemble-pass	95.58746426698934	49.0	467.20964723429	464	40.0	0.699983
+SRR32426580_igl_primer_pass_assemble-pass	98.05622983561223	49.0	458.10250422491936	464	40.0	0.16272499999999998
+SRR32426580_primer_unmatched_assemble-pass	94.83376701696392	49.0	469.96801908952494	474	30.0	0.537258

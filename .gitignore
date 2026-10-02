@@ -48,3 +48,4 @@ results/ERP003950_fastp_q30_u40/
 # other preprocessing branches stay local
 results/PRJNA1226555/notebooks/*_min200.ipynb
 results/PRJNA1226555/notebooks/*_fastp_min250.ipynb
+results/PRJNA1226555/branches/

@@ -1,0 +1,4 @@
+Sample	Unique Reads	Duplicate Reads
+SRR32426580_all_assemble-pass	30887.0	669096.0
+SRR32426580_igl_primer_pass_assemble-pass	3163.0	159562.0
+SRR32426580_primer_unmatched_assemble-pass	27756.0	509502.0

@@ -1,0 +1,5 @@
+Sample	Top overrepresented sequence	Sum of remaining overrepresented sequences
+SRR32426580_igl_primer_pass-1_pair-pass	50.41344064632616	45.731860329895646
+SRR32426580_igl_primer_pass-2_pair-pass	20.894818985831012	67.43397496710223
+SRR32426580_primer_unmatched-1_pair-pass	0.27469853855236076	0.0
+SRR32426580_primer_unmatched-2_pair-pass	6.584501934457957	42.71048132839514

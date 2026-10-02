@@ -1,0 +1,5 @@
+Sample	Unique Reads	Duplicate Reads
+ERR3004229_filtered	16900.0	1073222.0
+ERR3004230_filtered	16463.0	765868.0
+ERR3004231_filtered	16690.0	635172.0
+ERR3004232_filtered	14076.0	698655.0

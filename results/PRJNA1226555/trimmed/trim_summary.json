@@ -1,0 +1,11 @@
+{
+  "semantics": "cutadapt adapters-only; fastp whole-read filtering; no quality trimming",
+  "raw_pairs": 984351,
+  "trimmed_pairs": 707982,
+  "retention": 0.7192373452152738,
+  "qualified_quality_phred": 30,
+  "unqualified_percent_limit": 40,
+  "minimum_length": 250,
+  "low_quality_reads": 291624,
+  "too_short_reads": 261114
+}

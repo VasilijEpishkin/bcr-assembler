@@ -1,0 +1,8 @@
+
+/// MultiQC 🔍 v1.35
+
+       file_search | Search path: /Users/epishkin/workspace/bcr-assembler/results/PRJEB30386/raw/fastqc
+            fastqc | Found 8 reports
+     write_results | Data        : results/PRJEB30386/raw/multiqc/PRJEB30386_raw_multiqc_data
+     write_results | Report      : results/PRJEB30386/raw/multiqc/PRJEB30386_raw_multiqc.html
+           multiqc | MultiQC complete
