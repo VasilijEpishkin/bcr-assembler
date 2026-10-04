@@ -15,17 +15,18 @@
 7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_human.ipynb`,
    `benchmark_assemblers_human.ipynb`.
 
-Варианты симуляции, ещё не проверенные как основная линия: `*_pcr1_tails.ipynb`, `*_ultrasonic_fragmentation.ipynb`;
-сборщики вне основной линии: `assemble_mixcr_human.ipynb`, `assemble_vdjer_human.ipynb`.
-Диагностика: `read_geometry_human.ipynb` (длины ридов по стадиям), `align_simulated_reads_bowtie2_human.ipynb`,
-`audit_human_v_primer_trimming.ipynb`.
+Другие варианты симуляции: `*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и разбросом
+эффективности ПЦР1; `*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация. Другие сборщики:
+`assemble_mixcr_human.ipynb` (MiXCR), `assemble_vdjer_human.ipynb` (V'DJer). Распределения длин ридов по стадиям —
+`read_geometry_human.ipynb`; выравнивание симулированных ридов на шаблоны bowtie2 —
+`align_simulated_reads_bowtie2_human.ipynb`; проверка обрезки V-праймеров — `audit_human_v_primer_trimming.ipynb`.
 
 ## Содержимое
 
 - `notebooks/` — исполняемые ноутбуки;
 - `<стадия>/fastqc/`, `<стадия>/multiqc/` — отчёты FastQC и MultiQC (`raw`, `trimmed`, `pr_trimmed`, `merged`);
-- `trimmed/fastp_reports/`, `*/filter_summary.json`, `merged/qc/assembly_qc.tsv` — сводки стадий;
-- `post_annotation_filtered/qc/` — QC последовательностей после фильтрации;
-- `qc/read_geometry/` — распределения длин ридов.
+- `trimmed/fastp_reports/`, `*/filter_summary.json`, `merged/assembly_qc.tsv` — сводки стадий;
+- `post_annotation_filtered/fastqc/`, `post_annotation_filtered/multiqc/` — QC последовательностей после фильтрации;
+- `read_geometry/` — распределения длин ридов.
 
 FASTQ, полные AIRR-таблицы и результаты симуляции лежат на томе данных и в git не хранятся.

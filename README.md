@@ -9,10 +9,9 @@
 reference-like baseline из реальных данных, а затем генерирует на его основе
 синтетические фрагментированные reads с контролируемой правдой.
 
-Актуальные simulation-ветки строятся после аннотации и post-filtering, а не
-напрямую из старых merged-read simulation notebooks.
+Симуляция строится по последовательностям после аннотации и фильтрации.
 
-## Основная линия (run2_base)
+## Основная линия
 
 Симуляция: ПЦР1 → порция **5 нг** → один случайный разрез → отбор по размеру 250±40 → ПЦР2 → NovaSeq PE150.
 Ноутбуки основной линии (ветки по умолчанию — `…_random_cut_amp_{umicons,ec1x3}_in5ng_rb3x_ss250`):
@@ -26,10 +25,9 @@ reference-like baseline из реальных данных, а затем ген
 
 Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`.
 
-Варианты, которые лежат в репозитории, но ещё не проверены как основная линия:
-`simulate_*_pcr1_tails.ipynb` (хвосты праймеров ПЦР1), `simulate_*_ultrasonic_fragmentation.ipynb`
-(ультразвуковая фрагментация), `assemble_mixcr_*.ipynb` (нужна лицензия), `assemble_vdjer_*.ipynb`
-(на ампликонах 0 контигов, закрыт).
+Другие варианты симуляции: `simulate_*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и
+разбросом эффективности ПЦР1; `simulate_*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация
+вместо одного случайного разреза. Другие сборщики: `assemble_mixcr_*.ipynb` (MiXCR), `assemble_vdjer_*.ipynb` (V'DJer).
 
 ## Подготовка данных мыши ERP003950
 
@@ -52,9 +50,7 @@ reference-like baseline из реальных данных, а затем ген
 `benchmark_assemblers_{human,mouse}.ipynb` (`<ветка>/benchmark_unique_trim{20,0}/`), отчёт по стадиям
 симуляции — `notebooks/simulation_report.ipynb`, история всех оценок — `docs/evaluation_history/`.
 
-## Симуляция: общая архитектура
-
-Актуальная архитектура:
+## Симуляция: общая схема
 
 ```text
 post_annotation_filtered truth
@@ -72,7 +68,9 @@ InSilicoSeq
 PE150 FASTQ
 ```
 
-Фрагментация в production notebooks использует random-cut baseline: одна случайная межнуклеотидная точка разрыва на выбранную library-input молекулу, оба дочерних фрагмента создаются до size-selection. Отдельные ultrasonic-like notebooks используют рекурсивные size-dependent разрывы с midpoint-centered breakpoint distribution и отдельным size-selection.
+Основная фрагментация — один случайный разрез между нуклеотидами каждой молекулы порции; оба дочерних фрагмента
+проходят отбор по размеру. Вариант с ультразвуковой фрагментацией — повторные разрывы с вероятностью, зависящей
+от длины, точка разрыва распределена вокруг середины фрагмента, затем отдельный отбор по размеру.
 
 ## Окружение
 
@@ -85,10 +83,11 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 
 ## Структура
 
-- `notebooks/` — общие notebooks;
-- `results/PRJEB30386/` — human pipeline, simulation, сборка и оценка;
-- `results/ERP003950/` — mouse pipeline (fastp), simulation, сборка и оценка;
+- `notebooks/` — общие ноутбуки (`qc.ipynb` — FastQC и MultiQC любой стадии, `simulation_report.ipynb` — отчёт по стадиям симуляции);
+- `results/<датасет>/notebooks/` — ноутбуки стадий датасета; `results/<датасет>/<стадия>/{fastqc,multiqc}/` — отчёты QC стадии;
+- `results/PRJEB30386/` — человек: подготовка, симуляция, сборка и оценка;
+- `results/ERP003950/` — мышь: подготовка (fastp), симуляция, сборка и оценка;
 - `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
-  предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши), вне основной линии;
+  предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши);
 - `docs/` — отчёты, история оценок, раскладка ноутбуков;
 - `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `igbrowser/` — R-отчёты igbrowser).

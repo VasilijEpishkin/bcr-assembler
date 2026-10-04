@@ -49,3 +49,7 @@ results/ERP003950_fastp_q30_u40/
 results/PRJNA1226555/notebooks/*_min200.ipynb
 results/PRJNA1226555/notebooks/*_fastp_min250.ipynb
 results/PRJNA1226555/branches/
+
+# Не публикуются: логи стадий и старый QC сырых ридов овцы (заменён raw/)
+results/*/*/logs/
+results/PRJNA900592/qc_raw/
