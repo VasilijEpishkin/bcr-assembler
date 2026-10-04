@@ -53,3 +53,4 @@ results/PRJNA1226555/branches/
 # Не публикуются: логи стадий и старый QC сырых ридов овцы (заменён raw/)
 results/*/*/logs/
 results/PRJNA900592/qc_raw/
+results/evaluation/
