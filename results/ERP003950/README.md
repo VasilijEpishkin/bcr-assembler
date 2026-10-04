@@ -15,14 +15,15 @@
 7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_mouse.ipynb`,
    `benchmark_assemblers_mouse.ipynb`.
 
-Варианты симуляции, ещё не проверенные как основная линия: `*_pcr1_tails.ipynb`, `*_ultrasonic_fragmentation.ipynb`;
-сборщики вне основной линии: `assemble_mixcr_mouse.ipynb`, `assemble_vdjer_mouse.ipynb`.
-Диагностика: `read_geometry_mouse.ipynb` (длины ридов по стадиям).
+Другие варианты симуляции: `*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и разбросом
+эффективности ПЦР1; `*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация. Другие сборщики:
+`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_vdjer_mouse.ipynb` (V'DJer). Распределения длин ридов по
+стадиям — `read_geometry_mouse.ipynb`.
 
 ## Содержимое
 
 - `notebooks/` — исполняемые ноутбуки;
-- `<стадия>/qc/fastqc/`, `<стадия>/qc/multiqc/` — отчёты FastQC и MultiQC (`trimmed`, `pr_trimmed`, `merged`);
-- `merged/qc/assembly_qc.tsv` — сводка сборки пар ридов.
+- `<стадия>/fastqc/`, `<стадия>/multiqc/` — отчёты FastQC и MultiQC (`trimmed`, `pr_trimmed`, `merged`);
+- `merged/assembly_qc.tsv` — сводка сборки пар ридов.
 
 FASTQ, полные AIRR-таблицы, индексы SQLite и результаты симуляции лежат на томе данных и в git не хранятся.
