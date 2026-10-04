@@ -4,7 +4,7 @@
 
 ## Порядок обработки
 
-1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`), без обрезки концов по качеству — `adapter_trim_human.ipynb`;
+1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`) — `adapter_trim_human.ipynb`;
 2. удаление праймеров — `primer_trim_human.ipynb`;
 3. сборка пар ридов pRESTO — `presto_human.ipynb`;
 4. аннотация IgBLAST и отчёт — `annotate_human.ipynb`, `annotation_report_human.ipynb`;
@@ -28,5 +28,3 @@
 - `trimmed/fastp_reports/`, `*/filter_summary.json`, `merged/assembly_qc.tsv` — сводки стадий;
 - `post_annotation_filtered/fastqc/`, `post_annotation_filtered/multiqc/` — QC последовательностей после фильтрации;
 - `read_geometry/` — распределения длин ридов.
-
-FASTQ, полные AIRR-таблицы и результаты симуляции лежат на томе данных и в git не хранятся.

@@ -5,7 +5,7 @@
 
 ## Порядок обработки
 
-1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`), без обрезки концов по качеству — `adapter_trim_light_mouse.ipynb`;
+1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`) — `adapter_trim_light_mouse.ipynb`;
 2. удаление праймеров — `primer_trim_light_mouse.ipynb`;
 3. сборка пар ридов pRESTO — `presto_light_mouse.ipynb`.
 
@@ -32,5 +32,3 @@
 - `<стадия>/fastqc/`, `<стадия>/multiqc/` — отчёты FastQC и MultiQC (`trimmed`, `pr_trimmed`, `merged`);
 - `trimmed/fastp_reports/`, `<стадия>/*_summary.json` — сводки стадий;
 - `comparisons/` — сводки сравнения веток.
-
-FASTQ и AIRR-таблицы лежат на томе данных и в git не хранятся.

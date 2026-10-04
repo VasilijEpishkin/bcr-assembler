@@ -6,5 +6,3 @@
 - `notebooks/` — ноутбуки;
 - `<стадия>/fastqc/`, `<стадия>/multiqc/` — отчёты FastQC и MultiQC (`raw`, `trimmed`);
 - `trimmed/fastp_reports/` — отчёты fastp.
-
-FASTQ лежат на томе данных и в git не хранятся.

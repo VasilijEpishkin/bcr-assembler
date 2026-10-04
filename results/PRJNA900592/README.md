@@ -7,5 +7,3 @@
 - `notebooks/` — ноутбуки;
 - `<стадия>/fastqc/`, `<стадия>/multiqc/` — отчёты FastQC и MultiQC (`raw`, `trimmed`, `pr_trimmed`, `merged`); `merged/assembly_qc.tsv`, `merged/sheep_merge_dashboard.html` — сводки сборки пар ридов;
 - `annotator_compare/` — результаты и отчёты сравнения аннотаторов.
-
-FASTQ лежат на томе данных и в git не хранятся.

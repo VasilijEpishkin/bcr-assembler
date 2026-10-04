@@ -33,14 +33,11 @@ results/<DATASET>/read_geometry/                  распределения д�
 
 ## Схема тримминга
 
-Ноутбуки адаптерного триминга (`adapter_trim_<вид>.ipynb`) работают по текущей политике `fastp_q30_u40`;
-суффикс ветки в имя файла не входит:
+Ноутбуки адаптерного триминга (`adapter_trim_<вид>.ipynb`):
 
 - `cutadapt` снимает только технические префиксы и адаптеры;
 - `fastp` фильтрует целые пары: `-q 30 -u 40 -l 250`
-  `--disable_adapter_trimming --disable_trim_poly_g`;
-- обрезки концов по качеству нет (никаких `--quality-cutoff` у cutadapt и
-  никаких `--cut_*` у fastp).
+  `--disable_adapter_trimming --disable_trim_poly_g`.
 
 Если для конкретного run адаптер не подтверждён, cutadapt пропускается и
 выполняется только fastp-фильтрация (пример: `SRR19646180` у лошади).
