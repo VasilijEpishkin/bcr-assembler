@@ -17,7 +17,7 @@
 
 Другие варианты симуляции: `*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и разбросом
 эффективности ПЦР1; `*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация. Другие сборщики:
-`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_vdjer_mouse.ipynb` (V'DJer). Распределения длин ридов по
+`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_vdjer_mouse.ipynb` (V'DJer), `assemble_gather_mouse.ipynb` (GATHeR). Распределения длин ридов по
 стадиям — `read_geometry_mouse.ipynb`.
 
 ## Содержимое
