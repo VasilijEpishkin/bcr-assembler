@@ -20,12 +20,12 @@ reference-like baseline из реальных данных, а затем ген
 |---|---|---|
 | Симуляция | `simulate_human_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` |
 | Валидация симуляции | `validate_human_novaseq_post_annotation_filtered.ipynb` | `validate_mouse_novaseq_post_annotation_filtered.ipynb` |
-| Сборка | `assemble_{trust4,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,rnaspades,trinity}_mouse.ipynb` |
+| Сборка | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_mouse.ipynb` |
 | Оценка | `benchmark_assemblers_human.ipynb` | `benchmark_assemblers_mouse.ipynb` |
 
-Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`.
+Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`; параметры сценариев симуляции и их влияние на сборку — `docs/simulation_scenarios.md`.
 
-Другие сборщики: `assemble_mixcr_*.ipynb` (MiXCR), `assemble_vdjer_*.ipynb` (V'DJer).
+Ещё один сборщик: `assemble_vdjer_*.ipynb` (V'DJer).
 
 ## Подготовка данных мыши ERP003950
 
@@ -45,7 +45,7 @@ reference-like baseline из реальных данных, а затем ген
 Сборщики запускаются на PE150 FASTQ симуляций отдельными ноутбуками (ветка симуляции
 задаётся `BCR_BRANCH`, число потоков — `BCR_THREADS`). Нативные результаты и нормализованный
 `contigs.fasta` пишутся в `<ветка>/assemblers/<сборщик>/<образец>/`. Сравнение с эталоном —
-`benchmark_assemblers_{human,mouse}.ipynb` (`<ветка>/benchmark_unique_trim{20,0}/`), отчёт по стадиям
+`benchmark_assemblers_{human,mouse}.ipynb` (`<ветка>/benchmark_unique_trim{20,0,45_15}/`), отчёт по стадиям
 симуляции — `notebooks/simulation_report.ipynb`, история всех оценок — `docs/evaluation_history/`.
 
 ## Симуляция: общая схема
@@ -66,9 +66,8 @@ InSilicoSeq
 PE150 FASTQ
 ```
 
-Основная фрагментация — один случайный разрез между нуклеотидами каждой молекулы порции; оба дочерних фрагмента
-проходят отбор по размеру. Вариант с ультразвуковой фрагментацией — повторные разрывы с вероятностью, зависящей
-от длины, точка разрыва распределена вокруг середины фрагмента, затем отдельный отбор по размеру.
+Фрагментация — один случайный разрез между нуклеотидами каждой молекулы порции; оба дочерних фрагмента
+проходят отбор по размеру.
 
 ## Окружение
 
@@ -87,5 +86,5 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 - `results/ERP003950/` — мышь: подготовка (fastp), симуляция, сборка и оценка;
 - `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
   предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши);
-- `docs/` — отчёты, история оценок, раскладка ноутбуков;
+- `docs/` — отчёты, история оценок, сценарии симуляции, раскладка ноутбуков;
 - `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `igbrowser/` — R-отчёты igbrowser).
