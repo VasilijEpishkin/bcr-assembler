@@ -25,9 +25,7 @@ reference-like baseline из реальных данных, а затем ген
 
 Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`.
 
-Другие варианты симуляции: `simulate_*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и
-разбросом эффективности ПЦР1; `simulate_*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация
-вместо одного случайного разреза. Другие сборщики: `assemble_mixcr_*.ipynb` (MiXCR), `assemble_vdjer_*.ipynb` (V'DJer).
+Другие сборщики: `assemble_mixcr_*.ipynb` (MiXCR), `assemble_vdjer_*.ipynb` (V'DJer).
 
 ## Подготовка данных мыши ERP003950
 

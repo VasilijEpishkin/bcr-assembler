@@ -1,6 +1,6 @@
 """Сводит оценки всех полных прогонов сборщиков и пилотов в одну папку истории.
 
-Выход: /data/user/epishkin/results/evaluation_history/
+Выход: папка evaluation_history
   full_runs_summary.tsv    строки recall / CDR3 каждого полного бенчмарка (прогон, датасет, ветка, схема оценки + исходные колонки)
   full_runs_precision.tsv  precision контигов по образцам каждого полного бенчмарка
   full_runs_structure.tsv  структура контигов по поддержке ридами и пороги поддержки (только новая схема)
@@ -20,24 +20,34 @@ OUT = R / "evaluation_history"
 OUT.mkdir(exist_ok=True)
 HB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ss250"
 MB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ss250"
-HT = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_tails_c1400_in5ng_rb3x_ss250"
-MT = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_tails_c1400_in5ng_rb3x_ss250"
 
-# (прогон, дата, датасет, ветка, схема оценки, каталог с assemblers_*.tsv)
+HN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ssnone"
+H3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in100ng_rb3x_ss300_pcr1c30"
+MN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ssnone"
+M3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in100ng_rb3x_ss300_pcr1c30"
+
+# (прогон, датасет, ветка, схема оценки, каталог с assemblers_*.tsv)
 FULL = [
-    ("run1_v2", "2026-09-26..28", "PRJEB30386", "random_cut_amp_umimode_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "PRJEB30386/benchmark_v2"),
-    ("run1_v2", "2026-09-26..28", "ERP003950", "random_cut_amp_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "ERP003950/benchmark_v2"),
-    ("run2_base", "2026-09-30", "ERP003950", MB, "templates_whole_vj", R / "ERP003950/simulated" / MB / "benchmark"),
-    ("run2_base", "2026-09-30", "ERP003950", MB, "unique_vj_trim20", R / "ERP003950/simulated" / MB / "benchmark_unique_trim20"),
-    ("run2_base", "2026-09-30", "PRJEB30386", HB, "unique_vj_trim0", R / "PRJEB30386/simulated" / HB / "benchmark_unique_trim0"),
-    ("run3_tails_c1400", "2026-10-02..03", "ERP003950", MT, "unique_vj_trim20", R / "ERP003950/simulated" / MT / "benchmark_unique_trim20"),
-    ("run3_tails_c1400", "2026-10-02..03", "PRJEB30386", HT, "unique_vj_trim0", R / "PRJEB30386/simulated" / HT / "benchmark_unique_trim0"),
+    ("run1_v2", "PRJEB30386", "random_cut_amp_umimode_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "PRJEB30386/benchmark_v2"),
+    ("run1_v2", "ERP003950", "random_cut_amp_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "ERP003950/benchmark_v2"),
+    ("run2_base", "ERP003950", MB, "templates_whole_vj", R / "ERP003950/simulated" / MB / "benchmark"),
+    ("run2_base", "ERP003950", MB, "unique_vj_trim20", R / "ERP003950/simulated" / MB / "benchmark_unique_trim20"),
+    ("run2_base", "PRJEB30386", HB, "unique_vj_trim0", R / "PRJEB30386/simulated" / HB / "benchmark_unique_trim0"),
+    ("run3_ssnone", "ERP003950", MN, "unique_vj_trim20", R / "ERP003950/simulated" / MN / "benchmark_unique_trim20"),
+    ("run4_ss300", "ERP003950", M3, "unique_vj_trim20", R / "ERP003950/simulated" / M3 / "benchmark_unique_trim20"),
+    ("run3_ssnone", "PRJEB30386", HN, "unique_vj_trim0", R / "PRJEB30386/simulated" / HN / "benchmark_unique_trim0"),
+    ("run4_ss300", "PRJEB30386", H3, "unique_vj_trim0", R / "PRJEB30386/simulated" / H3 / "benchmark_unique_trim0"),
 ]
+# оценка по внутренней части V…J: без первых 45 и последних 15 нт эталона, т.е. exact full[45:-15]
+for run, ds, b in (("run2_base", "ERP003950", MB), ("run3_ssnone", "ERP003950", MN),
+                         ("run4_ss300", "ERP003950", M3), ("run2_base", "PRJEB30386", HB),
+                         ("run3_ssnone", "PRJEB30386", HN), ("run4_ss300", "PRJEB30386", H3)):
+    FULL.append((run, ds, b, "unique_vj_trim45_15", R / ds / "simulated" / b / "benchmark_unique_trim45_15"))
 
 
-def tagged(path, run, date, ds, branch, scoring, **extra):
+def tagged(path, run, ds, branch, scoring, **extra):
     df = pd.read_csv(path, sep="\t")
-    for k, v in reversed([("run", run), ("date", date), ("dataset", ds), ("branch", branch), ("scoring", scoring)]):
+    for k, v in reversed([("run", run), ("dataset", ds), ("branch", branch), ("scoring", scoring)]):
         df.insert(0, k, v)
     for k, v in extra.items():
         df[k] = v
@@ -45,16 +55,16 @@ def tagged(path, run, date, ds, branch, scoring, **extra):
 
 
 parts = {"summary": [], "precision": [], "structure": []}
-for run, date, ds, branch, scoring, d in FULL:
+for run, ds, branch, scoring, d in FULL:
     if not (d / "assemblers_summary.tsv").exists():
-        print("нет (ещё не посчитано):", d)
+        print("нет результатов:", d)
         continue
-    parts["summary"].append(tagged(d / "assemblers_summary.tsv", run, date, ds, branch, scoring))
+    parts["summary"].append(tagged(d / "assemblers_summary.tsv", run, ds, branch, scoring))
     if (d / "assemblers_precision.tsv").exists():
-        parts["precision"].append(tagged(d / "assemblers_precision.tsv", run, date, ds, branch, scoring))
+        parts["precision"].append(tagged(d / "assemblers_precision.tsv", run, ds, branch, scoring))
     for name in ("assemblers_structure_by_support.tsv", "assemblers_support_thresholds.tsv"):
         if (d / name).exists():
-            parts["structure"].append(tagged(d / name, run, date, ds, branch, scoring, table=name[11:-4]))
+            parts["structure"].append(tagged(d / name, run, ds, branch, scoring, table=name[11:-4]))
 for k, dfs in parts.items():
     pd.concat(dfs, ignore_index=True).to_csv(OUT / f"full_runs_{k}.tsv", sep="\t", index=False)
 
@@ -115,8 +125,7 @@ for s in sorted(glob.glob(str(PL / "trust4_inexact/ERR*.json"))):   # разбо
         "chimera_candidates": j["chimera_candidates_5p_3p_exact_to_different_templates"], "contigs": j["contigs"]}, s)
 
 for name, path in (("spades_modes_ERR346600", PL / "spades_modes_pilot/summary.tsv"),          # режимы SPAdes (мышь, база)
-                   ("trust4_strict_thresholds_ERR346600", PL / "trust4_strict/summary.tsv"),  # строгие пороги слияния TRUST4 (мышь, хвосты)
-                   ("trust4_tail_trimming_ERR346600", PL / "tails_diag/summary.tsv")):       # обрезка хвостов ПЦР1 перед TRUST4 (мышь, хвосты)
+                   ):
     if path.exists():
         for r in pd.read_csv(path, sep="\t").to_dict("records"):
             add(name, r.pop("variant"), r, path)
@@ -131,6 +140,14 @@ if p.exists():
         cond = f"{r.pop('branch')}:{r.pop('dataset')}:{r.pop('tool')}:{r.pop('sample')}"
         add("benchmark_audit", cond, r, p)
 
+# сравнение запусков: строка = датасет × ветка × сборщик, столбцы = схемы оценки (доля эталонных V…J, собранных точно / с CDR3)
+allrows = pd.concat(parts["summary"], ignore_index=True)
+allrows = allrows[(allrows.group_by == "reconstructability") & (allrows.group == "ALL") & allrows.scoring.str.startswith("unique_vj")]
+cmp_ = allrows.pivot_table(index=["dataset", "branch", "tool"], columns="scoring", values=["exact_full_frac", "cdr3_in_contig_frac"])
+cmp_.columns = [f"{m}__{sc}" for m, sc in cmp_.columns]
+cmp_.reset_index().to_csv(OUT / "full_runs_comparison.tsv", sep="\t", index=False)
+
+rows = [r for r in rows if "tails" not in r["condition"] + r["source"]]   # в историю входят только основные ветки
 pd.DataFrame(rows).to_csv(OUT / "pilots.tsv", sep="\t", index=False)
 print({k: sum(len(x) for x in v) for k, v in parts.items()}, "pilot rows:", len(rows),
       collections_count := pd.DataFrame(rows).groupby("pilot").size().to_dict())

@@ -15,8 +15,7 @@
 7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_mouse.ipynb`,
    `benchmark_assemblers_mouse.ipynb`.
 
-Другие варианты симуляции: `*_pcr1_tails.ipynb` — праймеры ПЦР1 с хвостами (адаптеры, UMI) и разбросом
-эффективности ПЦР1; `*_ultrasonic_fragmentation.ipynb` — ультразвуковая фрагментация. Другие сборщики:
+Другие сборщики:
 `assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_vdjer_mouse.ipynb` (V'DJer), `assemble_gather_mouse.ipynb` (GATHeR). Распределения длин ридов по
 стадиям — `read_geometry_mouse.ipynb`.
 
