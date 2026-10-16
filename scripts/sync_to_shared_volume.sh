@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Копирует данные проекта с персонального тома на общий том в структуре репозитория:
 #   <общий том>/bcr-assembler/{results,raw,seq_refs}
-# Копируются все датасеты и основные ветки симуляции целиком. Ноутбуки, README и отчёты берутся из репозитория (git archive).
+# Копируются все датасеты и основные ветки симуляции целиком. Ноутбуки, README, отчёты и история оценок берутся из репозитория (git archive).
 #
 # Все скопированные файлы и каталоги получают права на запись для всех пользователей тома (общая работа над проектом).
 # Повторный запуск докопирует изменения; файлы, которых нет на источнике, на общем томе не удаляются.
@@ -18,7 +18,7 @@ COMMON=(-a --chmod=a+rwX --exclude='._*' --exclude='.ipynb_checkpoints' --exclud
 
 mkdir -p "$DST/results" "$DST/raw" "$DST/seq_refs"
 echo "[$(date +%F\ %T)] results"
-"$RSYNC" "${COMMON[@]}" "$@" "$SRC/results/" "$DST/results/"
+"$RSYNC" "${COMMON[@]}" --exclude='/evaluation_history' "$@" "$SRC/results/" "$DST/results/"
 echo "[$(date +%F\ %T)] raw"
 "$RSYNC" "${COMMON[@]}" --exclude='/nastyas_weird_files' "$@" "$SRC/raw/" "$DST/raw/"
 echo "[$(date +%F\ %T)] seq_refs"
