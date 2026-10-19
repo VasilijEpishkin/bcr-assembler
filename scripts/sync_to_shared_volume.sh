@@ -14,7 +14,7 @@ SRC=${BCR_VOLUME:-/data/user/epishkin}
 DST=${1:?нужен каталог bcr-assembler на общем томе}
 shift || true
 RSYNC=${RSYNC:-rsync}
-COMMON=(-a --chmod=a+rwX --exclude='._*' --exclude='.ipynb_checkpoints' --exclude='*_tails_*' --exclude='*_sat4e12')
+COMMON=(-a --chmod=a+rwX --exclude='._*' --exclude='.ipynb_checkpoints' --exclude='*_tails_*' --exclude='*_sat4e12' --exclude='*in100ng_rb3x*' --exclude='*_ssnone_pcr1c30_pcr2c5_seq1e-3_al1e-1')
 
 mkdir -p "$DST/results" "$DST/raw" "$DST/seq_refs"
 echo "[$(date +%F\ %T)] results"
