@@ -23,6 +23,8 @@ MB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in
 
 HN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ssnone"
 H3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in100ng_rb3x_ss300_pcr1c30"
+HF = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
+MF = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
 MN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ssnone"
 M3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in100ng_rb3x_ss300_pcr1c30"
 
@@ -37,11 +39,14 @@ FULL = [
     ("run4_ss300", "ERP003950", M3, "unique_vj_trim20", R / "ERP003950/simulated" / M3 / "benchmark_unique_trim20"),
     ("run3_ssnone", "PRJEB30386", HN, "unique_vj_trim0", R / "PRJEB30386/simulated" / HN / "benchmark_unique_trim0"),
     ("run4_ss300", "PRJEB30386", H3, "unique_vj_trim0", R / "PRJEB30386/simulated" / H3 / "benchmark_unique_trim0"),
+    ("run5_final", "ERP003950", MF, "unique_vj_trim20", R / "ERP003950/simulated" / MF / "benchmark_unique_trim20"),
+    ("run5_final", "PRJEB30386", HF, "unique_vj_trim0", R / "PRJEB30386/simulated" / HF / "benchmark_unique_trim0"),
 ]
 # оценка по внутренней части V…J: без первых 45 и последних 15 нт эталона, т.е. exact full[45:-15]
 for run, ds, b in (("run2_base", "ERP003950", MB), ("run3_ssnone", "ERP003950", MN),
                          ("run4_ss300", "ERP003950", M3), ("run2_base", "PRJEB30386", HB),
-                         ("run3_ssnone", "PRJEB30386", HN), ("run4_ss300", "PRJEB30386", H3)):
+                         ("run3_ssnone", "PRJEB30386", HN), ("run4_ss300", "PRJEB30386", H3),
+                   ("run5_final", "ERP003950", MF), ("run5_final", "PRJEB30386", HF)):
     FULL.append((run, ds, b, "unique_vj_trim45_15", R / ds / "simulated" / b / "benchmark_unique_trim45_15"))
 
 
@@ -63,7 +68,7 @@ for run, ds, branch, scoring, d in FULL:
     if (d / "assemblers_precision.tsv").exists():
         parts["precision"].append(tagged(d / "assemblers_precision.tsv", run, ds, branch, scoring))
     for name in ("assemblers_structure_by_support.tsv", "assemblers_support_thresholds.tsv"):
-        if (d / name).exists():
+        if (d / name).exists() and (d / name).stat().st_size > 1:   # пустые таблицы (сборщика ещё нет) пропускаются
             parts["structure"].append(tagged(d / name, run, ds, branch, scoring, table=name[11:-4]))
 for k, dfs in parts.items():
     pd.concat(dfs, ignore_index=True).to_csv(OUT / f"full_runs_{k}.tsv", sep="\t", index=False)
