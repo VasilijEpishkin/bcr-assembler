@@ -71,7 +71,7 @@ for run, ds, branch, scoring, d in FULL:
     if (d / "assemblers_precision.tsv").exists():
         parts["precision"].append(tagged(d / "assemblers_precision.tsv", run, ds, branch, scoring))
     for name in ("assemblers_structure_by_support.tsv", "assemblers_support_thresholds.tsv"):
-        if (d / name).exists() and (d / name).stat().st_size > 1:   # пустые таблицы (сборщика ещё нет) пропускаются
+        if (d / name).exists() and (d / name).stat().st_size > 1:   # пустые таблицы (выходов сборщика нет) пропускаются
             parts["structure"].append(tagged(d / name, run, ds, branch, scoring, table=name[11:-4]))
 for k, dfs in parts.items():
     pd.concat(dfs, ignore_index=True).to_csv(OUT / f"full_runs_{k}.tsv", sep="\t", index=False)
@@ -330,7 +330,7 @@ def build():
         out.append(f"## {num}. {org}\n")
         out.append("Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона ("
                    + ", ".join(t for t, _ in trims) + ") и для каждого два знаменателя: **проверенные** V…J (основной) "
-                   "и **все** уникальные V…J, включая непроверенные. «—» — benchmark для этой пары ещё не посчитан. "
+                   "и **все** уникальные V…J, включая непроверенные. «—» — для этой пары нет результатов benchmark. "
                    "В таблицах только сборщики с посчитанным benchmark.\n")
         out.append("\n".join(f"- **{t}**: {d}" for t, d in trims) + "\n")
         for si, (label, branch) in enumerate(scenarios, 1):

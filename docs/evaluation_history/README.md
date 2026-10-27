@@ -1,6 +1,6 @@
 # История оценок сборщиков
 
-Сводные таблицы всех полных прогонов и пилотов. Выходные данные (контиги, BAM, рабочие файлы) после сбора частично удалены с тома OneQ; оценки сохранены здесь и в `/data/user/epishkin/results/evaluation_history/`. Пересобираются скриптом `collect_evaluations.py` (запускать на OneQ).
+Сводные таблицы всех полных прогонов и пилотов и отчёт по актуальным веткам. Таблицы и отчёт пересобирает скрипт `collect_evaluations.py` из каталогов `benchmark_*` веток симуляции.
 
 ## Файлы
 
@@ -11,7 +11,7 @@
 | `full_runs_structure.tsv` | структура контигов по поддержке ридами (`table=structure_by_support`) и пороги отсечения по поддержке (`table=support_thresholds`) |
 | `full_runs_comparison.tsv` | сравнение запусков: строка = датасет × ветка × сборщик, колонки — `exact_full_frac` и `cdr3_in_contig_frac` по схемам оценки |
 | `pilots.tsv` | пилоты в длинном формате: `pilot`, `condition`, `metric`, `value`, `source` |
-| `run2_base_report.md` | отчёт по основной линии (5 нг): результаты TRUST4, MiXCR, GATHeR, rnaSPAdes, Trinity, расчёт каждой метрики, стадии сборщиков |
+| `assembler_comparison_report.md` | отчёт по актуальным веткам (200 нг и текущая): результаты TRUST4, MiXCR, rnaSPAdes, metaSPAdes, rnaviralSPAdes, Trinity, GATHeR, расчёт каждой метрики, стадии сборщиков |
 
 ## Полные прогоны
 
@@ -32,7 +32,7 @@
 |---|---|
 | `templates_whole_vj` | каждый шаблон эталона отдельно, вся V…J. У мыши завышает потери: первые ~20 нт V…J задаёт FR1-праймер, и одна молекула числилась несколькими шаблонами |
 | `unique_vj_trim20` (мышь) / `unique_vj_trim0` (человек) | уникальные V…J без первых 20 нт (мышь, зона FR1-праймера) или целиком (человек, праймер в лидере). `exact_full` — эталонная V…J входит в контиг подстрокой (на любой цепи); `one_diff_full` — одно отличие с учётом оснований, обрезанных выравниванием на концах; структура контигов (`exact_verified`, `exact_unverified`, `exact_fragment`, `mosaic`, `unverified_variant`, `novel_error`, `chimera`, `other`, `unmapped`); поддержка ридами, пороги поддержки по любому точному контигу; CDR3 — junction в любом контиге образца, клонотипы по образцам |
-| `unique_vj_trim45_15` | то же, но у эталонной V…J убраны первые 45 и последние 15 нт: exact full[45:-15], см. раздел 11 отчёта |
+| `unique_vj_trim45_15` | то же, но у эталонной V…J убраны первые 45 и последние 15 нт: exact full[45:-15], см. разделы 1 и 2 `assembler_comparison_report.md` |
 
 ## Пилоты (`pilots.tsv`)
 

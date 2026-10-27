@@ -1,6 +1,6 @@
 # run5: результаты сборщиков и как они посчитаны
 
-Везде ниже число (доля); доля = число / знаменатель. Пустые ячейки означают, что benchmark ещё не завершён.
+Везде ниже число (доля); доля = число / знаменатель. «—» — для этой пары ветки и эталона нет результатов benchmark.
 
 ---
 
@@ -121,7 +121,7 @@ CDR3: клонотип `k = (образец, локус, junction)` по про�
 
 ## 1. Человек
 
-Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона (trim0, trim45_15) и для каждого два знаменателя: **проверенные** V…J (основной) и **все** уникальные V…J, включая непроверенные. «—» — benchmark для этой пары ещё не посчитан. В таблицах только сборщики с посчитанным benchmark.
+Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона (trim0, trim45_15) и для каждого два знаменателя: **проверенные** V…J (основной) и **все** уникальные V…J, включая непроверенные. «—» — для этой пары нет результатов benchmark. В таблицах только сборщики с посчитанным benchmark.
 
 - **trim0**: без обрезки
 - **trim45_15**: обрезка 45 нт слева и 15 нт справа
@@ -692,7 +692,7 @@ CDR3: клонотип `k = (образец, локус, junction)` по про�
 
 ## 2. Мышь
 
-Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона (trim0, trim20, trim45_15) и для каждого два знаменателя: **проверенные** V…J (основной) и **все** уникальные V…J, включая непроверенные. «—» — benchmark для этой пары ещё не посчитан. В таблицах только сборщики с посчитанным benchmark.
+Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона (trim0, trim20, trim45_15) и для каждого два знаменателя: **проверенные** V…J (основной) и **все** уникальные V…J, включая непроверенные. «—» — для этой пары нет результатов benchmark. В таблицах только сборщики с посчитанным benchmark.
 
 - **trim0**: без обрезки
 - **trim20**: обрезка 20 нт слева: специфичная часть FR1-праймера (20 нт у 18 из 19 праймеров Greiff 2014, у fw16 — 22 нт)
@@ -1584,6 +1584,10 @@ CDR3: клонотип `k = (образец, локус, junction)` по про�
 ---
 
 
+
+---
+
+
 ---
 
 ## 3. Сборщики: для чего созданы, стадии, выходы
@@ -1739,6 +1743,18 @@ Bolotin D.A. et al., *Nature Methods* 12, 380–381 (2015), doi:10.1038/nmeth.33
 Выход: `Trinity.fasta` (имя `TRINITY_DN9_c0_g1_i1` = компонент / ген / изоформа), `gene_trans_map`.
 Покрытия в выходе нет.
 
+### Источники по инструментам
+
+| инструмент | репозиторий и документация | версия | статья |
+|---|---|---|---|
+| MiXCR | [репозиторий](https://github.com/milaboratory/mixcr), [`mixcr analyze`](https://mixcr.com/mixcr/reference/mixcr-analyze/), [лицензия](https://github.com/milaboratory/mixcr/blob/develop/LICENSE) | [4.7.0](https://github.com/milaboratory/mixcr/releases/tag/v4.7.0) | [Nature Methods 2015](https://doi.org/10.1038/nmeth.3364) |
+| TRUST4 | [репозиторий и документация](https://github.com/liulab-dfci/TRUST4) | [1.1.10](https://github.com/liulab-dfci/TRUST4/releases/tag/v1.1.10) | [Nature Methods 2021](https://doi.org/10.1038/s41592-021-01142-2) |
+| rnaSPAdes | [репозиторий](https://github.com/ablab/spades), [документация rnaSPAdes](https://ablab.github.io/spades/rna.html) | [4.3.0](https://github.com/ablab/spades/releases/tag/v4.3.0) | [GigaScience 2019](https://doi.org/10.1093/gigascience/giz100) |
+| Trinity | [репозиторий](https://github.com/trinityrnaseq/trinityrnaseq), [документация](https://github.com/trinityrnaseq/trinityrnaseq/wiki) | [2.15.2](https://github.com/trinityrnaseq/trinityrnaseq/releases/tag/Trinity-v2.15.2) | [Nature Biotechnology 2011](https://doi.org/10.1038/nbt.1883) |
+| pRESTO (AssemblePairs) | [репозиторий](https://github.com/immcantation/presto), [AssemblePairs](https://presto.readthedocs.io/en/stable/tools/AssemblePairs.html) | [0.7.9](https://github.com/immcantation/presto/releases/tag/0.7.9) | [Bioinformatics 2014](https://doi.org/10.1093/bioinformatics/btu138) |
+| IgReC / Y-tools | [репозиторий](https://github.com/yana-safonova/ig_repertoire_constructor), [руководство](https://yana-safonova.github.io/ig_repertoire_constructor/ig_repertoire_constructor_manual.html) | [3.1.1](https://github.com/yana-safonova/ig_repertoire_constructor/releases/tag/3.1.1) | [статья (PMC5661950)](https://pmc.ncbi.nlm.nih.gov/articles/PMC5661950/) |
+| CATT | [репозиторий](https://github.com/GuoBioinfoLab/CATT), [сайт](https://guolab.wchscu.cn/CATT) | — | [Bioinformatics 2020](https://doi.org/10.1093/bioinformatics/btaa432) |
+
 ## 4. Сырые выходы и самооценка сборщиков
 
 | сборщик | основные файлы | что есть «из коробки» | правильность |
@@ -1757,21 +1773,10 @@ Bolotin D.A. et al., *Nature Methods* 12, 380–381 (2015), doi:10.1038/nmeth.33
 ---
 
 
-## 5. Проверка метрик
 
-Независимая перепроверка метрик для четырёх целевых веток пока не проводилась. Использованы сводные TSV соответствующих benchmark каталогов.
+## 5. Параметры симуляции, влияющие на сборку
 
-| что проверялось | метод проверки | совпало |
-|---|---|---|
-| exact_full по шаблонам | повторный поиск каждой эталонной V…J во всех контигах | |
-| exact_full по контигам | перебор проверенных эталонов | |
-| структура контигов | повторная классификация по эталонам | |
-| CDR3 | поиск junction в выходах сборщиков | |
-| сводные таблицы | пересчёт из построчных результатов benchmark | |
-
-## 6. Параметры симуляции, влияющие на сборку
-
-Оставлены последние две ветки у мыши и человека: ветка 200 нг и текущая ветка без in200ng. Ячейки «—» в разделах 1 и 2 — сборщики, выходов которых на ветке ещё нет.
+В отчёте две ветки у мыши и человека: ветка 200 нг и текущая ветка без in200ng.
 
 | вид | ветка 200 нг | текущая ветка |
 |---|---|---|
@@ -1784,4 +1789,4 @@ Bolotin D.A. et al., *Nature Methods* 12, 380–381 (2015), doi:10.1038/nmeth.33
 
 ## Итог
 
-Результаты по виду и ветке — в разделах 1 и 2: для каждой ветки два эталона (trim0, trim45_15) и два знаменателя (проверенные, все уникальные V…J). Ячейки «—» заполняются по мере завершения сборок и benchmark.
+Результаты по виду и ветке — в разделах 1 и 2: для каждой ветки два эталона (trim0, trim45_15) и два знаменателя (проверенные, все уникальные V…J).

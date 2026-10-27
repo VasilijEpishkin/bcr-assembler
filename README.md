@@ -23,7 +23,7 @@ reference-like baseline из реальных данных, а затем ген
 | Сборка | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_mouse.ipynb` |
 | Оценка | `benchmark_assemblers_human.ipynb` | `benchmark_assemblers_mouse.ipynb` |
 
-Результаты и описание метрик — `docs/evaluation_history/run2_base_report.md`; параметры сценариев симуляции и их влияние на сборку — `docs/simulation_scenarios.md`.
+Результаты и описание метрик — `docs/evaluation_history/assembler_comparison_report.md`; параметры сценариев симуляции и их влияние на сборку — `docs/simulation_scenarios.md`.
 
 Ещё один сборщик: `assemble_vdjer_*.ipynb` (V'DJer).
 

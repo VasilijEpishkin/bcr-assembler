@@ -1,6 +1,0 @@
-contig	length	exact_read_placements	unique_contig_read_placements	min_exact_coverage	p10_exact_coverage	zero_exact_bases	min_unique_coverage	p10_unique_coverage	passes_min_cov
-vjf_1_TGCGTCTCATATACAACCAGCAGCAATTTT	364	14849	8	0	3	18	0	0	0
-vjf_2_TGCGTCTCATATACAACCAGCAGCACTTTT	364	17713	3	0	202	1	0	0	0
-vjf_3_TGCGTCTCATATACAACCAGCAGCACTTTT	364	16636	5	0	4	17	0	0	0
-vjf_4_TGCGTCTCATATACAACCAGCAGCACTTTT	364	14051	13	0	9	3	0	0	0
-vjf_5_TGCGTCTCATATACAACCAGCAGCACTTTT	364	19785	0	39	1006	0	0	0	1
