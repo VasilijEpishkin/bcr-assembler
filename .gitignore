@@ -54,3 +54,5 @@ results/PRJNA1226555/branches/
 results/*/*/logs/
 results/PRJNA900592/qc_raw/
 results/evaluation/
+tools/vdjer-amplicon/
+seq_refs/vdjer/
