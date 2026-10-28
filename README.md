@@ -13,8 +13,10 @@ reference-like baseline из реальных данных, а затем ген
 
 ## Основная линия
 
-Симуляция: ПЦР1 → порция **5 нг** → один случайный разрез → отбор по размеру 250±40 → ПЦР2 → NovaSeq PE150.
-Ноутбуки основной линии (ветки по умолчанию — `…_random_cut_amp_{umicons,ec1x3}_in5ng_rb3x_ss250`):
+Симуляция: ПЦР1 (30 циклов, разброс эффективности) → случайная порция 1/10 продукта → один случайный разрез → мягкий отбор по длине
+(диапазон 200–350 нт, вне него вероятность падает вдвое каждые 25 нт, фрагменты короче 152 нт не берутся) → ПЦР2 (5 циклов) →
+1/1000 продукта на секвенирование → NovaSeq PE150. Ноутбуки основной линии (ветки по умолчанию —
+`…_random_cut_amp_{umicons,ec1x3}_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1`; вариант с входной массой 200 нг — `…_in200ng_rb3x_…`):
 
 | Шаг | Человек `results/PRJEB30386/notebooks/` | Мышь `results/ERP003950/notebooks/` |
 |---|---|---|
@@ -25,7 +27,7 @@ reference-like baseline из реальных данных, а затем ген
 
 Результаты и описание метрик — `docs/evaluation_history/assembler_comparison_report.md`; параметры сценариев симуляции и их влияние на сборку — `docs/simulation_scenarios.md`.
 
-Ещё один сборщик: `assemble_vdjer_*.ipynb` (V'DJer).
+Режимы SPAdes (`rna`, `meta`, `rnaviral`) задаются `BCR_SPADES_MODE` в `assemble_rnaspades_*.ipynb`; ещё один сборщик — `assemble_vdjer_*.ipynb` (V'DJer).
 
 ## Подготовка данных мыши ERP003950
 
@@ -87,4 +89,4 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 - `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
   предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши);
 - `docs/` — отчёты, история оценок, сценарии симуляции, раскладка ноутбуков;
-- `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `igbrowser/` — R-отчёты igbrowser).
+- `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `collect_evaluations.py` — сводка оценок в `docs/evaluation_history/`, `igbrowser/` — R-отчёты igbrowser).

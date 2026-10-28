@@ -1,6 +1,6 @@
 """Сводит оценки всех полных прогонов сборщиков и пилотов в одну папку истории.
 
-Выход: папка evaluation_history
+Выход: папка docs/evaluation_history корня проекта
   full_runs_summary.tsv    строки recall / CDR3 каждого полного бенчмарка (прогон, датасет, ветка, схема оценки + исходные колонки)
   full_runs_precision.tsv  precision контигов по образцам каждого полного бенчмарка
   full_runs_structure.tsv  структура контигов по поддержке ридами и пороги поддержки (только новая схема)
@@ -16,11 +16,11 @@ from pathlib import Path
 
 import pandas as pd
 
-V = Path(os.environ.get("BCR_VOLUME", "/data/user/epishkin"))
+V = Path(os.environ.get("BCR_VOLUME", "/data/user/epishkin/bcr-assembler"))
 R = V / "results"
 PL = V / "one-q/29eed1d7-f79d-4362-be81-21e7f7bfb640/pilots"      # пилоты и проверки (Jupyter-каталог третьей таски)
-OUT = R / "evaluation_history"
-OUT.mkdir(exist_ok=True)
+OUT = V / "docs/evaluation_history"
+OUT.mkdir(parents=True, exist_ok=True)
 HB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ss250"
 MB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ss250"
 
