@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Копирует данные проекта с персонального тома на общий том в структуре репозитория:
+# Копирует данные проекта из корня проекта на персональном томе на общий том в структуре репозитория:
 #   <общий том>/bcr-assembler/{results,raw,seq_refs}
 # Копируются все датасеты, финальная ветка симуляции целиком и таблицы бенчмарка остальных веток. Ноутбуки, README, отчёты и история оценок берутся из репозитория (git archive).
 #
@@ -10,7 +10,7 @@
 set -euo pipefail
 umask 000
 
-SRC=${BCR_VOLUME:-/data/user/epishkin}
+SRC=${BCR_VOLUME:-/data/user/epishkin/bcr-assembler}
 DST=${1:?нужен каталог bcr-assembler на общем томе}
 shift || true
 RSYNC=${RSYNC:-rsync}
@@ -19,7 +19,7 @@ COMMON=(-a --chmod=a+rwX --exclude='._*' --exclude='.ipynb_checkpoints' --exclud
 mkdir -p "$DST/results" "$DST/raw" "$DST/seq_refs"
 echo "[$(date +%F\ %T)] results"
 # Целиком копируется только финальная ветка симуляции (ss200-350h25); остальные ветки — только таблицы бенчмарка, на них ссылаются отчёты.
-"$RSYNC" "${COMMON[@]}" --exclude='/evaluation_history' \
+"$RSYNC" "${COMMON[@]}" \
   --include='/*/simulated/' --include='/*/simulated/*ss200-350h25*/' --include='/*/simulated/*ss200-350h25*/***' \
   --exclude='/*/simulated/*' "$@" "$SRC/results/" "$DST/results/"
 "$RSYNC" -a --chmod=a+rwX --prune-empty-dirs --exclude='._*' --exclude='.ipynb_checkpoints' --exclude='*_tails_*' \

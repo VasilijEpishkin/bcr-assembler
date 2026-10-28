@@ -70,8 +70,8 @@ make_native_browser <- function(in_tsv, out_html, n=10, mode=c("igblast", "absta
 }
 
 make_native_browser(
-  "/data/user/epishkin/results/PRJNA900592/annotator_compare/output/igblast/SRR22279249_200_igblast.tsv",
-  "/data/user/epishkin/results/PRJNA900592/annotator_compare/igbrowser_SRR22279249_igblast_valid10.html",
+  "/data/user/epishkin/bcr-assembler/results/PRJNA900592/annotator_compare/output/igblast/SRR22279249_200_igblast.tsv",
+  "/data/user/epishkin/bcr-assembler/results/PRJNA900592/annotator_compare/igbrowser_SRR22279249_igblast_valid10.html",
   n=10,
   mode="igblast"
 )
