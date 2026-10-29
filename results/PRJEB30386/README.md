@@ -9,7 +9,7 @@
 3. сборка пар ридов pRESTO — `presto_human.ipynb`;
 4. аннотация IgBLAST и отчёт — `annotate_human.ipynb`, `annotation_report_human.ipynb`;
 5. фильтрация после аннотации — `filter_human_post_annotation.ipynb`;
-6. симуляция NovaSeq PE150 (основная линия: порция 5 нг продукта ПЦР1, случайный разрез) —
+6. симуляция NovaSeq PE150 (основная линия: ПЦР1 30 циклов, порция 1/10 продукта, случайный разрез, отбор 200–350 нт) —
    `simulate_human_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`, валидация —
    `validate_human_novaseq_post_annotation_filtered.ipynb`;
 7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_human.ipynb`,

@@ -21,36 +21,16 @@ R = V / "results"
 PL = V / "one-q/29eed1d7-f79d-4362-be81-21e7f7bfb640/pilots"      # пилоты и проверки (Jupyter-каталог третьей таски)
 OUT = V / "docs/evaluation_history"
 OUT.mkdir(parents=True, exist_ok=True)
-HB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ss250"
-MB = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ss250"
+P = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_"
+T = "_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
+HF, MF = P + "umicons_in200ng" + T, P + "ec1x3_in200ng" + T   # 200 нг
+HC, MC = P + "umicons" + T, P + "ec1x3" + T                                                              # текущая ветка
 
-HN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ssnone"
-H3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in100ng_rb3x_ss300_pcr1c30"
-HF = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
-MF = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
-MN = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in5ng_rb3x_ssnone"
-M3 = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in100ng_rb3x_ss300_pcr1c30"
-
-# (прогон, датасет, ветка, схема оценки, каталог с assemblers_*.tsv)
-FULL = [
-    ("run1_v2", "PRJEB30386", "random_cut_amp_umimode_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "PRJEB30386/benchmark_v2"),
-    ("run1_v2", "ERP003950", "random_cut_amp_in10x_rb3x_ss250 (deleted)", "templates_whole_vj", R / "ERP003950/benchmark_v2"),
-    ("run2_base", "ERP003950", MB, "templates_whole_vj", R / "ERP003950/simulated" / MB / "benchmark"),
-    ("run2_base", "ERP003950", MB, "unique_vj_trim20", R / "ERP003950/simulated" / MB / "benchmark_unique_trim20"),
-    ("run2_base", "PRJEB30386", HB, "unique_vj_trim0", R / "PRJEB30386/simulated" / HB / "benchmark_unique_trim0"),
-    ("run3_ssnone", "ERP003950", MN, "unique_vj_trim20", R / "ERP003950/simulated" / MN / "benchmark_unique_trim20"),
-    ("run4_ss300", "ERP003950", M3, "unique_vj_trim20", R / "ERP003950/simulated" / M3 / "benchmark_unique_trim20"),
-    ("run3_ssnone", "PRJEB30386", HN, "unique_vj_trim0", R / "PRJEB30386/simulated" / HN / "benchmark_unique_trim0"),
-    ("run4_ss300", "PRJEB30386", H3, "unique_vj_trim0", R / "PRJEB30386/simulated" / H3 / "benchmark_unique_trim0"),
-    ("run5_final", "ERP003950", MF, "unique_vj_trim20", R / "ERP003950/simulated" / MF / "benchmark_unique_trim20"),
-    ("run5_final", "PRJEB30386", HF, "unique_vj_trim0", R / "PRJEB30386/simulated" / HF / "benchmark_unique_trim0"),
-]
-# оценка по внутренней части V…J: без первых 45 и последних 15 нт эталона, т.е. exact full[45:-15]
-for run, ds, b in (("run2_base", "ERP003950", MB), ("run3_ssnone", "ERP003950", MN),
-                         ("run4_ss300", "ERP003950", M3), ("run2_base", "PRJEB30386", HB),
-                         ("run3_ssnone", "PRJEB30386", HN), ("run4_ss300", "PRJEB30386", H3),
-                   ("run5_final", "ERP003950", MF), ("run5_final", "PRJEB30386", HF)):
-    FULL.append((run, ds, b, "unique_vj_trim45_15", R / ds / "simulated" / b / "benchmark_unique_trim45_15"))
+# (прогон, датасет, ветка, схема оценки, каталог с assemblers_*.tsv): только два последних сценария
+FULL = [(run, ds, b, f"unique_vj_{tr}", R / ds / "simulated" / b / f"benchmark_unique_{tr}")
+        for run, hb, mb in (("200ng", HF, MF), ("current", HC, MC))
+        for ds, b, trims in (("ERP003950", mb, ("trim0", "trim20", "trim45_15")), ("PRJEB30386", hb, ("trim0", "trim45_15")))
+        for tr in trims]
 
 
 def tagged(path, run, ds, branch, scoring, **extra):
@@ -171,8 +151,6 @@ STRUCTURE = ["exact_verified", "exact_unverified", "exact_fragment", "mosaic", "
              "chimera", "other", "unmapped"]
 RECON = ["full_coverage_read_overlap", "full_coverage_mate_linked_only", "full_coverage_unlinked",
          "partial_read_coverage", "no_reads"]
-HC = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
-MC = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
 # (номер раздела, вид, датасет, локусы, эталоны, [(ветка, каталог)])
 ORGS = [
     ("1", "Человек", "PRJEB30386", ["IGH", "IGK", "IGL"], [T0, T4515], [("200 нг", HF), ("текущая ветка", HC)]),

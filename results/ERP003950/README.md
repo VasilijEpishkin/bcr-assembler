@@ -9,7 +9,7 @@
 3. сборка пар ридов pRESTO — `presto_mouse.ipynb`;
 4. аннотация IgBLAST и отчёт — `annotate_mouse.ipynb`, `annotation_report_mouse.ipynb`;
 5. фильтрация после аннотации — `filter_mouse_post_annotation.ipynb`;
-6. симуляция NovaSeq PE150 (основная линия: порция 5 нг продукта ПЦР1, случайный разрез) —
+6. симуляция NovaSeq PE150 (основная линия: ПЦР1 30 циклов, порция 1/10 продукта, случайный разрез, отбор 200–350 нт) —
    `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`, валидация —
    `validate_mouse_novaseq_post_annotation_filtered.ipynb`;
 7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_mouse.ipynb`,
