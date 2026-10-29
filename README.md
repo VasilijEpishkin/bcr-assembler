@@ -22,25 +22,10 @@ reference-like baseline из реальных данных, а затем ген
 |---|---|---|
 | Симуляция | `simulate_human_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` | `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb` |
 | Валидация симуляции | `validate_human_novaseq_post_annotation_filtered.ipynb` | `validate_mouse_novaseq_post_annotation_filtered.ipynb` |
-| Сборка | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_human.ipynb` | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_mouse.ipynb` |
+| Сборка | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_human.ipynb` (rnaSPAdes в режимах `rna`, `meta`, `rnaviral` — `BCR_SPADES_MODE`) | `assemble_{trust4,mixcr,gather,rnaspades,trinity}_mouse.ipynb` |
 | Оценка | `benchmark_assemblers_human.ipynb` | `benchmark_assemblers_mouse.ipynb` |
 
 Результаты и описание метрик — `docs/evaluation_history/assembler_comparison_report.md`; параметры сценариев симуляции и их влияние на сборку — `docs/simulation_scenarios.md`.
-
-Режимы SPAdes (`rna`, `meta`, `rnaviral`) задаются `BCR_SPADES_MODE` в `assemble_rnaspades_*.ipynb`; ещё один сборщик — `assemble_vdjer_*.ipynb` (V'DJer).
-
-## Подготовка данных мыши ERP003950
-
-`results/ERP003950/` — ветка с фильтрацией fastp (`-q 30 -u 40 -l 250`) под каноническим именем датасета.
-
-| Шаг | Ноутбук | Инструмент |
-|---|---|---|
-| QC (на всех стадиях) | `notebooks/qc.ipynb` | FastQC, MultiQC |
-| Adapter trim | `adapter_trim_mouse.ipynb` | cutadapt, fastp |
-| Primer trim | `primer_trim_mouse.ipynb` | cutadapt |
-| Merge paired-end reads | `presto_mouse.ipynb` | pRESTO `AssemblePairs.py` |
-| Annotation | `annotate_mouse.ipynb`, `annotation_report_mouse.ipynb` | IgBLAST |
-| Post-annotation filter | `filter_mouse_post_annotation.ipynb` | AIRR/sequence filters |
 
 ## Сборка и оценка сборщиков
 
@@ -85,7 +70,7 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 - `notebooks/` — общие ноутбуки (`qc.ipynb` — FastQC и MultiQC любой стадии, `simulation_report.ipynb` — отчёт по стадиям симуляции);
 - `results/<датасет>/notebooks/` — ноутбуки стадий датасета; `results/<датасет>/<стадия>/{fastqc,multiqc}/` — отчёты QC стадии;
 - `results/PRJEB30386/` — человек: подготовка, симуляция, сборка и оценка;
-- `results/ERP003950/` — мышь: подготовка (fastp), симуляция, сборка и оценка;
+- `results/ERP003950/` — мышь: подготовка (fastp; шаги — в `results/ERP003950/README.md`), симуляция, сборка и оценка;
 - `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
   предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши);
 - `docs/` — отчёты, история оценок, сценарии симуляции, раскладка ноутбуков;
