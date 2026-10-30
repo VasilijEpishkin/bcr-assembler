@@ -18,7 +18,7 @@ import pandas as pd
 
 V = Path(os.environ.get("BCR_VOLUME", "/data/user/epishkin/bcr-assembler"))
 R = V / "results"
-PL = V / "one-q/29eed1d7-f79d-4362-be81-21e7f7bfb640/pilots"      # пилоты и проверки (Jupyter-каталог третьей таски)
+PL = Path(os.environ.get("BCR_PILOTS", "/data/user/epishkin/one-q/29eed1d7-f79d-4362-be81-21e7f7bfb640/pilots"))   # пилоты и проверки (Jupyter-каталог третьей таски)
 OUT = V / "docs/evaluation_history"
 OUT.mkdir(parents=True, exist_ok=True)
 P = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_"
