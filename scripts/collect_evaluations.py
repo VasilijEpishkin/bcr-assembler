@@ -302,9 +302,9 @@ def section_support(data, trims):
     return "\n".join(parts) if parts else "Данные поддержки не готовы.\n"
 
 
-def build():
+def build(orgs=None):
     out = []
-    for num, org, dataset, loci, trims, scenarios in ORGS:
+    for num, org, dataset, loci, trims, scenarios in (orgs or ORGS):
         out.append(f"## {num}. {org}\n")
         out.append("Сравнение сборщиков внутри вида. Для каждой ветки несколько вариантов эталона ("
                    + ", ".join(t for t, _ in trims) + ") и для каждого два знаменателя: **проверенные** V…J (основной) "
@@ -334,3 +334,42 @@ if REPORT.exists():     # заменяются разделы 1 и 2; вводн
     while lines[i3 - 1].strip() in ("", "---"):
         i3 -= 1
     REPORT.write_text("\n".join(lines[:i1] + build().split("\n") + ["", "---", ""] + lines[i3:]))
+
+
+# ---------------------------------------------------------------- отдельный отчёт: сценарий фиксированных кратностей ПЦР
+HR = P + "umicons_rpc1_ss200-350h25_pcr1x20_pcr2x3.5_seq1e-3_al1e-1"
+MR = P + "ec1x3_rpc1_ss200-350h25_pcr1x20_pcr2x3.5_seq1e-3_al1e-1"
+ORGS_FOLD = [
+    ("1", "Человек", "PRJEB30386", ["IGH", "IGK", "IGL"], [T0, T4515], [("фиксированные кратности ПЦР", HR)]),
+    ("2", "Мышь", "ERP003950", ["IGH"], [T0, T20, T4515], [("фиксированные кратности ПЦР", MR)]),
+]
+if all((R / ds / "simulated" / b / "benchmark_unique_trim0" / "assemblers_summary.tsv").exists()
+       for ds, b in (("ERP003950", MR), ("PRJEB30386", HR))):
+    depth = []
+    for ds, b in (("PRJEB30386", HR), ("ERP003950", MR)):
+        for r in read(R / ds / "simulated" / b / "qc/library_summary.tsv"):
+            depth.append([r["sample"], n(r["pcr1_molecules_total"]), n(r["library_input_molecules"]), n(r["pcr2_pool_copies"]),
+                          n(r["read_pairs"]), n(r["templates_with_reads"]), n(r["pcr1_templates"])])
+    head = """# Сценарий фиксированных кратностей ПЦР: результаты сборщиков
+
+Везде ниже число (доля); доля = число / знаменатель. Определения метрик, эталонов и классов — в `assembler_comparison_report.md`, раздел 0.
+
+---
+
+## 0. Сценарий
+
+ПЦР не моделируется по циклам и эффективности: ПЦР1 увеличивает общее число молекул ровно в 20 раз, ПЦР2 — ровно в 3,5 раза;
+новые копии раздаются случайно пропорционально числу копий шаблона (ПЦР1) или вида куска (ПЦР2). Остальные стадии:
+
+| стадия | параметр | значение |
+|---|---|---|
+| порция на фрагментацию | `PCR1_TO_FRAGMENTATION_FRACTION` | 0,1 |
+| фрагментация | один равновероятный разрыв | на молекулу 2 куска |
+| отбор по длине | диапазон 200–350 нт, вне него 2^(−d/25), от 152 нт | как в текущей ветке |
+| секвенирование | `PCR2_TO_SEQUENCING_FRACTION` | 0,001 пула ПЦР2 |
+| пары ридов | `READ_PAIRS_PER_SELECTED_COPY` | 1 на каждую отобранную копию, бюджета `rb3x` нет |
+
+Глубина сценария определяется только кратностями и долей на секвенирование:
+
+""" + table(["образец", "молекул после ПЦР1", "молекул в порции", "копий в пуле ПЦР2", "пар ридов", "шаблонов с ридами", "шаблонов"], depth) + "\n---\n\n"
+    (OUT / "fixed_pcr_fold_report.md").write_text(head + build(ORGS_FOLD) + "\n")

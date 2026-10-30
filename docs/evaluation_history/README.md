@@ -12,6 +12,7 @@
 | `full_runs_comparison.tsv` | сравнение запусков: строка = датасет × ветка × сборщик, колонки — `exact_full_frac` и `cdr3_in_contig_frac` по схемам оценки |
 | `pilots.tsv` | пилоты в длинном формате: `pilot`, `condition`, `metric`, `value`, `source` |
 | `assembler_comparison_report.md` | отчёт по актуальным веткам (200 нг и текущая): результаты TRUST4, MiXCR, rnaSPAdes, metaSPAdes, rnaviralSPAdes, Trinity, GATHeR, расчёт каждой метрики, стадии сборщиков |
+| `fixed_pcr_fold_report.md` | отдельный отчёт по сценарию фиксированных кратностей ПЦР (ветка `rpc1`): параметры, глубина, результаты всех сборщиков для человека и мыши; метрики определены в `assembler_comparison_report.md` |
 
 ## Полные прогоны
 
