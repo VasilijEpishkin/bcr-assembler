@@ -56,3 +56,8 @@ results/PRJNA900592/qc_raw/
 results/evaluation/
 tools/vdjer-amplicon/
 seq_refs/vdjer/
+
+# QC-отчёты регенерируются (fastqc/multiqc/fastp), в git не хранятся
+results/*/*/fastqc/
+results/*/*/multiqc/
+results/*/*/fastp_reports/

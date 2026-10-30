@@ -16,7 +16,7 @@
    `benchmark_assemblers_mouse.ipynb`.
 
 Другие сборщики:
-`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_vdjer_mouse.ipynb` (V'DJer), `assemble_gather_mouse.ipynb` (GATHeR). Распределения длин ридов по
+`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_gather_mouse.ipynb` (GATHeR). Распределения длин ридов по
 стадиям — `read_geometry_mouse.ipynb`.
 
 ## Содержимое

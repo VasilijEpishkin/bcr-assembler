@@ -1,0 +1,86 @@
+{
+  "pilot": "human IGL only; 500k-pair mixed-chain pilot; not a full-run result",
+  "branch": "/data/user/epishkin/results/PRJEB30386/simulated/insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in5ng_rb3x_ss250",
+  "pairs": 500078,
+  "represented_templates_by_locus": {
+    "IGH": 34786,
+    "IGK": 16451,
+    "IGL": 9014
+  },
+  "represented_pairs_by_locus": {
+    "IGH": 275896,
+    "IGK": 105544,
+    "IGL": 118638
+  },
+  "benchmark_source_sha256": "6626d40337960baeda2e9489399358e199615ad21c092a0aa47f6fc9bbea4bae",
+  "contigs_sha256": "37e952374a366d776858dca27d79bad5d3b36de0998156f683c9fdf2b5f0b456",
+  "contig_length_min": 258,
+  "contig_length_max": 258,
+  "igl_recall": [
+    {
+      "reconstructability": "ALL",
+      "templates": 6807,
+      "exact_full_frac": 0.0,
+      "one_diff_full_frac": 0.0,
+      "near_full_frac": 0.0,
+      "partial_frac": 0.9282,
+      "missing_frac": 0.0718
+    },
+    {
+      "reconstructability": "UNVERIFIED",
+      "templates": 9110,
+      "exact_full_frac": 0.0,
+      "one_diff_full_frac": 0.0,
+      "near_full_frac": 0.0,
+      "partial_frac": 0.9124,
+      "missing_frac": 0.0876
+    },
+    {
+      "reconstructability": "no_reads",
+      "templates": 545,
+      "exact_full_frac": 0.0,
+      "one_diff_full_frac": 0.0,
+      "near_full_frac": 0.0,
+      "partial_frac": 0.8862,
+      "missing_frac": 0.1138
+    },
+    {
+      "reconstructability": "pilot_present",
+      "templates": 6262,
+      "exact_full_frac": 0.0,
+      "one_diff_full_frac": 0.0,
+      "near_full_frac": 0.0,
+      "partial_frac": 0.9318,
+      "missing_frac": 0.0682
+    }
+  ],
+  "legacy_precision": {
+    "contigs": 827,
+    "exact_full_frac": 0.0,
+    "near_full_frac": 0.0,
+    "correct_partial_frac": 0.3918,
+    "unverified_match_frac": 0.2334,
+    "incorrect_frac": 0.3748,
+    "unmapped_frac": 0.0
+  },
+  "full_contig_alignment_check": {
+    "query_95pct_identity_98pct": 463,
+    "best_template_IGL": 827,
+    "fails_query_95pct_identity_98pct": 364
+  },
+  "cdr3_exact_either_strand": {
+    "pilot_present": {
+      "clonotypes": 5090,
+      "found_exact_either_strand": 0
+    },
+    "no_reads_control": {
+      "clonotypes": 366,
+      "found_exact_either_strand": 0
+    }
+  },
+  "limitations": [
+    "Pilot-present does not imply complete V-J coverage.",
+    "Legacy precision can call a contig correct from a local alignment; inspect full-contig check.",
+    "Short reads may not phase distant SHM variants; even an exact CDR3 is not full V-J recovery."
+  ]
+}

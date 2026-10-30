@@ -9,7 +9,7 @@
 #   conda (bioconda/conda-forge): fastp, fastqc, bowtie2, samtools, minimap2, seqkit, blast, bcalm, salmon, STAR,
 #                                 spades, trinity, gather, insilicoseq, pysam, openjdk, R и научный стек Python;
 #   pip: cutadapt, multiqc, presto, changeo, abstar, airr (пакеты, которых нет в каналах или нужны новее).
-#   Инструменты без conda/pip-пакета ставятся готовыми бинарниками в $TOOLS: TRUST4, MiXCR, V'DJer, IgReC, IgBLAST.
+#   Инструменты без conda/pip-пакета ставятся готовыми бинарниками в $TOOLS: TRUST4, MiXCR, IgReC, IgBLAST.
 #   Отдельных окружений нет: все ноутбуки работают с одним bcr_env.
 
 ROOT=${BCR_VOLUME:-/data/user/epishkin}
@@ -26,7 +26,7 @@ CONDA_PKGS=(
 )
 PIP_PKGS=(cutadapt=5.2 multiqc=1.35 presto=0.7 changeo=1.3 abstar=0.8 airr=2)
 # Бинарники вне conda: путь относительно $TOOLS.
-BINARIES=(TRUST4/run-trust4 mixcr-4.7.0/mixcr vdjer-0.12 vdjer-amplicon igrec)
+BINARIES=(TRUST4/run-trust4 mixcr-4.7.0/mixcr igrec)
 
 GREEN='\033[0;32m'; YELLOW='\033[1;33m'; NC='\033[0m'
 log()  { echo -e "${GREEN}[$(date -u +%H:%M:%S)]${NC} $1"; }

@@ -1,0 +1,189 @@
+{
+  "source": "results/ERP003950_fastp_q30_u40/post_annotation_filtered/airr_pass/ERR346596.airr.tsv.gz",
+  "source_rows": 556824,
+  "excluded_N": 0,
+  "eligible_reads": 556824,
+  "exact_variants": 268998,
+  "exact_variants_at_least_two_reads": 28655,
+  "collapse_code_sha256": "e691aa8fc89a7951477ddd51592b622dd3e2b8f96a6c5982a07696561f30c4d1",
+  "sensitivity": [
+    {
+      "ratio": 3,
+      "absorbed_variants": 135390,
+      "absorbed_reads": 181570,
+      "retained_variants": 133608,
+      "absorbed_variants_read_support": {
+        "2": 11437,
+        "3": 4396,
+        "5": 2373,
+        "10": 1165,
+        "20": 470
+      },
+      "absorbed_with_changed_junction": 15652,
+      "unique_junctions_before": 23128,
+      "unique_junctions_after": 18220,
+      "unique_junctions_lost": 4908,
+      "highest_support_absorbed_examples": [
+        {
+          "child_reads": 268,
+          "parent_reads": 1066,
+          "child_sha256": "c4a9fce73b8990d9d0fc094e431a7702f07ca5ee8bc2b4279fb1bceab72bf452",
+          "parent_sha256": "173d352e424ce1228a9e9d9d5ff90d148dbc8e2e30866cb474a33734640ed222",
+          "changed_position_vj_0based": 14,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 261,
+          "parent_reads": 1466,
+          "child_sha256": "94eab67891c09229789ba00ec4ff074c5a975a72c520b9f8fbe2fe70e61ce81d",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 15,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 254,
+          "parent_reads": 1066,
+          "child_sha256": "286635bb1ed63548a5b0a5987c6385d475469b4c6bc6c82ccc9ef76f3f5af28d",
+          "parent_sha256": "173d352e424ce1228a9e9d9d5ff90d148dbc8e2e30866cb474a33734640ed222",
+          "changed_position_vj_0based": 8,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 192,
+          "parent_reads": 720,
+          "child_sha256": "dfa2a9f993a6b7aa4a4f6c9d60af19e0db1c4ef99864a106a70ef9132af0388a",
+          "parent_sha256": "056a5209f2998e6ab75a1d6062502a5bb6439fe05ed90249558246ed0cd7a7d6",
+          "changed_position_vj_0based": 14,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 181,
+          "parent_reads": 1466,
+          "child_sha256": "1643eaadf65891426d2c18bf9f2be20e0f2e87c3764d5e87f86394994b533ecf",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 278,
+          "junction_changed": false
+        }
+      ]
+    },
+    {
+      "ratio": 5,
+      "absorbed_variants": 141560,
+      "absorbed_reads": 160283,
+      "retained_variants": 127438,
+      "absorbed_variants_read_support": {
+        "2": 9060,
+        "3": 2238,
+        "5": 832,
+        "10": 291,
+        "20": 83
+      },
+      "absorbed_with_changed_junction": 16809,
+      "unique_junctions_before": 23128,
+      "unique_junctions_after": 18000,
+      "unique_junctions_lost": 5128,
+      "highest_support_absorbed_examples": [
+        {
+          "child_reads": 261,
+          "parent_reads": 1466,
+          "child_sha256": "94eab67891c09229789ba00ec4ff074c5a975a72c520b9f8fbe2fe70e61ce81d",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 15,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 181,
+          "parent_reads": 1466,
+          "child_sha256": "1643eaadf65891426d2c18bf9f2be20e0f2e87c3764d5e87f86394994b533ecf",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 278,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 180,
+          "parent_reads": 974,
+          "child_sha256": "f1d265309d7a424b1c4f52eaf6b812742717b130f50acceeaa5fc05dafa8c1bd",
+          "parent_sha256": "76aaf121f80b032a374f7a5ae2b3b06d2a0d7ea3e53bde72dccea524ee83817a",
+          "changed_position_vj_0based": 15,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 153,
+          "parent_reads": 1066,
+          "child_sha256": "b834804ff6282cb55f9f5f776f7fc7568f340e429af5473f044c8aad703eb20e",
+          "parent_sha256": "173d352e424ce1228a9e9d9d5ff90d148dbc8e2e30866cb474a33734640ed222",
+          "changed_position_vj_0based": 17,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 125,
+          "parent_reads": 1466,
+          "child_sha256": "77d6fe1a97ea5495db15ca720971b5625cf78c8d6c89c04a24e0f76cef19e4cc",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 17,
+          "junction_changed": false
+        }
+      ]
+    },
+    {
+      "ratio": 10,
+      "absorbed_variants": 125591,
+      "absorbed_reads": 135833,
+      "retained_variants": 143407,
+      "absorbed_variants_read_support": {
+        "2": 7436,
+        "3": 1264,
+        "5": 243,
+        "10": 42,
+        "20": 10
+      },
+      "absorbed_with_changed_junction": 15132,
+      "unique_junctions_before": 23128,
+      "unique_junctions_after": 18968,
+      "unique_junctions_lost": 4160,
+      "highest_support_absorbed_examples": [
+        {
+          "child_reads": 125,
+          "parent_reads": 1466,
+          "child_sha256": "77d6fe1a97ea5495db15ca720971b5625cf78c8d6c89c04a24e0f76cef19e4cc",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 17,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 103,
+          "parent_reads": 1466,
+          "child_sha256": "a4935207d80508eb04983bda7fca65400386249b76dd74e7f6e7c9d6cf890e20",
+          "parent_sha256": "32a07b1d8b7ef3a9aa1d030aef06069ba3ea2eb144c7a42119c2cc7f7be55590",
+          "changed_position_vj_0based": 209,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 68,
+          "parent_reads": 974,
+          "child_sha256": "c834989a2fd542328efba242da02d6513a087b24a246fd5453c2d4e7297dac39",
+          "parent_sha256": "76aaf121f80b032a374f7a5ae2b3b06d2a0d7ea3e53bde72dccea524ee83817a",
+          "changed_position_vj_0based": 17,
+          "junction_changed": false
+        },
+        {
+          "child_reads": 23,
+          "parent_reads": 317,
+          "child_sha256": "88066a443dccf381d4be85ced0e75f99307726e3138e8d6150e0e48a3ac35782",
+          "parent_sha256": "d7f3b93e18e9072c06e4b270eeba6ff8b0e20d05f4912a42e43ee5cb7e15c009",
+          "changed_position_vj_0based": 316,
+          "junction_changed": true
+        },
+        {
+          "child_reads": 22,
+          "parent_reads": 309,
+          "child_sha256": "f715744ab8a20b93093d2bbdfbcc7342b202f076ea5f9e68815c02919d4b9a59",
+          "parent_sha256": "4b105c26c8317d0e68df4cb955e9c3e6d2cd69bbbfe58b82f91a16edae003f7f",
+          "changed_position_vj_0based": 17,
+          "junction_changed": false
+        }
+      ]
+    }
+  ],
+  "interpretation": "Counts describe algorithmic removals, not proven errors. Reads are not independent molecules without UMI. No base-quality or replicate test was performed."
+}

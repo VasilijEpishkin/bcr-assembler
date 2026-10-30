@@ -74,4 +74,4 @@ samtools, insilicoseq, rsync) и регистрирует Jupyter-ядро "BCR 
 - `results/PRJEB40348/`, `results/PRJNA848968/`, `results/PRJNA900592/`, `results/PRJNA1226555/` —
   предобработка других датасетов (человек, лошадь, овца, лёгкие цепи мыши);
 - `docs/` — отчёты, история оценок, сценарии симуляции, раскладка ноутбуков;
-- `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `collect_evaluations.py` — сводка оценок в `docs/evaluation_history/`, `igbrowser/` — R-отчёты igbrowser).
+- `scripts/` — вспомогательные скрипты (`setup_env.sh` — окружение, `collect_evaluations.py` — сводка оценок в `docs/evaluation_history/`).

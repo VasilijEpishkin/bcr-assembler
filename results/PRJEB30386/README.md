@@ -16,7 +16,7 @@
    `benchmark_assemblers_human.ipynb`.
 
 Другие сборщики:
-`assemble_mixcr_human.ipynb` (MiXCR), `assemble_vdjer_human.ipynb` (V'DJer), `assemble_gather_human.ipynb` (GATHeR). Распределения длин ридов по стадиям —
+`assemble_mixcr_human.ipynb` (MiXCR), `assemble_gather_human.ipynb` (GATHeR). Распределения длин ридов по стадиям —
 `read_geometry_human.ipynb`; выравнивание симулированных ридов на шаблоны bowtie2 —
 `align_simulated_reads_bowtie2_human.ipynb`; проверка обрезки V-праймеров — `audit_human_v_primer_trimming.ipynb`.
 
