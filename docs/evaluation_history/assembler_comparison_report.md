@@ -430,7 +430,7 @@ CDR3: клонотип `k = (образец, локус, junction)` по про�
 | 20 | 54 699 | 4.7% | 1.9% |
 | 50 | 42 008 | 3.7% | 1.9% |
 
-### 1.2. Человек, текущая ветка
+### 1.2. Человек, ветка «1/10 пула»
 
 #### Полнота: какая доля эталонных V…J собрана
 
@@ -1177,7 +1177,7 @@ CDR3: клонотип `k = (образец, локус, junction)` по про�
 | 20 | 49 469 | 2.8% | 1.1% |
 | 50 | 42 176 | 2.5% | 1.0% |
 
-### 2.2. Мышь, текущая ветка
+### 2.2. Мышь, ветка «1/10 пула»
 
 #### Полнота: какая доля эталонных V…J собрана
 
@@ -1828,9 +1828,9 @@ Bolotin D.A. et al., *Nature Methods* 12, 380–381 (2015), doi:10.1038/nmeth.33
 
 ## 5. Параметры симуляции, влияющие на сборку
 
-В отчёте две ветки у мыши и человека: ветка 200 нг и текущая ветка без in200ng.
+В отчёте две ветки у мыши и человека: ветка 200 нг и ветка «1/10 пула» (без in200ng).
 
-| вид | ветка 200 нг | текущая ветка |
+| вид | ветка 200 нг | ветка «1/10 пула» |
 |---|---|---|
 | мышь | insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1 | insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_ec1x3_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1 |
 | человек | insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_in200ng_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1 | insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_umicons_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1 |

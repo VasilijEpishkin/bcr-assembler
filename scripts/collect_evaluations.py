@@ -5,7 +5,7 @@
   full_runs_precision.tsv  precision контигов по образцам каждого полного бенчмарка
   full_runs_structure.tsv  структура контигов по поддержке ридами и пороги поддержки (только новая схема)
   pilots.tsv               пилоты в длинном формате: pilot, condition, metric, value
-  assembler_comparison_report.md  разделы 1 (человек) и 2 (мышь) отчёта: ветки 200 нг и текущая,
+  assembler_comparison_report.md  разделы 1 (человек) и 2 (мышь) отчёта: ветки 200 нг и «1/10 пула»,
                            эталоны trim0 / trim45_15 (мышь ещё trim20), знаменатели «проверенные» и «все» V…J
 """
 import csv
@@ -24,11 +24,11 @@ OUT.mkdir(parents=True, exist_ok=True)
 P = "insilicoseq_150bp_novaseq_post_annotation_filtered_random_cut_amp_"
 T = "_rb3x_ss200-350h25_pcr1c30_pcr2c5_seq1e-3_al1e-1"
 HF, MF = P + "umicons_in200ng" + T, P + "ec1x3_in200ng" + T   # 200 нг
-HC, MC = P + "umicons" + T, P + "ec1x3" + T                                                              # текущая ветка
+HC, MC = P + "umicons" + T, P + "ec1x3" + T                                                              # «1/10 пула»
 
 # (прогон, датасет, ветка, схема оценки, каталог с assemblers_*.tsv): только два последних сценария
 FULL = [(run, ds, b, f"unique_vj_{tr}", R / ds / "simulated" / b / f"benchmark_unique_{tr}")
-        for run, hb, mb in (("200ng", HF, MF), ("current", HC, MC))
+        for run, hb, mb in (("200ng", HF, MF), ("pool1_10", HC, MC))
         for ds, b, trims in (("ERP003950", mb, ("trim0", "trim20", "trim45_15")), ("PRJEB30386", hb, ("trim0", "trim45_15")))
         for tr in trims]
 
@@ -153,8 +153,8 @@ RECON = ["full_coverage_read_overlap", "full_coverage_mate_linked_only", "full_c
          "partial_read_coverage", "no_reads"]
 # (номер раздела, вид, датасет, локусы, эталоны, [(ветка, каталог)])
 ORGS = [
-    ("1", "Человек", "PRJEB30386", ["IGH", "IGK", "IGL"], [T0, T4515], [("200 нг", HF), ("текущая ветка", HC)]),
-    ("2", "Мышь", "ERP003950", ["IGH"], [T0, T20, T4515], [("200 нг", MF), ("текущая ветка", MC)]),
+    ("1", "Человек", "PRJEB30386", ["IGH", "IGK", "IGL"], [T0, T4515], [("200 нг", HF), ("ветка «1/10 пула»", HC)]),
+    ("2", "Мышь", "ERP003950", ["IGH"], [T0, T20, T4515], [("200 нг", MF), ("ветка «1/10 пула»", MC)]),
 ]
 NAMES = ("summary", "summary_all_templates", "precision", "structure_by_support", "support_thresholds")
 
@@ -365,7 +365,7 @@ if all((R / ds / "simulated" / b / "benchmark_unique_trim0" / "assemblers_summar
 |---|---|---|
 | порция на фрагментацию | `PCR1_TO_FRAGMENTATION_FRACTION` | 0,1 |
 | фрагментация | один равновероятный разрыв | на молекулу 2 куска |
-| отбор по длине | диапазон 200–350 нт, вне него 2^(−d/25), от 152 нт | как в текущей ветке |
+| отбор по длине | диапазон 200–350 нт, вне него 2^(−d/25), от 152 нт | как в ветке «1/10 пула» |
 | секвенирование | `PCR2_TO_SEQUENCING_FRACTION` | 0,001 пула ПЦР2 |
 | пары ридов | `READ_PAIRS_PER_SELECTED_COPY` | 1 на каждую отобранную копию, бюджета `rb3x` нет |
 
