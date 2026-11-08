@@ -37,7 +37,10 @@ results/<DATASET>/read_geometry/                  распределения д�
 
 - `cutadapt` снимает только технические префиксы и адаптеры;
 - `fastp` фильтрует целые пары: `-q 30 -u 40 -l 250`
-  `--disable_adapter_trimming --disable_trim_poly_g`.
+  `--disable_adapter_trimming --disable_trim_poly_g` (мышь ERP003950, человек PRJEB30386).
+
+У лошади PRJNA848968 и овцы PRJNA900592 тримминг сделан раньше, fastp 0.23.2 с
+`--detect_adapter_for_pe -q 30 -l 250`; эти результаты не пересчитывались.
 
 Если для конкретного run адаптер не подтверждён, cutadapt пропускается и
 выполняется только fastp-фильтрация (пример: `SRR19646180` у лошади).
