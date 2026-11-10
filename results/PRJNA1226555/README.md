@@ -12,8 +12,7 @@
 ## Выбор ветки предобработки
 
 Сравнивались четыре ветки: cutadapt с обрезкой по качеству и fastp, минимальная длина 200 и 250 нт
-(`compare_light_minlen_mouse.ipynb`, `compare_light_fastp_minlen_mouse.ipynb`, `compare_light_primer_strategy_mouse.ipynb`,
-`select_mouse_heavy_light_branches.ipynb`; сводки — `comparisons/`). Критерий — число строгих продуктивных полных
+(`select_mouse_heavy_light_branches.ipynb`; сводки — `comparisons/`). Критерий — число строгих продуктивных полных
 последовательностей V…J без стоп-кодона:
 
 | ветка | продуктивных полных | уникальных V…J |
