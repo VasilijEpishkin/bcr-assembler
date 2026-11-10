@@ -4,6 +4,8 @@
 
 ## Порядок обработки
 
+Входы и выходы каждого шага — `docs/pipeline.md`.
+
 1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`) — `adapter_trim_human.ipynb`;
 2. удаление праймеров — `primer_trim_human.ipynb`;
 3. сборка пар ридов pRESTO — `presto_human.ipynb`;
@@ -12,11 +14,10 @@
 6. симуляция NovaSeq PE150 (основная линия: ПЦР1 30 циклов, порция 1/10 продукта, случайный разрез, отбор 200–350 нт) —
    `simulate_human_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`, валидация —
    `validate_human_novaseq_post_annotation_filtered.ipynb`;
-7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_human.ipynb`,
+7. сборка (TRUST4, MiXCR, rnaSPAdes в трёх режимах, Trinity, GATHeR) и сравнение с эталоном симуляции — `assemble_*_human.ipynb`,
    `benchmark_assemblers_human.ipynb`.
 
-Другие сборщики:
-`assemble_mixcr_human.ipynb` (MiXCR), `assemble_gather_human.ipynb` (GATHeR). Распределения длин ридов по стадиям —
+Распределения длин ридов по стадиям —
 `read_geometry_human.ipynb`; выравнивание симулированных ридов на шаблоны bowtie2 —
 `align_simulated_reads_bowtie2_human.ipynb`; проверка обрезки V-праймеров — `audit_human_v_primer_trimming.ipynb`.
 

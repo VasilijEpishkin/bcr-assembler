@@ -4,6 +4,8 @@
 
 ## Порядок обработки
 
+Входы и выходы каждого шага — `docs/pipeline.md`.
+
 1. удаление адаптеров cutadapt и фильтрация пар fastp (`-q 30 -u 40 -l 250`) — `adapter_trim_mouse.ipynb`;
 2. удаление праймеров — `primer_trim_mouse.ipynb`;
 3. сборка пар ридов pRESTO — `presto_mouse.ipynb`;
@@ -12,12 +14,10 @@
 6. симуляция NovaSeq PE150 (основная линия: ПЦР1 30 циклов, порция 1/10 продукта, случайный разрез, отбор 200–350 нт) —
    `simulate_mouse_post_annotation_filtered_insilicoseq_150bp_novaseq.ipynb`, валидация —
    `validate_mouse_novaseq_post_annotation_filtered.ipynb`;
-7. сборка (TRUST4, rnaSPAdes, Trinity) и сравнение с эталоном симуляции — `assemble_*_mouse.ipynb`,
+7. сборка (TRUST4, MiXCR, rnaSPAdes в трёх режимах, Trinity, GATHeR) и сравнение с эталоном симуляции — `assemble_*_mouse.ipynb`,
    `benchmark_assemblers_mouse.ipynb`.
 
-Другие сборщики:
-`assemble_mixcr_mouse.ipynb` (MiXCR), `assemble_gather_mouse.ipynb` (GATHeR). Распределения длин ридов по
-стадиям — `read_geometry_mouse.ipynb`.
+Распределения длин ридов по стадиям — `read_geometry_mouse.ipynb`.
 
 ## Содержимое
 
